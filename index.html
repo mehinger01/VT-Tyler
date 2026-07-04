@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tyler's College Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0E1822;
+    --surface: #1A2A38;
+    --grad-a: #3B6E8F;
+    --grad-b: #3E8E7E;
+    --amber: #E8A33D;
+    --text-primary: #F3F7F9;
+    --text-muted: #93A3AF;
+    --locked: #445564;
+    --locked-line: #2C3E4C;
+    --success: #4FAE93;
+    --paper: #FDFCFA;
+    --paper-ink: #2B2B2B;
+    --paper-muted: #5A6570;
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(59,110,143,0.20), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(62,142,126,0.16), transparent 50%);
+    padding-bottom: 60px;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ---------- Menu bar ---------- */
+  .menu-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    background: rgba(14, 24, 34, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--locked-line);
+  }
+
+  .menu-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .brand .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+  }
+
+  .back-btn {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--locked-line);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .back-btn.show { display: flex; }
+  .back-btn:hover { background: rgba(255,255,255,0.1); }
+
+  .menu-bar .status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .status-bar {
+    width: 90px;
+    height: 6px;
+    border-radius: 4px;
+    background: var(--locked-line);
+    overflow: hidden;
+  }
+
+  .status-bar-fill {
+    height: 100%;
+    width: 22%;
+    background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
+    border-radius: 4px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 56px 28px 20px;
+  }
+
+  .hero .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grad-b);
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 720px;
+  }
+
+  .hero p {
+    margin-top: 14px;
+    max-width: 560px;
+    color: var(--text-muted);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  /* ---------- Section shells ---------- */
+  .section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 36px 28px 0;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 21px;
+  }
+
+  .section-head .hint {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ---------- Roadmap ---------- */
+  .roadmap { position: relative; padding-left: 28px; }
+
+  .roadmap::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--locked-line);
+  }
+
+  .roadmap-item {
+    position: relative;
+    padding: 14px 16px 14px 26px;
+    margin-left: -16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .roadmap-item:hover { background: rgba(255,255,255,0.03); }
+
+  .roadmap-item::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--locked-line);
+    background: var(--bg-deep);
+    z-index: 1;
+  }
+
+  .roadmap-item.done::before { border-color: var(--success); background: var(--success); }
+  .roadmap-item.current::before {
+    border-color: var(--amber);
+    background: var(--amber);
+    box-shadow: 0 0 0 4px rgba(232,163,61,0.18);
+  }
+
+  .roadmap-item .r-left { display: flex; align-items: baseline; gap: 12px; }
+  .roadmap-item .r-num { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); width: 22px; }
+  .roadmap-item .r-title { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .roadmap-item.locked .r-title, .roadmap-item.locked .r-num { color: var(--text-muted); }
+  .roadmap-item .r-arrow { font-family: var(--font-mono); color: var(--text-muted); font-size: 14px; }
+
+  .r-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .r-tag.done { background: rgba(79,174,147,0.14); color: var(--success); }
+  .r-tag.current { background: rgba(232,163,61,0.14); color: var(--amber); }
+  .r-tag.locked { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+
+  /* ---------- Toolkit strip ---------- */
+  .toolkit-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+
+  .tool-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--locked-line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .tool-chip:hover { transform: translateY(-2px); }
+  .tool-chip.active { border-color: rgba(79,174,147,0.4); }
+  .tool-chip.locked { opacity: 0.5; }
+
+  .tool-chip .chip-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; background: var(--locked-line); flex-shrink: 0;
+  }
+  .tool-chip.active .chip-icon { background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); }
+
+  .chip-text { min-width: 0; }
+  .chip-name { font-family: var(--font-display); font-weight: 600; font-size: 12.5px; }
+  .chip-status { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+
+  /* ---------- Agenda screen ---------- */
+  .agenda-header {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 28px 10px;
+  }
+
+  .agenda-header .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .agenda-header h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 4.5vw, 38px);
+    letter-spacing: -0.01em;
+  }
+
+  .agenda-list {
+    max-width: 980px;
+    margin: 30px auto 0;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .agenda-item {
+    display: flex;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--locked-line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    align-items: flex-start;
+  }
+
+  .agenda-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .agenda-body { flex: 1; min-width: 0; }
+
+  .agenda-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .agenda-title { font-family: var(--font-display); font-weight: 600; font-size: 15.5px; }
+  .agenda-time { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+  .agenda-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+
+  .agenda-tools { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  .tool-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: rgba(79,174,147,0.1);
+    border: 1px solid rgba(79,174,147,0.35);
+    color: var(--success);
+    cursor: pointer;
+  }
+  .tool-btn:hover { background: rgba(79,174,147,0.18); }
+
+  /* ---------- Locked session note ---------- */
+  .locked-note {
+    max-width: 980px;
+    margin: 60px auto;
+    padding: 0 28px;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+
+  /* ---------- Reading: clean/document view ---------- */
+  .doc-wrap {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 0 28px;
+  }
+
+  .doc-window {
+    background: var(--paper);
+    color: var(--paper-ink);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+
+  .doc-header {
+    background: linear-gradient(135deg, var(--grad-a) 0%, var(--grad-b) 100%);
+    color: #fff;
+    padding: 22px 30px;
+  }
+
+  .doc-header .doc-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+
+  .doc-header h2 { font-family: var(--font-display); font-size: 21px; font-weight: 700; }
+  .doc-header .doc-sub { font-size: 12.5px; opacity: 0.9; margin-top: 4px; font-style: italic; }
+
+  .doc-layout { display: flex; gap: 24px; padding: 26px 30px 32px; }
+  .doc-main { flex: 1; min-width: 0; }
+  .doc-side { width: 200px; flex-shrink: 0; }
+
+  .doc-main h3 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--grad-a);
+    border-bottom: 2px solid #E3ECF0;
+    padding-bottom: 4px;
+    margin: 18px 0 8px;
+  }
+  .doc-main h3:first-child { margin-top: 0; }
+  .doc-main p { font-size: 13px; line-height: 1.6; margin-bottom: 10px; color: #333; }
+
+  .doc-terms {
+    background: #F4F8F7;
+    border: 1px solid #DCE8E4;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .doc-terms h4 {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--grad-b);
+    margin-bottom: 8px;
+  }
+  .doc-terms dt { font-weight: 700; font-size: 11.5px; color: #2B2B2B; margin-top: 8px; }
+  .doc-terms dt:first-child { margin-top: 0; }
+  .doc-terms dd { font-size: 11px; color: var(--paper-muted); margin-top: 1px; line-height: 1.4; }
+
+  .doc-footer-note {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 18px 0 40px;
+  }
+
+  .mode-switch {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+  }
+
+  .mode-switch button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    background: var(--amber);
+    color: #1a1206;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* ---------- Reading: supported/chunked view ---------- */
+  .chunk-wrap { max-width: 820px; margin: 40px auto 0; padding: 0 28px 40px; }
+
+  .chunk-card {
+    background: var(--surface);
+    border: 1px solid var(--locked-line);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .chunk-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .chunk-card h4 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--grad-b);
+    margin-bottom: 8px;
+  }
+
+  .chunk-card p { font-size: 13.5px; line-height: 1.6; color: #D4DEE5; margin-bottom: 14px; }
+
+  .chunk-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 640px) { .chunk-inputs { grid-template-columns: 1fr; } }
+
+  .chunk-field label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .chunk-field textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--locked-line);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    padding: 8px 10px;
+    resize: vertical;
+  }
+  .chunk-field textarea:focus { outline: none; border-color: var(--grad-b); }
+
+  .prime-card {
+    border-left: 3px solid var(--grad-a);
+  }
+  .synth-card {
+    border-left: 3px solid var(--success);
+  }
+
+  .save-row { display: flex; justify-content: flex-end; max-width: 820px; margin: 0 auto; padding: 0 28px; }
+  .save-status { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .save-status.saved { color: var(--success); }
+
+  /* ---------- Habit rep widget ---------- */
+  .rep-card {
+    background: var(--surface);
+    border: 1px solid var(--locked-line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    max-width: 820px;
+    margin: 0 auto 40px;
+  }
+  .rep-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+  .rep-head h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+  .rep-count { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+  .rep-list { display: flex; flex-direction: column; gap: 10px; }
+  .rep-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,0.02); cursor: pointer; border: 1px solid transparent; }
+  .rep-row:hover { border-color: var(--locked-line); }
+  .rep-check { width: 20px; height: 20px; flex-shrink: 0; border-radius: 6px; border: 1.5px solid var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .rep-row.checked .rep-check { background: var(--success); border-color: var(--success); color: #0E1822; }
+  .rep-row.checked .rep-label { color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--locked-line); }
+  .rep-label { font-size: 13.5px; }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface);
+    border: 1px solid var(--locked-line);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 50;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  footer {
+    max-width: 980px;
+    margin: 50px auto 0;
+    padding: 20px 28px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--locked);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="menu-bar">
+    <div class="menu-left">
+      <div class="brand" data-nav="home"><span class="dot"></span> TYLER OS · v3.0</div>
+      <button class="back-btn" id="back-btn">‹ Back</button>
+    </div>
+    <div class="status">
+      <span>SESSION 2 OF 9</span>
+      <div class="status-bar"><div class="status-bar-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== HOME ===================== -->
+  <section id="screen-home" class="screen active">
+    <div class="hero">
+      <span class="eyebrow">College Operating System</span>
+      <h1>The system you're building, one session at a time.</h1>
+      <p>Every session installs one more piece. Click a session to open its agenda, or jump straight to a tool you've already unlocked.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Build Roadmap</h2>
+        <span class="hint">9 sessions · click one to open it</span>
+      </div>
+      <div class="roadmap" id="roadmap"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Your Toolkit</h2>
+        <span class="hint" id="toolkit-hint"></span>
+      </div>
+      <div class="toolkit-strip" id="toolkit"></div>
+    </div>
+
+    <footer>SAVED LOCALLY ON THIS DEVICE · TYLER'S COLLEGE OS</footer>
+  </section>
+
+  <!-- ===================== AGENDA ===================== -->
+  <section id="screen-agenda" class="screen">
+    <div class="agenda-header">
+      <span class="eyebrow" id="agenda-eyebrow"></span>
+      <h1 id="agenda-title"></h1>
+    </div>
+    <div class="agenda-list" id="agenda-list"></div>
+    <footer>SAVED LOCALLY ON THIS DEVICE · TYLER'S COLLEGE OS</footer>
+  </section>
+
+  <!-- ===================== READING: CLEAN / DOCUMENT VIEW ===================== -->
+  <section id="screen-reading-clean" class="screen">
+    <div class="doc-wrap">
+      <div class="doc-window">
+        <div class="doc-header">
+          <div class="doc-eyebrow">Session 2 · Read &amp; Discuss</div>
+          <h2>Business 101 — Unit 1: What Is Business?</h2>
+          <div class="doc-sub">Standing in until your real syllabus lands. Read it through, talk it over, nothing to fill in yet.</div>
+        </div>
+        <div class="doc-layout">
+          <div class="doc-main" id="doc-main"></div>
+          <div class="doc-side">
+            <div class="doc-terms" id="doc-terms"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mode-switch">
+        <button data-nav="reading-supported">Switch to practice with supports →</button>
+      </div>
+      <div class="doc-footer-note">This is the read-together version. No annotation, just the content.</div>
+    </div>
+  </section>
+
+  <!-- ===================== READING: SUPPORTED / CHUNKED VIEW ===================== -->
+  <section id="screen-reading-supported" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Before reading</div>
+        <p style="margin-bottom:10px;">Jot 2 to 3 things you already think you know about how businesses work.</p>
+        <div class="chunk-field">
+          <textarea class="prep-input" data-key="before" rows="2" placeholder="Type here..."></textarea>
+        </div>
+      </div>
+
+      <div id="chunk-list"></div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">After reading</div>
+        <p style="margin-bottom:10px;">What's the one idea you'd explain to a friend who missed class?</p>
+        <div class="chunk-field">
+          <textarea class="prep-input" data-key="after" rows="2" placeholder="Type here..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="save-row"><span id="save-status" class="save-status">Not saved yet</span></div>
+
+    <div class="section" style="margin-top:10px;">
+      <div class="section-head">
+        <h2>Today's Rep</h2>
+        <span class="hint">Preview &amp; Prepare</span>
+      </div>
+      <div class="rep-card">
+        <div class="rep-head">
+          <h3>Run it once, for real</h3>
+          <span class="rep-count" id="rep-count">0 / 3</span>
+        </div>
+        <div class="rep-list" id="rep-list"></div>
+      </div>
+    </div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="reading-clean">← Back to clean read</button>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  /* ---------------- Data ---------------- */
+  const sessionsData = {
+    1: { title: "Foundations & Vision", state: "done" },
+    2: {
+      title: "Before Class: Preview & Prepare",
+      state: "current",
+      agenda: [
+        { title: "Check In & Arc Review", time: "5 min", desc: "Pull up the roadmap together and walk through where today fits across all nine sessions.", tools: [] },
+        { title: "Build the Assignment Tracker", time: "8 min", desc: "Log this unit's Business 101 items into the Command Center using the placeholder set.", tools: [{ label: "Open Command Center", nav: null, note: "Excel workbook, hand this to Tyler separately" }] },
+        { title: "Read & Discuss the Passage", time: "10 min", desc: "Read the Unit 1 passage together and talk through it before doing any annotating.", tools: [{ label: "Open Reading (clean)", nav: "reading-clean" }] },
+        { title: "Practice With Reading Supports", time: "15 min", desc: "Go back through the same passage with chunking, main idea tracking, and question prompts.", tools: [{ label: "Open Reading (with supports)", nav: "reading-supported" }] },
+        { title: "Log Today's Rep", time: "3 min", desc: "Check off the habit once it's actually been done, not just discussed.", tools: [{ label: "Open Rep Checklist", nav: "reading-supported" }] },
+        { title: "Restart Rule & What's Next", time: "3 min", desc: "Set the rule for what happens if a pass gets missed, then ask where else this same move could help.", tools: [] }
+      ]
+    },
+    3: { title: "During Class: Active Note-Taking & Engagement", state: "locked" },
+    4: { title: "After Class: The Review Window", state: "locked" },
+    5: { title: "Reading Strategies for Dense Text", state: "locked" },
+    6: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
+    7: { title: "Building Retention Across the Semester", state: "locked" },
+    8: { title: "Application & Synthesis", state: "locked" },
+    9: { title: "Finals Prep & System Tune-Up", state: "locked" },
+  };
+
+  const toolsData = [
+    { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed" },
+    { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Active today" },
+    { icon: "📝", name: "Note-Taking System", state: "locked", session: 3, statusText: "Unlocks S3" },
+    { icon: "🔁", name: "Review Window Tracker", state: "locked", session: 4, statusText: "Unlocks S4" },
+    { icon: "🔍", name: "Reading Toolkit", state: "locked", session: 5, statusText: "Unlocks S5" },
+    { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 6, statusText: "Unlocks S6" },
+    { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
+    { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
+    { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
+    { icon: "📊", name: "Google Sheets Foundations", state: "planned", session: null, statusText: "Planned" },
+    { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
+  ];
+
+  const chunksData = [
+    { heading: "What Is Business?", text: "At its core, a business is any organization that provides goods or services in exchange for something of value, usually money. A goods-producing business makes something physical, like a bakery selling bread or a factory building furniture. A service business sells expertise, time, or labor instead, like a tutoring company, a hair salon, or an accounting firm. Most businesses today are actually a mix of both, since even a bakery is also selling the experience and convenience of walking in and getting exactly what you want. Every business exists to solve a problem for someone. Coffee shops solve the problem of wanting a fast, quality drink without making it yourself. Understanding business starts with understanding what problem is actually being solved, and for whom." },
+    { heading: "Goods, Services, and Profit", text: "Businesses generally aim to earn a profit, the money left over after all costs of running the business are subtracted from the money it brings in through sales. Profit is not the same as revenue. A business might bring in a million dollars in sales and still lose money if its costs are higher than that. Profit is what allows a business to survive, grow, pay its employees well, and reinvest in itself. Nonprofits still need revenue to cover costs, but instead of distributing extra money to owners, they reinvest everything back into their mission." },
+    { heading: "Who Businesses Serve: The Stakeholder Circle", text: "A stakeholder is anyone who is affected by, or has an interest in, how a business operates. This is a bigger group than most people initially assume. Customers are the most obvious stakeholders, but employees, suppliers, investors, and even the local community all count too. Strong businesses learn to balance the needs of all these groups rather than focusing on just one, because ignoring any of them tends to create problems down the road." },
+    { heading: "How Businesses Are Owned: Three Basic Structures", text: "Nearly every business fits into one of three ownership structures. A sole proprietorship is owned and run by one person, simplest to start but personally on the hook for every debt or lawsuit the business faces. A partnership works the same way but is split between two or more people, who share both the decision-making and the risk. A corporation is its own legal entity, separate from its owners, which protects them personally but comes with more paperwork, more regulation, and often shareholders." },
+    { heading: "The Environment Businesses Operate In", text: "No business exists in a vacuum. Every business operates inside a broader environment made up of forces it usually cannot control directly: the economy, competitors, technology, and social trends. A business that ignores shifts in this environment, like a retailer that never adapts to online shopping, tends to fall behind." },
+    { heading: "Management: Turning Resources Into Results", text: "Once a business exists, someone has to run it. Management is generally broken into four functions. Planning means setting goals and deciding how to reach them. Organizing means arranging people and resources to carry that plan out. Leading means motivating and directing the people doing the work. Controlling means tracking whether things are actually going according to plan, and adjusting when they are not. These four functions happen continuously and often overlap." }
+  ];
+
+  const termsData = [
+    ["Revenue", "Total money brought in from sales, before costs are subtracted."],
+    ["Profit", "What's left after all costs are subtracted from revenue."],
+    ["Stakeholder", "Anyone affected by or invested in how a business operates."],
+    ["Sole Proprietorship", "A business owned and run by one person."],
+    ["Partnership", "A business owned by two or more people."],
+    ["Corporation", "A business structured as its own legal entity, separate from its owners."],
+    ["Liability", "Legal responsibility for a business's debts or losses."]
+  ];
+
+  const repItems = [
+    { id: "preview", label: "Previewed the reading before diving in" },
+    { id: "questions", label: "Wrote a question for at least one section" },
+    { id: "annotate", label: "Named the main idea of at least one section" },
+  ];
+
+  /* ---------------- Navigation ---------------- */
+  const navHistory = ["home"];
+
+  function goTo(screen) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById("screen-" + screen).classList.add("active");
+    document.getElementById("back-btn").classList.toggle("show", screen !== "home");
+    window.scrollTo({ top: 0, behavior: "instant" });
+    if (screen === "agenda") renderAgenda(2);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  document.addEventListener("click", (e) => {
+    const navEl = e.target.closest("[data-nav]");
+    if (navEl) {
+      const target = navEl.getAttribute("data-nav");
+      if (target) goTo(target);
+    }
+  });
+
+  document.getElementById("back-btn").addEventListener("click", () => {
+    const current = document.querySelector(".screen.active").id;
+    if (current === "screen-reading-clean" || current === "screen-reading-supported") {
+      goTo("agenda");
+    } else {
+      goTo("home");
+    }
+  });
+
+  /* ---------------- Roadmap ---------------- */
+  function renderRoadmap() {
+    const el = document.getElementById("roadmap");
+    el.innerHTML = Object.entries(sessionsData).map(([num, s]) => `
+      <div class="roadmap-item ${s.state}" data-session="${num}">
+        <div class="r-left">
+          <span class="r-num">${String(num).padStart(2, "0")}</span>
+          <span class="r-title">${s.title}</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="r-tag ${s.state}">${s.state === "done" ? "Done" : s.state === "current" ? "In progress" : "Locked"}</span>
+          <span class="r-arrow">${s.state === "locked" ? "🔒" : "→"}</span>
+        </div>
+      </div>
+    `).join("");
+
+    el.querySelectorAll(".roadmap-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const num = item.getAttribute("data-session");
+        const s = sessionsData[num];
+        if (s.state === "locked") {
+          showToast(`Session ${num} unlocks when we get there.`);
+        } else if (num === "2") {
+          goTo("agenda");
+        } else if (num === "1") {
+          showToast("Session 1 is already done, on to today.");
+        }
+      });
+    });
+  }
+
+  /* ---------------- Toolkit ---------------- */
+  function renderToolkit() {
+    const el = document.getElementById("toolkit");
+    const activeCount = toolsData.filter(t => t.state === "active").length;
+    document.getElementById("toolkit-hint").textContent = `${activeCount} of ${toolsData.length} active`;
+
+    el.innerHTML = toolsData.map(t => `
+      <div class="tool-chip ${t.state}" data-tool="${t.name}" data-session="${t.session || ""}">
+        <div class="chip-icon">${t.icon}</div>
+        <div class="chip-text">
+          <div class="chip-name">${t.name}</div>
+          <div class="chip-status">${t.state === "locked" ? "🔒 " : ""}${t.statusText}</div>
+        </div>
+      </div>
+    `).join("");
+
+    el.querySelectorAll(".tool-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const state = chip.classList.contains("active") ? "active" : chip.classList.contains("planned") ? "planned" : "locked";
+        const session = chip.getAttribute("data-session");
+        if (state === "planned") {
+          showToast("On the roadmap, not slotted into a session yet.");
+        } else if (state === "locked") {
+          showToast(`Unlocks in session ${session}.`);
+        } else if (session === "2") {
+          goTo("agenda");
+        } else if (session === "1") {
+          showToast("Command Center lives in your Excel workbook from session 1.");
+        }
+      });
+    });
+  }
+
+  /* ---------------- Agenda ---------------- */
+  function renderAgenda(num) {
+    const s = sessionsData[num];
+    document.getElementById("agenda-eyebrow").textContent = `Session ${num} of 9`;
+    document.getElementById("agenda-title").textContent = s.title;
+    const el = document.getElementById("agenda-list");
+    el.innerHTML = s.agenda.map((item, i) => `
+      <div class="agenda-item">
+        <div class="agenda-num">${i + 1}</div>
+        <div class="agenda-body">
+          <div class="agenda-top-row">
+            <span class="agenda-title">${item.title}</span>
+            <span class="agenda-time">${item.time}</span>
+          </div>
+          <div class="agenda-desc">${item.desc}</div>
+          ${item.tools.length ? `<div class="agenda-tools">${item.tools.map(t => `<span class="tool-btn" ${t.nav ? `data-nav="${t.nav}"` : ""}>${t.label}</span>`).join("")}</div>` : ""}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  /* ---------------- Reading: clean/document view ---------------- */
+  function renderDocClean() {
+    document.getElementById("doc-main").innerHTML = chunksData.map(c => `<h3>${c.heading}</h3><p>${c.text}</p>`).join("");
+    document.getElementById("doc-terms").innerHTML = `<h4>Key Terms</h4><dl>${termsData.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join("")}</dl>`;
+  }
+
+  /* ---------------- Reading: supported/chunked view ---------------- */
+  function renderChunks() {
+    const el = document.getElementById("chunk-list");
+    el.innerHTML = chunksData.map((c, i) => `
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Section ${i + 1}</div>
+        <h4>${c.heading}</h4>
+        <p>${c.text}</p>
+        <div class="chunk-inputs">
+          <div class="chunk-field">
+            <label>Main idea</label>
+            <textarea class="prep-input" data-key="chunk-${i}-main" rows="2" placeholder="In your own words..."></textarea>
+          </div>
+          <div class="chunk-field">
+            <label>Your question</label>
+            <textarea class="prep-input" data-key="chunk-${i}-question" rows="2" placeholder="What are you unsure of?"></textarea>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  /* ---------------- Persistence: reading notes ---------------- */
+  async function loadPrepState() {
+    try {
+      const result = await window.storage.get('session2-preview-prepare');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+
+  async function savePrepState(state) {
+    try {
+      await window.storage.set('session2-preview-prepare', JSON.stringify(state));
+      const status = document.getElementById('save-status');
+      if (status) {
+        status.textContent = 'Saved';
+        status.classList.add('saved');
+      }
+    } catch (e) { console.error('Could not save reading notes', e); }
+  }
+
+  let saveTimer = null;
+  async function initPrepInputs() {
+    const state = await loadPrepState();
+    document.querySelectorAll('.prep-input').forEach(input => {
+      const key = input.getAttribute('data-key');
+      if (state[key]) input.value = state[key];
+      input.addEventListener('input', () => {
+        const status = document.getElementById('save-status');
+        if (status) {
+          status.textContent = 'Typing...';
+          status.classList.remove('saved');
+        }
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(async () => {
+          const current = await loadPrepState();
+          current[key] = input.value;
+          await savePrepState(current);
+        }, 500);
+      });
+    });
+  }
+
+  /* ---------------- Persistence: habit checklist ---------------- */
+  async function loadRepState() {
+    try {
+      const result = await window.storage.get('session2-rep-checklist');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+
+  async function saveRepState(state) {
+    try { await window.storage.set('session2-rep-checklist', JSON.stringify(state)); }
+    catch (e) { console.error('Could not save checklist', e); }
+  }
+
+  async function renderRepList() {
+    const state = await loadRepState();
+    const el = document.getElementById("rep-list");
+    el.innerHTML = repItems.map(item => `
+      <div class="rep-row ${state[item.id] ? 'checked' : ''}" data-id="${item.id}">
+        <div class="rep-check">${state[item.id] ? '✓' : ''}</div>
+        <div class="rep-label">${item.label}</div>
+      </div>
+    `).join("");
+    updateRepCount(state);
+    el.querySelectorAll(".rep-row").forEach(row => {
+      row.addEventListener("click", async () => {
+        const id = row.getAttribute("data-id");
+        const current = await loadRepState();
+        current[id] = !current[id];
+        await saveRepState(current);
+        renderRepList();
+      });
+    });
+  }
+
+  function updateRepCount(state) {
+    const checked = repItems.filter(i => state[i.id]).length;
+    const el = document.getElementById("rep-count");
+    if (el) el.textContent = `${checked} / ${repItems.length}`;
+  }
+
+  /* ---------------- Init ---------------- */
+  renderRoadmap();
+  renderToolkit();
+  renderDocClean();
+  renderChunks();
+  renderRepList();
+  initPrepInputs();
+</script>
+
+</body>
+</html>
