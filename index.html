@@ -812,8 +812,14 @@
         { title: "Set Your Plan for Next Class", time: "5 min", desc: "Write your own answer: how will you catch yourself if your attention drifts during a real lecture?", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] }
       ]
     },
-    4: { title: "After Class: The Review Window", state: "locked" },
-    5: { title: "Grade Tracking & Sheets Foundations", state: "locked" },
+    4: {
+      title: "After Class: The Review Window",
+      state: "locked",
+      agenda: [
+        { title: "Sheets Rep: Build a Review Tracker", time: "10-12 min", desc: "A light rep, same move as the budget tracker, new context. Log what got reviewed and total the minutes with one repeated formula.", tools: [{ label: "Review Tracker Rep (Google Sheets)", nav: null, note: "Live walkthrough, built directly in Tyler's Google Sheet, not an in-app tool" }] }
+      ]
+    },
+    5: { title: "Grade Tracking & Forecasting", state: "locked" },
     6: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
     7: { title: "Building Retention Across the Semester", state: "locked" },
     8: { title: "Application & Synthesis", state: "locked" },
@@ -830,7 +836,7 @@
     { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
     { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
     { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
-    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 5, statusText: "Unlocks S5" },
+    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 4, statusText: "Unlocks S4" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
   ];
 
