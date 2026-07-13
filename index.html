@@ -121,7 +121,7 @@
 
   .status-bar-fill {
     height: 100%;
-    width: 22%;
+    width: 33%;
     background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
     border-radius: 4px;
   }
@@ -511,6 +511,23 @@
   .chunk-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   @media (max-width: 640px) { .chunk-inputs { grid-template-columns: 1fr; } }
 
+  .gap-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .gap-row-head { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 6px; }
+  .gap-row-head span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    border-radius: 6px;
+    color: #0E1822;
+    text-align: center;
+  }
+  .gap-row-head span:nth-child(1) { background: var(--grad-b); }
+  .gap-row-head span:nth-child(2) { background: var(--grad-a); }
+  .gap-row-head span:nth-child(3) { background: var(--amber); }
+  @media (max-width: 640px) { .gap-row, .gap-row-head { grid-template-columns: 1fr; } }
+
   .chunk-field label {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -604,7 +621,7 @@
       <button class="back-btn" id="back-btn">‹ Back</button>
     </div>
     <div class="status">
-      <span>SESSION 2 OF 9</span>
+      <span>SESSION 3 OF 9</span>
       <div class="status-bar"><div class="status-bar-fill"></div></div>
     </div>
   </div>
@@ -711,6 +728,61 @@
     </div>
   </section>
 
+  <!-- ===================== GAP SHEET (Session 3) ===================== -->
+  <section id="screen-gap-sheet" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Today's Material</div>
+        <h4>Dr. Stephen Chew, "Putting Principles for Learning into Practice"</h4>
+        <p style="margin-bottom:14px;">Samford University · How to Get the Most Out of Studying, Part 4 of 5. Watch it once through, no pausing, and work your gap sheet below as you go.</p>
+        <a class="tool-btn" href="https://www.youtube.com/watch?v=E9GrOxhYZdQ" target="_blank" rel="noopener">▶ Watch the video</a>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Your Gap Sheet</div>
+        <p style="margin-bottom:10px;">As you watch, sort what you hear into three buckets. Doesn't need to be neat, just real.</p>
+        <div class="gap-row-head">
+          <span>Already Knew</span>
+          <span>New or Deeper</span>
+          <span>Still Unclear</span>
+        </div>
+        <div id="gap-rows"></div>
+      </div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">Your Recovery Rule</div>
+        <p style="margin-bottom:10px;">If I miss something in class and can't ask right then, here's exactly what I do:</p>
+        <div class="chunk-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="chunk-field">
+            <label>Step 1</label>
+            <textarea class="gap-input" data-key="recovery-1" rows="2" placeholder="..."></textarea>
+          </div>
+          <div class="chunk-field">
+            <label>Step 2</label>
+            <textarea class="gap-input" data-key="recovery-2" rows="2" placeholder="..."></textarea>
+          </div>
+          <div class="chunk-field">
+            <label>Step 3</label>
+            <textarea class="gap-input" data-key="recovery-3" rows="2" placeholder="..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Before Next Class</div>
+        <p style="margin-bottom:10px;">What's your plan for catching yourself if you space out during a real lecture next month?</p>
+        <div class="chunk-field">
+          <textarea class="gap-input" data-key="plan" rows="2" placeholder="Type here..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="save-row"><span id="gap-save-status" class="save-status">Not saved yet</span></div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="agenda">← Back to agenda</button>
+    </div>
+  </section>
+
   <div class="toast" id="toast"></div>
 
 <script>
@@ -719,7 +791,7 @@
     1: { title: "Foundations & Vision", state: "done" },
     2: {
       title: "Before Class: Preview & Prepare",
-      state: "current",
+      state: "done",
       agenda: [
         { title: "Check In & Arc Review", time: "5 min", desc: "Pull up the roadmap together and walk through where today fits across all nine sessions.", tools: [] },
         { title: "Build the Assignment Tracker", time: "8 min", desc: "Log this unit's Business 101 items into the Command Center using the placeholder set.", tools: [{ label: "Open Command Center", nav: null, note: "Excel workbook, hand this to Tyler separately" }] },
@@ -729,9 +801,19 @@
         { title: "Restart Rule & What's Next", time: "3 min", desc: "Set the rule for what happens if a pass gets missed, then ask where else this same move could help.", tools: [] }
       ]
     },
-    3: { title: "During Class: Active Note-Taking & Engagement", state: "locked" },
+    3: {
+      title: "During Class: Closing the Gap",
+      state: "current",
+      agenda: [
+        { title: "Open With What You've Already Built", time: "3 min", desc: "A quick look at the fall schedule and the three-pass reading you've already practiced, proof this system is already working.", tools: [] },
+        { title: "Name the Skill: Catching the Gap", time: "5 min", desc: "Class time isn't where learning starts, it's where you close the gap between what you taught yourself and what actually gets covered. Four things to catch: a new example, a different emphasis, the speaker's own take, or a correction.", tools: [] },
+        { title: "Watch & Fill Your Gap Sheet", time: "25 min", desc: "Watch a real research-based study skills lecture once through and work your gap sheet live: Already Knew, New or Deeper, Still Unclear.", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] },
+        { title: "Lock In Your Recovery Rule", time: "7 min", desc: "Decide exactly what you do when you miss something in class and can't ask right away.", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] },
+        { title: "Set Your Plan for Next Class", time: "5 min", desc: "Write your own answer: how will you catch yourself if your attention drifts during a real lecture?", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] }
+      ]
+    },
     4: { title: "After Class: The Review Window", state: "locked" },
-    5: { title: "Reading Strategies for Dense Text", state: "locked" },
+    5: { title: "Grade Tracking & Sheets Foundations", state: "locked" },
     6: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
     7: { title: "Building Retention Across the Semester", state: "locked" },
     8: { title: "Application & Synthesis", state: "locked" },
@@ -739,16 +821,16 @@
   };
 
   const toolsData = [
-    { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed" },
-    { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Active today" },
-    { icon: "📝", name: "Note-Taking System", state: "locked", session: 3, statusText: "Unlocks S3" },
+    { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed", nav: null },
+    { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed", nav: "reading-supported" },
+    { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Active today", nav: "gap-sheet" },
     { icon: "🔁", name: "Review Window Tracker", state: "locked", session: 4, statusText: "Unlocks S4" },
-    { icon: "🔍", name: "Reading Toolkit", state: "locked", session: 5, statusText: "Unlocks S5" },
+    { icon: "📈", name: "Grade Forecast Tool", state: "locked", session: 5, statusText: "Unlocks S5" },
     { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 6, statusText: "Unlocks S6" },
     { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
     { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
     { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
-    { icon: "📊", name: "Google Sheets Foundations", state: "planned", session: null, statusText: "Planned" },
+    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 5, statusText: "Unlocks S5" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
   ];
 
@@ -777,15 +859,21 @@
     { id: "annotate", label: "Named the main idea of at least one section" },
   ];
 
+  const gapRowCount = 5;
+
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
+  let activeAgendaSession = 3;
+  let lastScreenBeforeTool = "home";
 
   function goTo(screen) {
+    const current = document.querySelector(".screen.active");
+    if (current) lastScreenBeforeTool = current.id.replace("screen-", "");
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     document.getElementById("screen-" + screen).classList.add("active");
     document.getElementById("back-btn").classList.toggle("show", screen !== "home");
     window.scrollTo({ top: 0, behavior: "instant" });
-    if (screen === "agenda") renderAgenda(2);
+    if (screen === "agenda") renderAgenda(activeAgendaSession);
   }
 
   function showToast(msg) {
@@ -806,7 +894,7 @@
 
   document.getElementById("back-btn").addEventListener("click", () => {
     const current = document.querySelector(".screen.active").id;
-    if (current === "screen-reading-clean" || current === "screen-reading-supported") {
+    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet") {
       goTo("agenda");
     } else {
       goTo("home");
@@ -835,10 +923,11 @@
         const s = sessionsData[num];
         if (s.state === "locked") {
           showToast(`Session ${num} unlocks when we get there.`);
-        } else if (num === "2") {
+        } else if (s.agenda) {
+          activeAgendaSession = num;
           goTo("agenda");
-        } else if (num === "1") {
-          showToast("Session 1 is already done, on to today.");
+        } else {
+          showToast(`Session ${num} is already done.`);
         }
       });
     });
@@ -862,16 +951,19 @@
 
     el.querySelectorAll(".tool-chip").forEach(chip => {
       chip.addEventListener("click", () => {
-        const state = chip.classList.contains("active") ? "active" : chip.classList.contains("planned") ? "planned" : "locked";
+        const name = chip.getAttribute("data-tool");
+        const tool = toolsData.find(t => t.name === name);
         const session = chip.getAttribute("data-session");
-        if (state === "planned") {
+        if (tool.state === "planned") {
           showToast("On the roadmap, not slotted into a session yet.");
-        } else if (state === "locked") {
+        } else if (tool.state === "locked") {
           showToast(`Unlocks in session ${session}.`);
-        } else if (session === "2") {
-          goTo("agenda");
-        } else if (session === "1") {
+        } else if (tool.nav) {
+          goTo(tool.nav);
+        } else if (tool.session == 1) {
           showToast("Command Center lives in your Excel workbook from session 1.");
+        } else {
+          showToast(`${tool.name} is installed.`);
         }
       });
     });
@@ -1007,6 +1099,62 @@
     if (el) el.textContent = `${checked} / ${repItems.length}`;
   }
 
+  /* ---------------- Gap sheet (Session 3) ---------------- */
+  function renderGapRows() {
+    const el = document.getElementById("gap-rows");
+    if (!el) return;
+    let rows = "";
+    for (let i = 0; i < gapRowCount; i++) {
+      rows += `
+        <div class="gap-row">
+          <textarea class="gap-input" data-key="row-${i}-knew" rows="2" placeholder="..."></textarea>
+          <textarea class="gap-input" data-key="row-${i}-new" rows="2" placeholder="..."></textarea>
+          <textarea class="gap-input" data-key="row-${i}-unclear" rows="2" placeholder="..."></textarea>
+        </div>`;
+    }
+    el.innerHTML = rows;
+  }
+
+  async function loadGapState() {
+    try {
+      const result = await window.storage.get('session3-gap-sheet');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+
+  async function saveGapState(state) {
+    try {
+      await window.storage.set('session3-gap-sheet', JSON.stringify(state));
+      const status = document.getElementById('gap-save-status');
+      if (status) {
+        status.textContent = 'Saved';
+        status.classList.add('saved');
+      }
+    } catch (e) { console.error('Could not save gap sheet', e); }
+  }
+
+  let gapSaveTimer = null;
+  async function initGapInputs() {
+    const state = await loadGapState();
+    document.querySelectorAll('.gap-input').forEach(input => {
+      const key = input.getAttribute('data-key');
+      if (state[key]) input.value = state[key];
+      input.addEventListener('input', () => {
+        const status = document.getElementById('gap-save-status');
+        if (status) {
+          status.textContent = 'Typing...';
+          status.classList.remove('saved');
+        }
+        clearTimeout(gapSaveTimer);
+        gapSaveTimer = setTimeout(async () => {
+          const current = await loadGapState();
+          current[key] = input.value;
+          await saveGapState(current);
+        }, 500);
+      });
+    });
+  }
+
   /* ---------------- Init ---------------- */
   renderRoadmap();
   renderToolkit();
@@ -1014,6 +1162,8 @@
   renderChunks();
   renderRepList();
   initPrepInputs();
+  renderGapRows();
+  initGapInputs();
 </script>
 
 </body>
