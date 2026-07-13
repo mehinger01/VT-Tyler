@@ -783,6 +783,56 @@
     </div>
   </section>
 
+  <!-- ===================== SHEETS REP (Session 4) ===================== -->
+  <section id="screen-sheets-rep" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Session 4 · Google Sheets Rep</div>
+        <h4>Build a Review Tracker</h4>
+        <p style="margin-bottom:6px;">Same move as your budget tracker, new context. Log what you reviewed after class and total the minutes with one repeated formula.</p>
+        <p style="margin-bottom:0;">Build it live with your coach, right in the same Google Sheets file as your budget tracker, as a new tab.</p>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">What You're Building</div>
+        <div class="chunk-inputs" style="grid-template-columns: 1fr;">
+          <div class="chunk-field">
+            <label>Columns</label>
+            <div style="font-size:13px; color:#D4DEE5; line-height:1.6;">Date &nbsp;·&nbsp; Course &nbsp;·&nbsp; What I Reviewed &nbsp;·&nbsp; Minutes Spent</div>
+          </div>
+          <div class="chunk-field">
+            <label>The one formula</label>
+            <div style="font-family: var(--font-mono); font-size:13px; color: var(--success);">=SUM(D2:D10)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">Today's Rep</div>
+        <div class="rep-card" style="border:none; padding:0; background:transparent;">
+          <div class="rep-head">
+            <h3>Run it once, for real</h3>
+            <span class="rep-count" id="sheets-rep-count">0 / 3</span>
+          </div>
+          <div class="rep-list" id="sheets-rep-list"></div>
+        </div>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Connect the Dots</div>
+        <p style="margin-bottom:10px;">Where else could this same total trick be useful?</p>
+        <div class="chunk-field">
+          <textarea class="sheets-rep-input" data-key="transfer" rows="2" placeholder="Type here..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="save-row"><span id="sheets-rep-save-status" class="save-status">Not saved yet</span></div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="agenda">← Back to agenda</button>
+    </div>
+  </section>
+
   <div class="toast" id="toast"></div>
 
 <script>
@@ -816,7 +866,7 @@
       title: "After Class: The Review Window",
       state: "locked",
       agenda: [
-        { title: "Sheets Rep: Build a Review Tracker", time: "10-12 min", desc: "A light rep, same move as the budget tracker, new context. Log what got reviewed and total the minutes with one repeated formula.", tools: [{ label: "Review Tracker Rep (Google Sheets)", nav: null, note: "Live walkthrough, built directly in Tyler's Google Sheet, not an in-app tool" }] }
+        { title: "Sheets Rep: Build a Review Tracker", time: "10-12 min", desc: "A light rep, same move as the budget tracker, new context. Log what got reviewed and total the minutes with one repeated formula.", tools: [{ label: "Open Sheets Rep", nav: "sheets-rep" }] }
       ]
     },
     5: { title: "Grade Tracking & Forecasting", state: "locked" },
@@ -836,7 +886,7 @@
     { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
     { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
     { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
-    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 4, statusText: "Unlocks S4" },
+    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 4, statusText: "Unlocks S4", nav: "sheets-rep" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
   ];
 
@@ -866,6 +916,12 @@
   ];
 
   const gapRowCount = 5;
+
+  const sheetsRepItems = [
+    { id: "headers", label: "Typed the column headers myself" },
+    { id: "formula", label: "Typed the SUM formula myself, before being shown" },
+    { id: "transfer", label: "Named another place this same formula trick could help" },
+  ];
 
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
@@ -900,7 +956,7 @@
 
   document.getElementById("back-btn").addEventListener("click", () => {
     const current = document.querySelector(".screen.active").id;
-    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet") {
+    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep") {
       goTo("agenda");
     } else {
       goTo("home");
@@ -1161,6 +1217,87 @@
     });
   }
 
+  /* ---------------- Sheets rep (Session 4) ---------------- */
+  async function loadSheetsRepState() {
+    try {
+      const result = await window.storage.get('session4-sheets-rep');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+
+  async function saveSheetsRepState(state) {
+    try { await window.storage.set('session4-sheets-rep', JSON.stringify(state)); }
+    catch (e) { console.error('Could not save sheets rep checklist', e); }
+  }
+
+  async function renderSheetsRepList() {
+    const el = document.getElementById("sheets-rep-list");
+    if (!el) return;
+    const state = await loadSheetsRepState();
+    el.innerHTML = sheetsRepItems.map(item => `
+      <div class="rep-row ${state[item.id] ? 'checked' : ''}" data-id="${item.id}">
+        <div class="rep-check">${state[item.id] ? '✓' : ''}</div>
+        <div class="rep-label">${item.label}</div>
+      </div>
+    `).join("");
+    updateSheetsRepCount(state);
+    el.querySelectorAll(".rep-row").forEach(row => {
+      row.addEventListener("click", async () => {
+        const id = row.getAttribute("data-id");
+        const current = await loadSheetsRepState();
+        current[id] = !current[id];
+        await saveSheetsRepState(current);
+        renderSheetsRepList();
+      });
+    });
+  }
+
+  function updateSheetsRepCount(state) {
+    const checked = sheetsRepItems.filter(i => state[i.id]).length;
+    const el = document.getElementById("sheets-rep-count");
+    if (el) el.textContent = `${checked} / ${sheetsRepItems.length}`;
+  }
+
+  async function loadSheetsRepNotes() {
+    try {
+      const result = await window.storage.get('session4-sheets-rep-notes');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+
+  async function saveSheetsRepNotes(state) {
+    try {
+      await window.storage.set('session4-sheets-rep-notes', JSON.stringify(state));
+      const status = document.getElementById('sheets-rep-save-status');
+      if (status) {
+        status.textContent = 'Saved';
+        status.classList.add('saved');
+      }
+    } catch (e) { console.error('Could not save sheets rep notes', e); }
+  }
+
+  let sheetsRepSaveTimer = null;
+  async function initSheetsRepInputs() {
+    const state = await loadSheetsRepNotes();
+    document.querySelectorAll('.sheets-rep-input').forEach(input => {
+      const key = input.getAttribute('data-key');
+      if (state[key]) input.value = state[key];
+      input.addEventListener('input', () => {
+        const status = document.getElementById('sheets-rep-save-status');
+        if (status) {
+          status.textContent = 'Typing...';
+          status.classList.remove('saved');
+        }
+        clearTimeout(sheetsRepSaveTimer);
+        sheetsRepSaveTimer = setTimeout(async () => {
+          const current = await loadSheetsRepNotes();
+          current[key] = input.value;
+          await saveSheetsRepNotes(current);
+        }, 500);
+      });
+    });
+  }
+
   /* ---------------- Init ---------------- */
   renderRoadmap();
   renderToolkit();
@@ -1170,6 +1307,8 @@
   initPrepInputs();
   renderGapRows();
   initGapInputs();
+  renderSheetsRepList();
+  initSheetsRepInputs();
 </script>
 
 </body>
