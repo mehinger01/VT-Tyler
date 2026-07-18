@@ -121,7 +121,7 @@
 
   .status-bar-fill {
     height: 100%;
-    width: 33%;
+    width: 44%;
     background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
     border-radius: 4px;
   }
@@ -783,13 +783,38 @@
     </div>
   </section>
 
+  <!-- ===================== READING: WHITE PAPER (Session 4) ===================== -->
+  <section id="screen-reading-whitepaper" class="screen">
+    <div class="doc-wrap">
+      <div class="doc-window">
+        <div class="doc-header">
+          <div class="doc-eyebrow">Session 4 · 3-Pass Reading</div>
+          <h2>The First-Semester Systems Gap</h2>
+          <div class="doc-sub">Research brief. Do your three passes on this: overview, key points, details. Use the Before Class tracker alongside it.</div>
+        </div>
+        <div class="doc-layout">
+          <div class="doc-main" id="doc-main-whitepaper"></div>
+          <div class="doc-side">
+            <div class="doc-terms" id="doc-terms-whitepaper"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mode-switch">
+        <a class="tool-btn" href="templates/First-Semester-Systems-Gap-Research-Brief.docx" target="_blank" rel="noopener">Download the brief (.docx)</a>
+        <a class="tool-btn" href="templates/Template-1-Before-Class-3-Pass-Reading-Tracker.docx" target="_blank" rel="noopener">Open Before Class tracker</a>
+        <button data-nav="agenda">← Back to agenda</button>
+      </div>
+      <div class="doc-footer-note">Five sections, same order every time you'll see them: Responsibility Shift, Unstructured Time, Notes Fading, Office Hours, Routines.</div>
+    </div>
+  </section>
+
   <!-- ===================== SHEETS REP (Session 4) ===================== -->
   <section id="screen-sheets-rep" class="screen">
     <div class="chunk-wrap">
       <div class="chunk-card prime-card">
         <div class="chunk-eyebrow">Session 4 · Google Sheets Rep</div>
-        <h4>Build a Review Tracker</h4>
-        <p style="margin-bottom:6px;">Same move as your budget tracker, new context. Log what you reviewed after class and total the minutes with one repeated formula.</p>
+        <h4>Build Your Takeaway Tracker</h4>
+        <p style="margin-bottom:6px;">This is today's after-class synthesis, turned into a spreadsheet. Enter the 3-5 takeaways you just wrote from the reading and lecture, then total how many you've locked in.</p>
         <p style="margin-bottom:0;">Build it live with your coach, right in the same Google Sheets file as your budget tracker, as a new tab.</p>
       </div>
 
@@ -798,11 +823,11 @@
         <div class="chunk-inputs" style="grid-template-columns: 1fr;">
           <div class="chunk-field">
             <label>Columns</label>
-            <div style="font-size:13px; color:#D4DEE5; line-height:1.6;">Date &nbsp;·&nbsp; Course &nbsp;·&nbsp; What I Reviewed &nbsp;·&nbsp; Minutes Spent</div>
+            <div style="font-size:13px; color:#D4DEE5; line-height:1.6;">Takeaway &nbsp;·&nbsp; Locked In? (1/0)</div>
           </div>
           <div class="chunk-field">
             <label>The one formula</label>
-            <div style="font-family: var(--font-mono); font-size:13px; color: var(--success);">=SUM(D2:D10)</div>
+            <div style="font-family: var(--font-mono); font-size:13px; color: var(--success);">=SUM(B2:B6)</div>
           </div>
         </div>
       </div>
@@ -853,7 +878,7 @@
     },
     3: {
       title: "During Class: Closing the Gap",
-      state: "current",
+      state: "done",
       agenda: [
         { title: "Open With What You've Already Built", time: "3 min", desc: "A quick look at the fall schedule and the three-pass reading you've already practiced, proof this system is already working.", tools: [] },
         { title: "Name the Skill: Catching the Gap", time: "5 min", desc: "Class time isn't where learning starts, it's where you close the gap between what you taught yourself and what actually gets covered. Four things to catch: a new example, a different emphasis, the speaker's own take, or a correction.", tools: [] },
@@ -864,9 +889,13 @@
     },
     4: {
       title: "After Class: The Review Window",
-      state: "locked",
+      state: "current",
       agenda: [
-        { title: "Sheets Rep: Build a Review Tracker", time: "10-12 min", desc: "A light rep, same move as the budget tracker, new context. Log what got reviewed and total the minutes with one repeated formula.", tools: [{ label: "Open Sheets Rep", nav: "sheets-rep" }] }
+        { title: "3-Pass Reading: First-Semester Systems", time: "15 min", desc: "Read a fresh passage on what actually trips up first-semester freshmen, using the same overview → key points → details pass structure from Session 2.", tools: [{ label: "Open the Reading", nav: "reading-whitepaper" }, { label: "Before Class tracker (.docx)", href: "templates/Template-1-Before-Class-3-Pass-Reading-Tracker.docx" }] },
+        { title: "Live Lecture: What the Reading Didn't Cover", time: "5-10 min", desc: "A short live lecture that goes deeper on two points from the reading (the responsibility shift, notes fading fast) and introduces two genuinely new ones (office hours, decision fatigue), so there's a real gap to close.", tools: [{ label: "During Class Gap Sheet (.docx)", href: "templates/Template-2-During-Class-Gap-Sheet.docx" }] },
+        { title: "Cold Recall, Then Check", time: "8-10 min", desc: "Write down what you remember from the reading and the lecture combined, before looking back at anything. Then check your notes, fill in what you missed, and rewrite it into 3-5 real takeaways.", tools: [{ label: "After Class Cold Recall (.docx)", href: "templates/Template-3-After-Class-Cold-Recall.docx" }] },
+        { title: "Sheets Rep: Build a Takeaway Tracker", time: "15 min", desc: "Cell basics and one SUM formula, live, using your own synthesized takeaways as the sheet's actual content. This finishes the after-class rep and builds today's tool at the same time.", tools: [{ label: "Open Sheets Rep", nav: "sheets-rep" }] },
+        { title: "Closing Question", time: "2-3 min", desc: "Which of these takeaways will actually still be true in week 3?", tools: [] }
       ]
     },
     5: { title: "Grade Tracking & Forecasting", state: "locked" },
@@ -879,15 +908,32 @@
   const toolsData = [
     { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed", nav: null },
     { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed", nav: "reading-supported" },
-    { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Active today", nav: "gap-sheet" },
-    { icon: "🔁", name: "Review Window Tracker", state: "locked", session: 4, statusText: "Unlocks S4" },
+    { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Installed", nav: "gap-sheet" },
+    { icon: "📊", name: "Takeaway Tracker (Sheets)", state: "active", session: 4, statusText: "Active today", nav: "sheets-rep" },
     { icon: "📈", name: "Grade Forecast Tool", state: "locked", session: 5, statusText: "Unlocks S5" },
     { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 6, statusText: "Unlocks S6" },
     { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
     { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
     { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
-    { icon: "📊", name: "Google Sheets Foundations", state: "locked", session: 4, statusText: "Unlocks S4", nav: "sheets-rep" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
+  ];
+
+  const whitepaperData = [
+    { heading: "Abstract", text: "Nearly every first-semester college student encounters the same five structural problems, regardless of academic ability. This brief summarizes peer-reviewed and applied research behind each one: the shift from externally managed accountability to self-regulated learning, the risks of unstructured time, the rapid decay of unreviewed lecture material, the underuse of faculty office hours, and the cognitive cost of unstructured daily decision-making. Across these five bodies of research, a consistent theme emerges: first-year struggle is rarely a matter of intelligence or effort. It is a matter of whether a student has built systems that do not depend on someone else providing structure." },
+    { heading: "1. The Responsibility Shift: Self-Regulated Learning", text: "Education researchers describe the move from secondary school to college as a shift in self-regulated learning (SRL), the set of skills a student uses to independently plan, monitor, and manage their own academic behavior. A 2026 study of 1,385 students at a large public university found that first-year students experience marked changes in how much they rely on their own planning and monitoring once the external structure of high school disappears, and that these shifts in self-regulation are closely tied to whether students persist and perform well in their first year.\n\nA related line of research applies Nicholson's Transition Cycle model to the first-year experience, identifying \u201cbecoming a self-regulated learner\u201d as one of the core adjustment challenges new students face, alongside readiness and goal-setting. The consistent finding across this literature is that the skills required to succeed in college are not simply more advanced versions of high school skills. They are a different category of skill entirely, centered on independent accountability rather than externally enforced deadlines." },
+    { heading: "2. Unstructured Time and the Time Management Gap", text: "A 2026 design-based research study on first-year time management competencies notes that the transition to college demands heightened autonomy, since students must now balance academic and personal demands under much looser external supervision than in secondary school. The researchers found that most institutional responses to this gap, typically a single orientation-week seminar, are too brief and too front-loaded to build a durable skill, and that sustained, practice-based instruction produces significantly stronger time management competency than one-time instruction alone.\n\nThis matches a broader pattern in the self-regulated learning literature: unstructured time is not inherently a problem, but time management is a trainable skill that most students have never explicitly practiced, since high school rarely requires them to independently allocate large blocks of unsupervised time." },
+    { heading: "3. The Forgetting Curve and the Case for Same-Day Review", text: "The foundational research here dates to Hermann Ebbinghaus's 1885 memory experiments, which established that newly learned information decays fastest in the hours immediately following exposure, and that this decay can be substantially slowed through review at well-timed intervals. Ebbinghaus's original findings have since been replicated with modern methods, most notably by Murre and Dros in 2015, who reproduced his original decay curve using a fresh sample of learners.\n\nLater cognitive science extended this into what is now called the spacing effect and the testing effect. Roediger and Karpicke's widely cited 2006 research demonstrated that actively retrieving and reprocessing material shortly after learning it produces substantially stronger long-term retention than passive rereading, and later synthesis work by Kang (2016) and others has translated this into practical guidance for instructional settings: a short review completed within about a day of first exposure meaningfully blunts the steepest part of the decay curve, while delaying that review by a week or more allows most of the material to be lost." },
+    { heading: "4. Office Hours: An Underused, High-Return Resource", text: "Despite being one of the few structured, one-on-one academic resources built into a college schedule, office hours remain sharply underused. Reporting on office hour research in the Journal of Political Science Education found that students who attended office hours at least twice in a semester scored significantly higher on exams, even after controlling for prior academic performance, yet the same research base consistently finds that the large majority of students never attend a single session.\n\nApplied research on why students avoid office hours points to a consistent misconception: most students believe office hours exist only for emergencies, reserved for when they are already failing or deeply confused, rather than as a routine, low-stakes touchpoint. Research summarized by faculty development researchers found that students who use office hours as ongoing check-ins, rather than last resorts, report stronger relationships with instructors and catch small misunderstandings well before those misunderstandings compound into larger academic problems." },
+    { heading: "5. Routine, Decision Fatigue, and the Value of Structure", text: "The psychological basis for routine-building traces back to Baumeister, Bratslavsky, Muraven, and Tice's 1998 research on ego depletion, which established that self-control functions like a limited resource that becomes harder to exercise well the more it is used across a day. Vohs and colleagues later extended this finding specifically to decision-making, showing that the simple act of making repeated choices, independent of their difficulty, measurably reduces a person's capacity for self-control on subsequent tasks.\n\nThe practical implication for routine-building is well established in this literature: habits and pre-set routines largely bypass this depletion effect, since once a behavior becomes automatic it no longer draws on the same limited pool of self-control that active decision-making requires. Researchers summarizing this body of work note that structured routines function as a form of cognitive offloading, conserving a person's limited daily capacity for the decisions that actually require judgment, rather than spending it on dozens of small, repeated choices about when and how to work." },
+    { heading: "Conclusion", text: "Across all five areas, the research points to the same underlying mechanism. First-semester struggle is very rarely a story about raw ability. It is a story about whether a student has replaced the external scaffolding of high school, teacher reminders, daily supervision, and structured time, with self-built systems: a habit of capturing deadlines the moment they appear, fixed study blocks that treat free time as usable time, a short same-day review habit that interrupts the forgetting curve, routine rather than emergency-only use of office hours, and a small set of fixed weekly anchors that remove the need to renegotiate the schedule every day. None of these fixes require more intelligence or more raw effort. They require different habits, built deliberately, before the semester makes the cost of not having them obvious." },
+  ];
+
+  const whitepaperSourcesData = [
+    ["Responsibility Shift", "Georgia Southern SRL study (2026); Frontiers in Psychology (2021)"],
+    ["Unstructured Time", "Design-based time management study, first-year students (2026)"],
+    ["Notes Fading", "Ebbinghaus (1885); Murre & Dros (2015); Roediger & Karpicke (2006); Kang (2016)"],
+    ["Office Hours", "Journal of Political Science Education; Umbach & Wawrzynski (2005)"],
+    ["Routines", "Baumeister et al. (1998); Vohs et al. (2008)"],
   ];
 
   const chunksData = [
@@ -918,14 +964,14 @@
   const gapRowCount = 5;
 
   const sheetsRepItems = [
-    { id: "headers", label: "Typed the column headers myself" },
+    { id: "takeaways", label: "Typed each takeaway myself, in my own words" },
     { id: "formula", label: "Typed the SUM formula myself, before being shown" },
     { id: "transfer", label: "Named another place this same formula trick could help" },
   ];
 
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
-  let activeAgendaSession = 3;
+  let activeAgendaSession = 4;
   let lastScreenBeforeTool = "home";
 
   function goTo(screen) {
@@ -956,7 +1002,7 @@
 
   document.getElementById("back-btn").addEventListener("click", () => {
     const current = document.querySelector(".screen.active").id;
-    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep") {
+    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep" || current === "screen-reading-whitepaper") {
       goTo("agenda");
     } else {
       goTo("home");
@@ -1046,7 +1092,7 @@
             <span class="agenda-time">${item.time}</span>
           </div>
           <div class="agenda-desc">${item.desc}</div>
-          ${item.tools.length ? `<div class="agenda-tools">${item.tools.map(t => `<span class="tool-btn" ${t.nav ? `data-nav="${t.nav}"` : ""}>${t.label}</span>`).join("")}</div>` : ""}
+          ${item.tools.length ? `<div class="agenda-tools">${item.tools.map(t => t.href ? `<a class="tool-btn" href="${t.href}" target="_blank" rel="noopener">${t.label}</a>` : `<span class="tool-btn" ${t.nav ? `data-nav="${t.nav}"` : ""}>${t.label}</span>`).join("")}</div>` : ""}
         </div>
       </div>
     `).join("");
@@ -1056,6 +1102,14 @@
   function renderDocClean() {
     document.getElementById("doc-main").innerHTML = chunksData.map(c => `<h3>${c.heading}</h3><p>${c.text}</p>`).join("");
     document.getElementById("doc-terms").innerHTML = `<h4>Key Terms</h4><dl>${termsData.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join("")}</dl>`;
+  }
+
+  /* ---------------- Reading: white paper view (Session 4) ---------------- */
+  function renderWhitepaper() {
+    document.getElementById("doc-main-whitepaper").innerHTML = whitepaperData.map(c =>
+      `<h3>${c.heading}</h3>${c.text.split("\n\n").map(p => `<p>${p}</p>`).join("")}`
+    ).join("");
+    document.getElementById("doc-terms-whitepaper").innerHTML = `<h4>Section → Source</h4><dl>${whitepaperSourcesData.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join("")}</dl>`;
   }
 
   /* ---------------- Reading: supported/chunked view ---------------- */
@@ -1302,6 +1356,7 @@
   renderRoadmap();
   renderToolkit();
   renderDocClean();
+  renderWhitepaper();
   renderChunks();
   renderRepList();
   initPrepInputs();
