@@ -121,7 +121,7 @@
 
   .status-bar-fill {
     height: 100%;
-    width: 44%;
+    width: 56%;
     background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
     border-radius: 4px;
   }
@@ -550,6 +550,65 @@
   }
   .chunk-field textarea:focus { outline: none; border-color: var(--grad-b); }
 
+  .chunk-field select.gf-select,
+  .chunk-field input.gf-number {
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--locked-line);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    padding: 8px 10px;
+  }
+  .chunk-field select.gf-select:focus,
+  .chunk-field input.gf-number:focus { outline: none; border-color: var(--grad-b); }
+
+  .gf-row { display: grid; gap: 10px; margin-bottom: 10px; }
+  .gf-weight-row { grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; align-items: center; }
+  .gf-entry-row { grid-template-columns: 1fr 1fr 1.4fr 0.7fr; align-items: center; }
+  .gf-standing-row { grid-template-columns: 1.2fr 1fr 1fr 1fr; align-items: center; }
+  @media (max-width: 640px) {
+    .gf-weight-row, .gf-entry-row, .gf-standing-row { grid-template-columns: 1fr; }
+  }
+
+  .gf-course-label { font-family: var(--font-display); font-weight: 600; font-size: 13px; }
+
+  .status-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .status-pill.ontrack { background: rgba(79,174,147,0.16); color: var(--success); }
+  .status-pill.atrisk { background: rgba(192,85,77,0.16); color: #E08A82; }
+  .status-pill.nodata { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+
+  .routine-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .routine-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .routine-row input {
+    flex: 1;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--locked-line);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  .routine-row input:focus { outline: none; border-color: var(--grad-b); }
+
+
   .prime-card {
     border-left: 3px solid var(--grad-a);
   }
@@ -621,7 +680,7 @@
       <button class="back-btn" id="back-btn">‹ Back</button>
     </div>
     <div class="status">
-      <span>SESSION 3 OF 9</span>
+      <span>SESSION 5 OF 9</span>
       <div class="status-bar"><div class="status-bar-fill"></div></div>
     </div>
   </div>
@@ -858,6 +917,141 @@
     </div>
   </section>
 
+  <!-- ===================== GRADE FORECAST (Session 5) ===================== -->
+  <section id="screen-grade-forecast" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Session 5 · Grade Forecast Tool</div>
+        <h4>Your Live Grade Calculator</h4>
+        <p style="margin-bottom:0;">Set your category weights, enter grades as they come in, and this tool tells you where you stand and what you need on what's left. Weights below are placeholders built from GMU's catalog course descriptions — swap them in for the real numbers the day your syllabi post.</p>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">1 · Category Weights (%)</div>
+        <div class="gap-row-head" style="grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;">
+          <span>Course</span><span>Participation</span><span>Homework</span><span>Midterms</span><span>Final</span>
+        </div>
+        <div id="gf-weights"></div>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">2 · Grades Entered So Far</div>
+        <div class="gap-row-head" style="grid-template-columns: 1fr 1fr 1.4fr 0.7fr;">
+          <span>Course</span><span>Category</span><span>Assignment</span><span>Score %</span>
+        </div>
+        <div id="gf-entries"></div>
+      </div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">3 · Your Live Standing</div>
+        <p style="margin-bottom:10px;">Set a target grade per course. Status colors itself.</p>
+        <div class="gap-row-head" style="grid-template-columns: 1.2fr 1fr 1fr 1fr;">
+          <span>Course</span><span>Current Grade</span><span>Target %</span><span>Status</span>
+        </div>
+        <div id="gf-standing"></div>
+      </div>
+
+      <div class="chunk-card" style="border-left-color: var(--amber);">
+        <div class="chunk-eyebrow">4 · What Do I Need?</div>
+        <p style="margin-bottom:10px;">Pick a course and a target. This tells you the score you need on the final.</p>
+        <div class="chunk-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="chunk-field">
+            <label>Course</label>
+            <select id="gf-whatif-course" class="gf-select"></select>
+          </div>
+          <div class="chunk-field">
+            <label>Target Grade %</label>
+            <input type="number" id="gf-whatif-target" class="gf-number" min="0" max="100" value="90">
+          </div>
+          <div class="chunk-field">
+            <label>Score Needed on Final</label>
+            <div id="gf-whatif-result" style="font-family: var(--font-mono); font-size:20px; font-weight:700; color: var(--success); padding-top: 6px;">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chunk-card" style="border-left-color:#C0554D; background: rgba(192,85,77,0.08);">
+        <div class="chunk-eyebrow" style="color:#E08A82;">When You See Red</div>
+        <p style="margin-bottom:0;">A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. If stress ever gets bigger than a spreadsheet or a reset breath can handle, GMU's counseling services are there for exactly that.</p>
+      </div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">Your Recovery Rule</div>
+        <p style="margin-bottom:10px;">If I don't update this within 48 hours of a grade posting, here's exactly what I do:</p>
+        <div class="chunk-field">
+          <textarea class="gf-input" data-key="recovery-rule" rows="2" placeholder="Type here..."></textarea>
+        </div>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Today's Rep</div>
+        <div class="rep-card" style="border:none; padding:0; background:transparent;">
+          <div class="rep-head">
+            <h3>Run it once, for real</h3>
+            <span class="rep-count" id="gf-rep-count">0 / 3</span>
+          </div>
+          <div class="rep-list" id="gf-rep-list"></div>
+        </div>
+      </div>
+    </div>
+    <div class="save-row"><span id="gf-save-status" class="save-status">Not saved yet</span></div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="agenda">← Back to agenda</button>
+    </div>
+  </section>
+
+  <!-- ===================== DAILY ROUTINE: 3+3 (Session 5) ===================== -->
+  <section id="screen-daily-routine" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Session 5 · Daily Routine</div>
+        <h4>The 3+3</h4>
+        <p style="margin-bottom:0;">Under two minutes, every morning. Three things that must get done today. Then three things you're grateful for. Same order every time, gratitude second so it never feels like a chore attached to a nicer thing.</p>
+      </div>
+
+      <div class="chunk-card">
+        <div class="chunk-eyebrow">Must Get Done Today</div>
+        <div id="routine-mustdo"></div>
+      </div>
+
+      <div class="chunk-card synth-card">
+        <div class="chunk-eyebrow">Grateful For</div>
+        <div id="routine-grateful"></div>
+      </div>
+    </div>
+    <div class="save-row"><span id="routine-save-status" class="save-status">Not saved yet</span></div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="agenda">← Back to agenda</button>
+    </div>
+  </section>
+
+  <!-- ===================== WORK BLOCKS: 50/5 (Session 5) ===================== -->
+  <section id="screen-work-blocks" class="screen">
+    <div class="chunk-wrap">
+      <div class="chunk-card prime-card">
+        <div class="chunk-eyebrow">Session 5 · Work Blocks</div>
+        <h4>50 Up, 5 Moving</h4>
+        <p style="margin-bottom:0;">Every 50 minutes of focused work, stand up and move for 5 — walk, stretch, refill water, anything that gets you out of the chair. Scheduled in advance, not negotiated in the moment.</p>
+      </div>
+
+      <div class="chunk-card" style="text-align:center; padding: 36px 22px;">
+        <div id="wb-phase-label" style="font-family: var(--font-mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color: var(--amber); margin-bottom:10px;">Focus Block</div>
+        <div id="wb-timer" style="font-family: var(--font-mono); font-size:56px; font-weight:700;">50:00</div>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:22px;">
+          <button class="tool-btn" id="wb-start">▶ Start</button>
+          <button class="tool-btn" id="wb-pause" style="background: rgba(255,255,255,0.06); border-color: var(--locked-line); color: var(--text-primary);">⏸ Pause</button>
+          <button class="tool-btn" id="wb-reset" style="background: rgba(255,255,255,0.06); border-color: var(--locked-line); color: var(--text-primary);">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mode-switch" style="margin-bottom:40px;">
+      <button data-nav="agenda">← Back to agenda</button>
+    </div>
+  </section>
+
   <div class="toast" id="toast"></div>
 
 <script>
@@ -889,7 +1083,7 @@
     },
     4: {
       title: "After Class: The Review Window",
-      state: "current",
+      state: "done",
       agenda: [
         { title: "3-Pass Reading: First-Semester Systems", time: "15 min", desc: "Read a fresh passage on what actually trips up first-semester freshmen, using the same overview → key points → details pass structure from Session 2.", tools: [{ label: "Open the Reading", nav: "reading-whitepaper" }, { label: "Before Class tracker (Google Doc)", href: "https://docs.google.com/document/d/1UzmQ8tfDIp18mvz-A_yEOgBVbo4JTmDqqvyx4FM0OSk/edit" }] },
         { title: "Live Lecture: What the Reading Didn't Cover", time: "5-10 min", desc: "A short live lecture that goes deeper on two points from the reading (the responsibility shift, notes fading fast) and introduces two genuinely new ones (office hours, decision fatigue), so there's a real gap to close.", tools: [{ label: "During Class Gap Sheet (Google Doc)", href: "https://docs.google.com/document/d/17AVdcJGGONC4R-AosEjjGulIv4RPMMv4aAzl8X_9IxM/edit" }] },
@@ -898,7 +1092,23 @@
         { title: "Closing Question", time: "2-3 min", desc: "Which of these takeaways will actually still be true in week 3?", tools: [] }
       ]
     },
-    5: { title: "Grade Tracking & Forecasting", state: "locked" },
+    5: {
+      title: "Grade Tracking & Forecasting",
+      state: "current",
+      agenda: [
+        { title: "Check In", time: "5 min", desc: "Quick catch-up. How are you feeling heading into the semester?", tools: [] },
+        { title: "Daily Routine: The 3+3", time: "5 min", desc: "A fast morning routine you can run in under two minutes: name 3 things that must get done today, then 3 things you're grateful for. Practice it live right now, using today as the example.", tools: [{ label: "Open Daily Routine", nav: "daily-routine" }] },
+        { title: "See the Finished Tool First", time: "5 min", desc: "Before you build anything, see a finished example: sample classes color-coded on track or at risk, plus a working what-if calculator you can try right now.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Work Blocks: 50 Up, 5 Moving", time: "3-5 min", desc: "The rule: every 50 minutes of focused work, stand up and move for 5. Scheduled in advance, not negotiated in the moment. You'll use this for real during today's build.", tools: [{ label: "Open Work Block Timer", nav: "work-blocks" }] },
+        { title: "Build: Your Real Grade, Weighted", time: "10 min", desc: "Add your real fall course weights and build the formula that calculates your actual current grade, factoring in how much each category is really worth.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Automatic Warning Flags", time: "10-15 min", desc: "Set a target grade for each class and watch the status flag itself the moment a class drops below where you want it, color-coded so you see it at a glance.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "When You See Red", time: "3-5 min", desc: "A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. GMU's counseling services are there if stress ever gets bigger than a spreadsheet or a reset breath can handle.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Clean Data Entry", time: "10 min", desc: "Dropdown menus for course and category, so entering a new grade all semester stays fast and consistent.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Live Practice: What Do I Need?", time: "10 min", desc: "Pick one class. Build the formula that answers: what score do I need on the final to land the grade I want?", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Log the Rep + Recovery Rule", time: "5 min", desc: "Log today's rep. Set your rule for what happens once real grades start posting, so updating this tool becomes automatic.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Closing Question", time: "2-3 min", desc: "Once your first grade posts this semester, when are you going to open this and plug it in?", tools: [] }
+      ]
+    },
     6: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
     7: { title: "Building Retention Across the Semester", state: "locked" },
     8: { title: "Application & Synthesis", state: "locked" },
@@ -909,8 +1119,10 @@
     { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed", nav: null },
     { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed", nav: "reading-supported" },
     { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Installed", nav: "gap-sheet" },
-    { icon: "📊", name: "Takeaway Tracker (Sheets)", state: "active", session: 4, statusText: "Active today", nav: "sheets-rep" },
-    { icon: "📈", name: "Grade Forecast Tool", state: "locked", session: 5, statusText: "Unlocks S5" },
+    { icon: "📊", name: "Takeaway Tracker (Sheets)", state: "active", session: 4, statusText: "Installed", nav: "sheets-rep" },
+    { icon: "📈", name: "Grade Forecast Tool", state: "active", session: 5, statusText: "Active today", nav: "grade-forecast" },
+    { icon: "☀️", name: "Daily Routine (3+3)", state: "active", session: 5, statusText: "Active today", nav: "daily-routine" },
+    { icon: "🏃", name: "Work Block Timer", state: "active", session: 5, statusText: "Active today", nav: "work-blocks" },
     { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 6, statusText: "Unlocks S6" },
     { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
     { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
@@ -969,9 +1181,30 @@
     { id: "transfer", label: "Named another place this same formula trick could help" },
   ];
 
+  /* ---------------- Session 5: Grade Forecast data ---------------- */
+  const gfCourses = ["ENGH 101", "BUS 103", "FREN 101", "UNIV 100"];
+  const gfCategories = ["Participation", "Homework", "Midterms", "Final"];
+  const gfDefaultWeights = {
+    "ENGH 101": { Participation: 10, Homework: 25, Midterms: 25, Final: 40 },
+    "BUS 103": { Participation: 10, Homework: 20, Midterms: 30, Final: 40 },
+    "FREN 101": { Participation: 15, Homework: 25, Midterms: 25, Final: 35 },
+    "UNIV 100": { Participation: 30, Homework: 40, Midterms: 15, Final: 15 },
+  };
+  const gfEntryRowCount = 6;
+
+  const gfRepItems = [
+    { id: "weighted", label: "Typed the weighted grade formula myself, before being shown" },
+    { id: "flags", label: "Set my own target grades, not ones assigned to me" },
+    { id: "whatif", label: "Ran the what-if calculator on a real target I care about" },
+  ];
+
+  /* ---------------- Session 5: Daily Routine data ---------------- */
+  const routineMustDoLabels = ["Must-do 1", "Must-do 2", "Must-do 3"];
+  const routineGratefulLabels = ["Grateful for 1", "Grateful for 2", "Grateful for 3"];
+
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
-  let activeAgendaSession = 4;
+  let activeAgendaSession = 5;
   let lastScreenBeforeTool = "home";
 
   function goTo(screen) {
@@ -1002,7 +1235,7 @@
 
   document.getElementById("back-btn").addEventListener("click", () => {
     const current = document.querySelector(".screen.active").id;
-    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep" || current === "screen-reading-whitepaper") {
+    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep" || current === "screen-reading-whitepaper" || current === "screen-grade-forecast" || current === "screen-daily-routine" || current === "screen-work-blocks") {
       goTo("agenda");
     } else {
       goTo("home");
@@ -1352,6 +1585,372 @@
     });
   }
 
+  /* ---------------- Grade Forecast Tool (Session 5) ---------------- */
+  async function loadGfWeights() {
+    try {
+      const result = await window.storage.get('session5-gf-weights');
+      return result ? JSON.parse(result.value) : JSON.parse(JSON.stringify(gfDefaultWeights));
+    } catch (e) { return JSON.parse(JSON.stringify(gfDefaultWeights)); }
+  }
+  async function saveGfWeights(state) {
+    try {
+      await window.storage.set('session5-gf-weights', JSON.stringify(state));
+      flashSaved('gf-save-status');
+    } catch (e) { console.error('Could not save weights', e); }
+  }
+
+  async function loadGfEntries() {
+    try {
+      const result = await window.storage.get('session5-gf-entries');
+      return result ? JSON.parse(result.value) : Array.from({ length: gfEntryRowCount }, () => ({ course: "", category: "", assignment: "", score: "" }));
+    } catch (e) { return Array.from({ length: gfEntryRowCount }, () => ({ course: "", category: "", assignment: "", score: "" })); }
+  }
+  async function saveGfEntries(state) {
+    try {
+      await window.storage.set('session5-gf-entries', JSON.stringify(state));
+      flashSaved('gf-save-status');
+    } catch (e) { console.error('Could not save entries', e); }
+  }
+
+  async function loadGfTargets() {
+    try {
+      const result = await window.storage.get('session5-gf-targets');
+      return result ? JSON.parse(result.value) : Object.fromEntries(gfCourses.map(c => [c, 85]));
+    } catch (e) { return Object.fromEntries(gfCourses.map(c => [c, 85])); }
+  }
+  async function saveGfTargets(state) {
+    try {
+      await window.storage.set('session5-gf-targets', JSON.stringify(state));
+      flashSaved('gf-save-status');
+    } catch (e) { console.error('Could not save targets', e); }
+  }
+
+  function flashSaved(elId) {
+    const status = document.getElementById(elId);
+    if (status) { status.textContent = 'Saved'; status.classList.add('saved'); }
+  }
+  function flashTyping(elId) {
+    const status = document.getElementById(elId);
+    if (status) { status.textContent = 'Typing...'; status.classList.remove('saved'); }
+  }
+
+  function computeCourseStats(course, weights, entries) {
+    const w = weights[course] || {};
+    const catData = {};
+    gfCategories.forEach(cat => {
+      const scores = entries
+        .filter(e => e.course === course && e.category === cat && e.score !== "" && !isNaN(parseFloat(e.score)))
+        .map(e => parseFloat(e.score));
+      if (scores.length) catData[cat] = scores.reduce((a, b) => a + b, 0) / scores.length;
+    });
+    let weightedSum = 0, weightUsed = 0, pointsBanked = 0;
+    gfCategories.forEach(cat => {
+      if (catData[cat] !== undefined) {
+        const wt = parseFloat(w[cat]) || 0;
+        weightedSum += catData[cat] * wt;
+        weightUsed += wt;
+        pointsBanked += (catData[cat] / 100) * wt;
+      }
+    });
+    const currentGrade = weightUsed > 0 ? (weightedSum / weightUsed) : null;
+    return { currentGrade, pointsBanked, weightUsed };
+  }
+
+  let gfWeightsCache = null, gfEntriesCache = null, gfTargetsCache = null;
+
+  async function renderGfWeights() {
+    gfWeightsCache = await loadGfWeights();
+    const el = document.getElementById("gf-weights");
+    el.innerHTML = gfCourses.map(course => `
+      <div class="gf-row gf-weight-row">
+        <div class="gf-course-label">${course}</div>
+        ${gfCategories.map(cat => `<input type="number" class="gf-number gf-weight-input" data-course="${course}" data-cat="${cat}" min="0" max="100" value="${gfWeightsCache[course][cat]}">`).join("")}
+      </div>
+    `).join("");
+    el.querySelectorAll(".gf-weight-input").forEach(input => {
+      input.addEventListener("input", async () => {
+        flashTyping('gf-save-status');
+        const course = input.getAttribute("data-course");
+        const cat = input.getAttribute("data-cat");
+        gfWeightsCache[course][cat] = parseFloat(input.value) || 0;
+        await saveGfWeights(gfWeightsCache);
+        renderGfStanding();
+        renderGfWhatIf();
+      });
+    });
+  }
+
+  async function renderGfEntries() {
+    gfEntriesCache = await loadGfEntries();
+    const el = document.getElementById("gf-entries");
+    el.innerHTML = gfEntriesCache.map((entry, i) => `
+      <div class="gf-row gf-entry-row">
+        <select class="gf-select gf-entry-course" data-i="${i}">
+          <option value="">Select...</option>
+          ${gfCourses.map(c => `<option value="${c}" ${entry.course === c ? "selected" : ""}>${c}</option>`).join("")}
+        </select>
+        <select class="gf-select gf-entry-cat" data-i="${i}">
+          <option value="">Select...</option>
+          ${gfCategories.map(c => `<option value="${c}" ${entry.category === c ? "selected" : ""}>${c}</option>`).join("")}
+        </select>
+        <input type="text" class="gf-number gf-entry-assign" data-i="${i}" placeholder="e.g. Midterm 1" value="${entry.assignment || ""}">
+        <input type="number" class="gf-number gf-entry-score" data-i="${i}" min="0" max="100" placeholder="%" value="${entry.score}">
+      </div>
+    `).join("");
+
+    const bindEntry = (selector, field, parse) => {
+      el.querySelectorAll(selector).forEach(input => {
+        input.addEventListener("input", async () => {
+          flashTyping('gf-save-status');
+          const i = parseInt(input.getAttribute("data-i"), 10);
+          gfEntriesCache[i][field] = parse ? input.value : input.value;
+          await saveGfEntries(gfEntriesCache);
+          renderGfStanding();
+          renderGfWhatIf();
+        });
+      });
+    };
+    bindEntry(".gf-entry-course", "course");
+    bindEntry(".gf-entry-cat", "category");
+    bindEntry(".gf-entry-assign", "assignment");
+    bindEntry(".gf-entry-score", "score");
+  }
+
+  async function renderGfStanding() {
+    if (!gfWeightsCache) gfWeightsCache = await loadGfWeights();
+    if (!gfEntriesCache) gfEntriesCache = await loadGfEntries();
+    gfTargetsCache = await loadGfTargets();
+    const el = document.getElementById("gf-standing");
+    el.innerHTML = gfCourses.map(course => {
+      const stats = computeCourseStats(course, gfWeightsCache, gfEntriesCache);
+      const target = gfTargetsCache[course] ?? 85;
+      const gradeText = stats.currentGrade === null ? "—" : stats.currentGrade.toFixed(1) + "%";
+      let statusClass = "nodata", statusText = "No data yet";
+      if (stats.currentGrade !== null) {
+        statusClass = stats.currentGrade >= target ? "ontrack" : "atrisk";
+        statusText = stats.currentGrade >= target ? "On Track" : "At Risk";
+      }
+      return `
+        <div class="gf-row gf-standing-row">
+          <div class="gf-course-label">${course}</div>
+          <div style="font-family: var(--font-mono); font-size:13px;">${gradeText}</div>
+          <input type="number" class="gf-number gf-target-input" data-course="${course}" min="0" max="100" value="${target}">
+          <div class="status-pill ${statusClass}">${statusText}</div>
+        </div>
+      `;
+    }).join("");
+
+    el.querySelectorAll(".gf-target-input").forEach(input => {
+      input.addEventListener("input", async () => {
+        flashTyping('gf-save-status');
+        const course = input.getAttribute("data-course");
+        gfTargetsCache[course] = parseFloat(input.value) || 0;
+        await saveGfTargets(gfTargetsCache);
+        renderGfStanding();
+        renderGfWhatIf();
+      });
+    });
+  }
+
+  async function renderGfWhatIf() {
+    const courseSel = document.getElementById("gf-whatif-course");
+    if (!courseSel) return;
+    if (!courseSel.dataset.built) {
+      courseSel.innerHTML = gfCourses.map(c => `<option value="${c}">${c}</option>`).join("");
+      courseSel.dataset.built = "1";
+      courseSel.addEventListener("change", renderGfWhatIf);
+      document.getElementById("gf-whatif-target").addEventListener("input", renderGfWhatIf);
+    }
+    if (!gfWeightsCache) gfWeightsCache = await loadGfWeights();
+    if (!gfEntriesCache) gfEntriesCache = await loadGfEntries();
+    const course = courseSel.value || gfCourses[0];
+    const target = parseFloat(document.getElementById("gf-whatif-target").value) || 0;
+    const stats = computeCourseStats(course, gfWeightsCache, gfEntriesCache);
+    const finalWeight = parseFloat((gfWeightsCache[course] || {}).Final) || 0;
+    const resultEl = document.getElementById("gf-whatif-result");
+    if (finalWeight <= 0) {
+      resultEl.textContent = "Set a Final weight above";
+      return;
+    }
+    const needed = (target - stats.pointsBanked) * 100 / finalWeight;
+    if (needed <= 0) resultEl.textContent = "Already there! 🎉";
+    else if (needed > 100) resultEl.textContent = "Not possible on the final alone";
+    else resultEl.textContent = needed.toFixed(1) + "%";
+  }
+
+  let gfRecoveryTimer = null;
+  async function loadGfRecovery() {
+    try {
+      const result = await window.storage.get('session5-gf-recovery');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+  async function saveGfRecovery(state) {
+    try { await window.storage.set('session5-gf-recovery', JSON.stringify(state)); flashSaved('gf-save-status'); }
+    catch (e) { console.error('Could not save recovery rule', e); }
+  }
+  async function initGfRecoveryInput() {
+    const state = await loadGfRecovery();
+    document.querySelectorAll('.gf-input').forEach(input => {
+      const key = input.getAttribute('data-key');
+      if (state[key]) input.value = state[key];
+      input.addEventListener('input', () => {
+        flashTyping('gf-save-status');
+        clearTimeout(gfRecoveryTimer);
+        gfRecoveryTimer = setTimeout(async () => {
+          const current = await loadGfRecovery();
+          current[key] = input.value;
+          await saveGfRecovery(current);
+        }, 500);
+      });
+    });
+  }
+
+  async function loadGfRepState() {
+    try {
+      const result = await window.storage.get('session5-gf-rep');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+  async function saveGfRepState(state) {
+    try { await window.storage.set('session5-gf-rep', JSON.stringify(state)); }
+    catch (e) { console.error('Could not save rep checklist', e); }
+  }
+  async function renderGfRepList() {
+    const el = document.getElementById("gf-rep-list");
+    if (!el) return;
+    const state = await loadGfRepState();
+    el.innerHTML = gfRepItems.map(item => `
+      <div class="rep-row ${state[item.id] ? 'checked' : ''}" data-id="${item.id}">
+        <div class="rep-check">${state[item.id] ? '✓' : ''}</div>
+        <div class="rep-label">${item.label}</div>
+      </div>
+    `).join("");
+    const checked = gfRepItems.filter(i => state[i.id]).length;
+    document.getElementById("gf-rep-count").textContent = `${checked} / ${gfRepItems.length}`;
+    el.querySelectorAll(".rep-row").forEach(row => {
+      row.addEventListener("click", async () => {
+        const id = row.getAttribute("data-id");
+        const current = await loadGfRepState();
+        current[id] = !current[id];
+        await saveGfRepState(current);
+        renderGfRepList();
+      });
+    });
+  }
+
+  async function initGradeForecast() {
+    await renderGfWeights();
+    await renderGfEntries();
+    await renderGfStanding();
+    await renderGfWhatIf();
+    await initGfRecoveryInput();
+    await renderGfRepList();
+  }
+
+  /* ---------------- Daily Routine: 3+3 (Session 5) ---------------- */
+  let routineTimer = null;
+  async function loadRoutineState() {
+    try {
+      const result = await window.storage.get('daily-routine');
+      return result ? JSON.parse(result.value) : {};
+    } catch (e) { return {}; }
+  }
+  async function saveRoutineState(state) {
+    try {
+      await window.storage.set('daily-routine', JSON.stringify(state));
+      flashSaved('routine-save-status');
+    } catch (e) { console.error('Could not save routine', e); }
+  }
+  async function renderRoutine() {
+    const state = await loadRoutineState();
+    const mustdoEl = document.getElementById("routine-mustdo");
+    const gratefulEl = document.getElementById("routine-grateful");
+    mustdoEl.innerHTML = routineMustDoLabels.map((label, i) => `
+      <div class="routine-row">
+        <div class="routine-num">${i + 1}</div>
+        <input type="text" class="routine-input" data-key="mustdo-${i}" placeholder="${label}..." value="${state["mustdo-" + i] || ""}">
+      </div>
+    `).join("");
+    gratefulEl.innerHTML = routineGratefulLabels.map((label, i) => `
+      <div class="routine-row">
+        <div class="routine-num">${i + 1}</div>
+        <input type="text" class="routine-input" data-key="grateful-${i}" placeholder="${label}..." value="${state["grateful-" + i] || ""}">
+      </div>
+    `).join("");
+
+    document.querySelectorAll(".routine-input").forEach(input => {
+      input.addEventListener("input", () => {
+        flashTyping('routine-save-status');
+        clearTimeout(routineTimer);
+        routineTimer = setTimeout(async () => {
+          const current = await loadRoutineState();
+          current[input.getAttribute("data-key")] = input.value;
+          await saveRoutineState(current);
+        }, 500);
+      });
+    });
+  }
+
+  /* ---------------- Work Block Timer: 50/5 (Session 5) ---------------- */
+  let wbSecondsLeft = 50 * 60;
+  let wbPhase = "focus";
+  let wbInterval = null;
+
+  function wbFormatTime(s) {
+    const m = Math.floor(s / 60).toString().padStart(2, "0");
+    const sec = (s % 60).toString().padStart(2, "0");
+    return `${m}:${sec}`;
+  }
+
+  function wbUpdateDisplay() {
+    const timerEl = document.getElementById("wb-timer");
+    const labelEl = document.getElementById("wb-phase-label");
+    if (!timerEl) return;
+    timerEl.textContent = wbFormatTime(wbSecondsLeft);
+    labelEl.textContent = wbPhase === "focus" ? "Focus Block" : "Move for 5";
+    labelEl.style.color = wbPhase === "focus" ? "var(--amber)" : "var(--success)";
+  }
+
+  function wbTick() {
+    wbSecondsLeft--;
+    if (wbSecondsLeft <= 0) {
+      if (wbPhase === "focus") {
+        wbPhase = "move";
+        wbSecondsLeft = 5 * 60;
+        showToast("50 minutes up. Time to move for 5.");
+      } else {
+        wbPhase = "focus";
+        wbSecondsLeft = 50 * 60;
+        showToast("Break's over. Back to a focus block.");
+      }
+    }
+    wbUpdateDisplay();
+  }
+
+  function initWorkBlockTimer() {
+    const startBtn = document.getElementById("wb-start");
+    const pauseBtn = document.getElementById("wb-pause");
+    const resetBtn = document.getElementById("wb-reset");
+    if (!startBtn) return;
+    wbUpdateDisplay();
+    startBtn.addEventListener("click", () => {
+      if (wbInterval) return;
+      wbInterval = setInterval(wbTick, 1000);
+    });
+    pauseBtn.addEventListener("click", () => {
+      clearInterval(wbInterval);
+      wbInterval = null;
+    });
+    resetBtn.addEventListener("click", () => {
+      clearInterval(wbInterval);
+      wbInterval = null;
+      wbPhase = "focus";
+      wbSecondsLeft = 50 * 60;
+      wbUpdateDisplay();
+    });
+  }
+
   /* ---------------- Init ---------------- */
   renderRoadmap();
   renderToolkit();
@@ -1364,6 +1963,9 @@
   initGapInputs();
   renderSheetsRepList();
   initSheetsRepInputs();
+  initGradeForecast();
+  renderRoutine();
+  initWorkBlockTimer();
 </script>
 
 </body>
