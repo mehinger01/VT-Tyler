@@ -121,7 +121,7 @@
 
   .status-bar-fill {
     height: 100%;
-    width: 56%;
+    width: 67%;
     background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
     border-radius: 4px;
   }
@@ -680,7 +680,7 @@
       <button class="back-btn" id="back-btn">‹ Back</button>
     </div>
     <div class="status">
-      <span>SESSION 5 OF 9</span>
+      <span>SESSION 6 OF 9</span>
       <div class="status-bar"><div class="status-bar-fill"></div></div>
     </div>
   </div>
@@ -921,7 +921,7 @@
   <section id="screen-grade-forecast" class="screen">
     <div class="chunk-wrap">
       <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Session 5 · Grade Forecast Tool</div>
+        <div class="chunk-eyebrow">Sessions 5&ndash;6 &middot; Grade Forecast Tool</div>
         <h4>Your Live Grade Calculator</h4>
         <p style="margin-bottom:0;">Set your category weights, enter grades as they come in, and this tool tells you where you stand and what you need on what's left. Weights below are placeholders built from GMU's catalog course descriptions — swap them in for the real numbers the day your syllabi post.</p>
       </div>
@@ -1094,25 +1094,37 @@
     },
     5: {
       title: "Grade Tracking & Forecasting",
-      state: "current",
+      state: "done",
       agenda: [
         { title: "Check In", time: "5 min", desc: "Quick catch-up. How are you feeling heading into the semester?", tools: [] },
         { title: "Daily Routine: The 3+3", time: "5 min", desc: "A fast morning routine you can run in under two minutes: name 3 things that must get done today, then 3 things you're grateful for. Practice it live right now, using today as the example.", tools: [{ label: "Open Daily Routine", nav: "daily-routine" }] },
         { title: "See the Finished Tool First", time: "5 min", desc: "Before you build anything, see a finished example: sample classes color-coded on track or at risk, plus a working what-if calculator you can try right now.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
         { title: "Work Blocks: 50 Up, 5 Moving", time: "3-5 min", desc: "The rule: every 50 minutes of focused work, stand up and move for 5. Scheduled in advance, not negotiated in the moment. You'll use this for real during today's build.", tools: [{ label: "Open Work Block Timer", nav: "work-blocks" }] },
-        { title: "Build: Your Real Grade, Weighted", time: "10 min", desc: "Add your real fall course weights and build the formula that calculates your actual current grade, factoring in how much each category is really worth.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Automatic Warning Flags", time: "10-15 min", desc: "Set a target grade for each class and watch the status flag itself the moment a class drops below where you want it, color-coded so you see it at a glance.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "When You See Red", time: "3-5 min", desc: "A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. GMU's counseling services are there if stress ever gets bigger than a spreadsheet or a reset breath can handle.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Clean Data Entry", time: "10 min", desc: "Dropdown menus for course and category, so entering a new grade all semester stays fast and consistent.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Live Practice: What Do I Need?", time: "10 min", desc: "Pick one class. Build the formula that answers: what score do I need on the final to land the grade I want?", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Log the Rep + Recovery Rule", time: "5 min", desc: "Log today's rep. Set your rule for what happens once real grades start posting, so updating this tool becomes automatic.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Cells, SUM & AVERAGE", time: "10 min", desc: "Format individual cells and cells as a group, then build your first real formulas: SUM and AVERAGE, entering grades as they come in.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Dropdown Menus", time: "10-15 min", desc: "Add dropdown menus for course and category, and add your own items to select through them, so entering a new grade stays fast and consistent.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Intro: Conditional Statements", time: "5 min", desc: "A first look at IF/THEN logic and how it'll power automatic flags in an upcoming session.", tools: [] },
         { title: "Closing Question", time: "2-3 min", desc: "Once your first grade posts this semester, when are you going to open this and plug it in?", tools: [] }
       ]
     },
-    6: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
-    7: { title: "Building Retention Across the Semester", state: "locked" },
-    8: { title: "Application & Synthesis", state: "locked" },
-    9: { title: "Finals Prep & System Tune-Up", state: "locked" },
+    6: {
+      title: "Finishing the Grade Forecast Tool",
+      state: "current",
+      agenda: [
+        { title: "Check In", time: "5 min", desc: "Quick catch-up: how's the 3+3 morning routine going, and are the 50/5 work blocks actually happening?", tools: [] },
+        { title: "Where the Tool Stands", time: "4-5 min", desc: "Quick look at what's already working in your Grade Forecast Tool (SUM, AVERAGE, basic dropdowns) and what's still missing. Today we finish it.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Real Weighted Grades", time: "12-15 min", desc: "Replace the plain average with a real weighted grade formula, built cell by cell, category by category, yourself.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Automatic Warning Flags", time: "12-15 min", desc: "Write your first real IF formula: compare your current grade to a target you set, and return On Track or At Risk automatically.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Color-Coded Status", time: "10 min", desc: "Layer conditional formatting on top of the flag so status is a color at a glance, not text you have to read every time.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "When You See Red", time: "3-5 min", desc: "A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. GMU's counseling services are there if stress ever gets bigger than a spreadsheet or a reset breath can handle.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Build: Real Data Validation", time: "10 min", desc: "Properly wire your course and category dropdowns with real validation rules, plus an error alert so a typo can't quietly break a formula.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Live Practice: What Do I Need?", time: "10 min", desc: "Now that your weighted grade and flags are real, build the formula that answers: what score do I need on the final to land a B+?", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Log the Rep + Recovery Rule", time: "5 min", desc: "Log today's rep. Set your rule for what happens once real grades start posting.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
+        { title: "Closing Question", time: "2-3 min", desc: "Once your first grade posts this semester, when are you going to open this and plug it in?", tools: [] }
+      ]
+    },
+    7: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
+    8: { title: "Building Retention Across the Semester", state: "locked" },
+    9: { title: "Application & Synthesis / Finals Prep (scope TBD)", state: "locked" },
   };
 
   const toolsData = [
@@ -1120,13 +1132,13 @@
     { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed", nav: "reading-supported" },
     { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Installed", nav: "gap-sheet" },
     { icon: "📊", name: "Takeaway Tracker (Sheets)", state: "active", session: 4, statusText: "Installed", nav: "sheets-rep" },
-    { icon: "📈", name: "Grade Forecast Tool", state: "active", session: 5, statusText: "Active today", nav: "grade-forecast" },
-    { icon: "☀️", name: "Daily Routine (3+3)", state: "active", session: 5, statusText: "Active today", nav: "daily-routine" },
-    { icon: "🏃", name: "Work Block Timer", state: "active", session: 5, statusText: "Active today", nav: "work-blocks" },
-    { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 6, statusText: "Unlocks S6" },
-    { icon: "🧠", name: "Retention Builder", state: "locked", session: 7, statusText: "Unlocks S7" },
-    { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
-    { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
+    { icon: "📈", name: "Grade Forecast Tool", state: "active", session: 6, statusText: "Active today", nav: "grade-forecast" },
+    { icon: "☀️", name: "Daily Routine (3+3)", state: "active", session: 5, statusText: "Installed", nav: "daily-routine" },
+    { icon: "🏃", name: "Work Block Timer", state: "active", session: 5, statusText: "Installed", nav: "work-blocks" },
+    { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 7, statusText: "Unlocks S7" },
+    { icon: "🧠", name: "Retention Builder", state: "locked", session: 8, statusText: "Unlocks S8" },
+    { icon: "⚙️", name: "Application Lab", state: "locked", session: 9, statusText: "Unlocks S9" },
+    { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Scope TBD" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
   ];
 
@@ -1204,7 +1216,7 @@
 
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
-  let activeAgendaSession = 5;
+  let activeAgendaSession = 6;
   let lastScreenBeforeTool = "home";
 
   function goTo(screen) {
