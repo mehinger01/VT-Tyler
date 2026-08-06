@@ -121,7 +121,7 @@
 
   .status-bar-fill {
     height: 100%;
-    width: 67%;
+    width: 89%;
     background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
     border-radius: 4px;
   }
@@ -511,23 +511,6 @@
   .chunk-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   @media (max-width: 640px) { .chunk-inputs { grid-template-columns: 1fr; } }
 
-  .gap-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .gap-row-head { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 6px; }
-  .gap-row-head span {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 5px 8px;
-    border-radius: 6px;
-    color: #0E1822;
-    text-align: center;
-  }
-  .gap-row-head span:nth-child(1) { background: var(--grad-b); }
-  .gap-row-head span:nth-child(2) { background: var(--grad-a); }
-  .gap-row-head span:nth-child(3) { background: var(--amber); }
-  @media (max-width: 640px) { .gap-row, .gap-row-head { grid-template-columns: 1fr; } }
-
   .chunk-field label {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -549,65 +532,6 @@
     resize: vertical;
   }
   .chunk-field textarea:focus { outline: none; border-color: var(--grad-b); }
-
-  .chunk-field select.gf-select,
-  .chunk-field input.gf-number {
-    width: 100%;
-    background: rgba(0,0,0,0.2);
-    border: 1px solid var(--locked-line);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 12.5px;
-    padding: 8px 10px;
-  }
-  .chunk-field select.gf-select:focus,
-  .chunk-field input.gf-number:focus { outline: none; border-color: var(--grad-b); }
-
-  .gf-row { display: grid; gap: 10px; margin-bottom: 10px; }
-  .gf-weight-row { grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; align-items: center; }
-  .gf-entry-row { grid-template-columns: 1fr 1fr 1.4fr 0.7fr; align-items: center; }
-  .gf-standing-row { grid-template-columns: 1.2fr 1fr 1fr 1fr; align-items: center; }
-  @media (max-width: 640px) {
-    .gf-weight-row, .gf-entry-row, .gf-standing-row { grid-template-columns: 1fr; }
-  }
-
-  .gf-course-label { font-family: var(--font-display); font-weight: 600; font-size: 13px; }
-
-  .status-pill {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 5px 10px;
-    border-radius: 20px;
-    text-align: center;
-  }
-  .status-pill.ontrack { background: rgba(79,174,147,0.16); color: var(--success); }
-  .status-pill.atrisk { background: rgba(192,85,77,0.16); color: #E08A82; }
-  .status-pill.nodata { background: rgba(255,255,255,0.04); color: var(--text-muted); }
-
-  .routine-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .routine-num {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-muted);
-    width: 24px;
-    flex-shrink: 0;
-  }
-  .routine-row input {
-    flex: 1;
-    background: rgba(0,0,0,0.2);
-    border: 1px solid var(--locked-line);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-  .routine-row input:focus { outline: none; border-color: var(--grad-b); }
-
 
   .prime-card {
     border-left: 3px solid var(--grad-a);
@@ -639,6 +563,45 @@
   .rep-row.checked .rep-check { background: var(--success); border-color: var(--success); color: #0E1822; }
   .rep-row.checked .rep-label { color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--locked-line); }
   .rep-label { font-size: 13.5px; }
+
+
+  /* ---------- Session 8: Application Lab ---------- */
+  .lab-wrap { max-width: 980px; margin: 38px auto 0; padding: 0 28px 50px; }
+  .lab-intro { background: linear-gradient(135deg, rgba(59,110,143,.22), rgba(62,142,126,.18)); border: 1px solid rgba(79,174,147,.35); border-radius: 18px; padding: 24px; margin-bottom: 18px; }
+  .lab-intro .lab-kicker { font-family: var(--font-mono); color: var(--amber); text-transform: uppercase; letter-spacing: .08em; font-size: 11px; }
+  .lab-intro h2 { font-family: var(--font-display); font-size: 24px; margin-top: 7px; }
+  .lab-intro p { color: var(--text-muted); line-height: 1.6; margin-top: 8px; max-width: 760px; }
+  .scenario-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 18px 0; }
+  .scenario-card { background: var(--surface); border: 1px solid var(--locked-line); border-radius: 15px; padding: 18px; }
+  .scenario-card h3 { font-family: var(--font-display); font-size: 15px; margin-bottom: 7px; }
+  .scenario-card p { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+  .scenario-meta { display:flex; gap:7px; flex-wrap:wrap; margin-top:10px; }
+  .scenario-tag { font-family:var(--font-mono); font-size:10px; padding:4px 8px; border-radius:20px; background:rgba(255,255,255,.05); color:var(--text-muted); }
+  .lab-section { background: var(--surface); border:1px solid var(--locked-line); border-radius:16px; padding:22px; margin-top:16px; }
+  .lab-section h3 { font-family:var(--font-display); font-size:17px; }
+  .lab-section .lab-help { color:var(--text-muted); font-size:13px; margin:6px 0 14px; line-height:1.5; }
+  .phase-row { display:grid; grid-template-columns: 130px 1fr; gap:14px; align-items:start; padding:14px 0; border-top:1px solid var(--locked-line); }
+  .phase-row:first-of-type { border-top:0; }
+  .phase-label { font-family:var(--font-mono); font-size:11px; text-transform:uppercase; color:var(--grad-b); padding-top:9px; }
+  .lab-input, .lab-select { width:100%; background:rgba(0,0,0,.18); border:1px solid var(--locked-line); border-radius:9px; padding:10px 11px; color:var(--text-primary); font-family:var(--font-body); font-size:13px; }
+  .lab-input:focus, .lab-select:focus { outline:none; border-color:var(--grad-b); }
+  textarea.lab-input { min-height:72px; resize:vertical; }
+  .decision-list { display:grid; gap:9px; }
+  .decision { display:flex; gap:10px; align-items:flex-start; padding:11px 12px; border:1px solid var(--locked-line); border-radius:10px; cursor:pointer; background:rgba(255,255,255,.02); }
+  .decision:hover { border-color:rgba(79,174,147,.5); }
+  .decision input { margin-top:3px; }
+  .plan-table { width:100%; border-collapse:collapse; margin-top:10px; font-size:12.5px; }
+  .plan-table th,.plan-table td { border:1px solid var(--locked-line); padding:9px; text-align:left; vertical-align:top; }
+  .plan-table th { font-family:var(--font-mono); color:var(--text-muted); font-size:10px; text-transform:uppercase; background:rgba(255,255,255,.03); }
+  .plan-table input { width:100%; background:transparent; border:0; color:var(--text-primary); font-family:var(--font-body); }
+  .plan-table input:focus { outline:1px solid var(--grad-b); border-radius:4px; }
+  .lab-actions { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; margin-top:18px; }
+  .lab-btn { font-family:var(--font-mono); border:0; border-radius:10px; padding:10px 15px; cursor:pointer; font-weight:600; }
+  .lab-btn.primary { background:var(--amber); color:#211707; }
+  .lab-btn.secondary { background:rgba(255,255,255,.06); color:var(--text-primary); border:1px solid var(--locked-line); }
+  .readiness { display:flex; gap:8px; align-items:center; font-family:var(--font-mono); font-size:11px; color:var(--text-muted); }
+  .readiness strong { color:var(--success); font-size:14px; }
+  @media (max-width:700px){ .scenario-grid{grid-template-columns:1fr}.phase-row{grid-template-columns:1fr;gap:5px}.plan-table{font-size:11px}.lab-wrap{padding:0 16px 40px} }
 
   /* ---------- Toast ---------- */
   .toast {
@@ -676,7 +639,7 @@
 
   <div class="menu-bar">
     <div class="menu-left">
-      <div class="brand" data-nav="home"><span class="dot"></span> TYLER OS · v3.0</div>
+      <div class="brand" data-nav="home"><span class="dot"></span> TYLER OS · v3.1</div>
       <button class="back-btn" id="back-btn">‹ Back</button>
     </div>
     <div class="status">
@@ -787,268 +750,130 @@
     </div>
   </section>
 
-  <!-- ===================== GAP SHEET (Session 3) ===================== -->
-  <section id="screen-gap-sheet" class="screen">
-    <div class="chunk-wrap">
-      <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Today's Material</div>
-        <h4>Dr. Stephen Chew, "Putting Principles for Learning into Practice"</h4>
-        <p style="margin-bottom:14px;">Samford University · How to Get the Most Out of Studying, Part 4 of 5. Watch it once through, no pausing, and work your gap sheet below as you go.</p>
-        <a class="tool-btn" href="https://www.youtube.com/watch?v=E9GrOxhYZdQ" target="_blank" rel="noopener">▶ Watch the video</a>
+
+
+  <!-- ===================== SESSION 6: RETENTION LAB ===================== -->
+  <section id="screen-retention-lab" class="screen">
+    <div class="lab-wrap">
+      <div class="lab-intro">
+        <div class="lab-kicker">Session 6 · Make Learning Stick</div>
+        <h2>Retention &amp; Spaced Practice Lab</h2>
+        <p>Move beyond familiarity. Build a study process that requires the brain to retrieve, repair, and revisit learning over time.</p>
       </div>
 
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">Your Gap Sheet</div>
-        <p style="margin-bottom:10px;">As you watch, sort what you hear into three buckets. Doesn't need to be neat, just real.</p>
-        <div class="gap-row-head">
-          <span>Already Knew</span>
-          <span>New or Deeper</span>
-          <span>Still Unclear</span>
-        </div>
-        <div id="gap-rows"></div>
-      </div>
-
-      <div class="chunk-card synth-card">
-        <div class="chunk-eyebrow">Your Recovery Rule</div>
-        <p style="margin-bottom:10px;">If I miss something in class and can't ask right then, here's exactly what I do:</p>
-        <div class="chunk-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
-          <div class="chunk-field">
-            <label>Step 1</label>
-            <textarea class="gap-input" data-key="recovery-1" rows="2" placeholder="..."></textarea>
-          </div>
-          <div class="chunk-field">
-            <label>Step 2</label>
-            <textarea class="gap-input" data-key="recovery-2" rows="2" placeholder="..."></textarea>
-          </div>
-          <div class="chunk-field">
-            <label>Step 3</label>
-            <textarea class="gap-input" data-key="recovery-3" rows="2" placeholder="..."></textarea>
-          </div>
+      <div class="lab-section">
+        <h3>The Four-Step Retention Cycle</h3>
+        <div class="scenario-grid">
+          <div class="scenario-card"><h3>1. Learn</h3><p>Understand the idea well enough to begin working with it.</p></div>
+          <div class="scenario-card"><h3>2. Retrieve</h3><p>Close the notes and bring the idea back from memory.</p></div>
+          <div class="scenario-card"><h3>3. Check &amp; Repair</h3><p>Compare, identify gaps, and correct only what is missing or inaccurate.</p></div>
+          <div class="scenario-card"><h3>4. Space &amp; Repeat</h3><p>Return after time has passed and retrieve it again.</p></div>
         </div>
       </div>
 
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">Before Next Class</div>
-        <p style="margin-bottom:10px;">What's your plan for catching yourself if you space out during a real lecture next month?</p>
-        <div class="chunk-field">
-          <textarea class="gap-input" data-key="plan" rows="2" placeholder="Type here..."></textarea>
+      <div class="lab-section">
+        <h3>Choose Your Retrieval Methods</h3>
+        <p class="lab-help">Select methods that make you produce the answer rather than recognize it.</p>
+        <div class="decision-list">
+          <label class="decision"><input type="checkbox" class="ret-save" data-key="brain-dump"><span><strong>Brain dump</strong><br><span style="color:var(--text-muted)">Write everything remembered before checking notes.</span></span></label>
+          <label class="decision"><input type="checkbox" class="ret-save" data-key="teach-back"><span><strong>Explain it aloud</strong><br><span style="color:var(--text-muted)">Teach the concept in plain language without looking.</span></span></label>
+          <label class="decision"><input type="checkbox" class="ret-save" data-key="questions"><span><strong>Turn notes into questions</strong><br><span style="color:var(--text-muted)">Use prompts instead of rereading complete answers.</span></span></label>
+          <label class="decision"><input type="checkbox" class="ret-save" data-key="reconstruct"><span><strong>Reconstruct a diagram or process</strong><br><span style="color:var(--text-muted)">Rebuild steps, labels, or relationships from memory.</span></span></label>
+          <label class="decision"><input type="checkbox" class="ret-save" data-key="no-model"><span><strong>Solve without a model</strong><br><span style="color:var(--text-muted)">Complete a problem before viewing a worked example.</span></span></label>
         </div>
       </div>
-    </div>
-    <div class="save-row"><span id="gap-save-status" class="save-status">Not saved yet</span></div>
 
-    <div class="mode-switch" style="margin-bottom:40px;">
-      <button data-nav="agenda">← Back to agenda</button>
-    </div>
-  </section>
+      <div class="lab-section">
+        <h3>Apply It by Subject</h3>
+        <div class="phase-row"><div class="phase-label">Math</div><div><p>Recall the formula or process, identify when it applies, and solve without copying an example.</p></div></div>
+        <div class="phase-row"><div class="phase-label">Science</div><div><p>Explain vocabulary, sequences, cause-and-effect relationships, diagrams, and applications in your own words.</p></div></div>
+        <div class="phase-row"><div class="phase-label">Reading</div><div><p>Close the text and reconstruct the main idea, evidence, unfamiliar terms, and remaining questions.</p></div></div>
+        <div class="phase-row"><div class="phase-label">Class notes</div><div><p>Use headings or questions as prompts, then retrieve the explanation before checking the notes.</p></div></div>
+      </div>
 
-  <!-- ===================== READING: WHITE PAPER (Session 4) ===================== -->
-  <section id="screen-reading-whitepaper" class="screen">
-    <div class="doc-wrap">
-      <div class="doc-window">
-        <div class="doc-header">
-          <div class="doc-eyebrow">Session 4 · 3-Pass Reading</div>
-          <h2>The First-Semester Systems Gap</h2>
-          <div class="doc-sub">Research brief. Do your three passes on this: overview, key points, details. Use the Before Class tracker alongside it.</div>
-        </div>
-        <div class="doc-layout">
-          <div class="doc-main" id="doc-main-whitepaper"></div>
-          <div class="doc-side">
-            <div class="doc-terms" id="doc-terms-whitepaper"></div>
-          </div>
-        </div>
+      <div class="lab-section">
+        <h3>Build a Spaced Review Schedule</h3>
+        <p class="lab-help">Short retrieval checks are more valuable than one long rereading session.</p>
+        <div style="overflow-x:auto"><table class="plan-table"><thead><tr><th>Review</th><th>When</th><th>What I will retrieve</th><th>Method</th></tr></thead><tbody>
+          <tr><td>First check</td><td><input class="lab-input ret-save" data-key="space-1-when" placeholder="Later today / after class"></td><td><input class="lab-input ret-save" data-key="space-1-what" placeholder="Main ideas or process"></td><td><input class="lab-input ret-save" data-key="space-1-method" placeholder="Brain dump, teach-back..."></td></tr>
+          <tr><td>Second check</td><td><input class="lab-input ret-save" data-key="space-2-when" placeholder="1–2 days later"></td><td><input class="lab-input ret-save" data-key="space-2-what" placeholder="Weak or missed material"></td><td><input class="lab-input ret-save" data-key="space-2-method" placeholder="Questions, reconstruction..."></td></tr>
+          <tr><td>Third check</td><td><input class="lab-input ret-save" data-key="space-3-when" placeholder="Several days later"></td><td><input class="lab-input ret-save" data-key="space-3-what" placeholder="Full retrieval check"></td><td><input class="lab-input ret-save" data-key="space-3-method" placeholder="Mixed self-test"></td></tr>
+        </tbody></table></div>
       </div>
-      <div class="mode-switch">
-        <a class="tool-btn" href="https://docs.google.com/document/d/1qZwPBSi0K8It9op_I-YX7G937Ojj0fcoM7pWSKiPylc/edit" target="_blank" rel="noopener">Open the brief (Google Doc)</a>
-        <a class="tool-btn" href="https://docs.google.com/document/d/1UzmQ8tfDIp18mvz-A_yEOgBVbo4JTmDqqvyx4FM0OSk/edit" target="_blank" rel="noopener">Open Before Class tracker</a>
-        <button data-nav="agenda">← Back to agenda</button>
+
+      <div class="lab-section">
+        <h3>Academic Organization Preview</h3>
+        <p class="lab-help">Today’s Google Drive portion was a demonstration of what an organized system can look like—not a reorganization of Tyler’s actual Drive.</p>
+        <div class="phase-row"><div class="phase-label">Folder model</div><div><p>College → Semester → Course → Notes / Assignments / Resources</p></div></div>
+        <div class="phase-row"><div class="phase-label">File naming</div><div><p><strong>COURSE – Topic or Assignment – Date</strong> so files remain searchable and understandable later.</p></div></div>
       </div>
-      <div class="doc-footer-note">Five sections, same order every time you'll see them: Responsibility Shift, Unstructured Time, Notes Fading, Office Hours, Routines.</div>
+
+      <div class="lab-section">
+        <h3>Tyler's First Retention Rep</h3>
+        <div class="phase-row"><div class="phase-label">Course or topic</div><div><input class="lab-input ret-save" data-key="first-topic" placeholder="Where will you test this first?"></div></div>
+        <div class="phase-row"><div class="phase-label">Method</div><div><input class="lab-input ret-save" data-key="first-method" placeholder="Which retrieval method will you use?"></div></div>
+        <div class="phase-row"><div class="phase-label">Next review</div><div><input class="lab-input ret-save" data-key="first-review" placeholder="When will you retrieve it again?"></div></div>
+        <div class="lab-actions"><div class="readiness">Key idea: <strong>Retrieval makes learning usable.</strong></div><div><button class="lab-btn secondary" id="ret-reset">Reset</button> <button class="lab-btn primary" id="ret-save-now">Save Retention Plan</button></div></div>
+      </div>
     </div>
   </section>
 
-  <!-- ===================== SHEETS REP (Session 4) ===================== -->
-  <section id="screen-sheets-rep" class="screen">
-    <div class="chunk-wrap">
-      <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Session 4 · Google Sheets Rep</div>
-        <h4>Build Your Takeaway Tracker</h4>
-        <p style="margin-bottom:6px;">This is today's after-class synthesis, turned into a spreadsheet. Enter the 3-5 takeaways you just wrote from the reading and lecture, then total how many you've locked in.</p>
-        <p style="margin-bottom:0;">Build it live with your coach, right in the same Google Sheets file as your budget tracker, as a new tab.</p>
+  <!-- ===================== SESSION 8: APPLICATION LAB ===================== -->
+  <section id="screen-application-lab" class="screen">
+    <div class="lab-wrap">
+      <div class="lab-intro">
+        <div class="lab-kicker">Session 8 · Application &amp; Synthesis</div>
+        <h2>The College Week Simulation</h2>
+        <p>Use the full system on one realistic week. The objective is not a perfect plan—it is noticing the situation, selecting the right tool, and creating a workable next action.</p>
       </div>
 
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">What You're Building</div>
-        <div class="chunk-inputs" style="grid-template-columns: 1fr;">
-          <div class="chunk-field">
-            <label>Columns</label>
-            <div style="font-size:13px; color:#D4DEE5; line-height:1.6;">Takeaway &nbsp;·&nbsp; Locked In? (1/0)</div>
-          </div>
-          <div class="chunk-field">
-            <label>The one formula</label>
-            <div style="font-family: var(--font-mono); font-size:13px; color: var(--success);">=SUM(B2:B6)</div>
-          </div>
+      <div class="scenario-grid">
+        <div class="scenario-card"><h3>Business Reading</h3><p>A 22-page chapter is assigned Monday for discussion Wednesday. The vocabulary is unfamiliar and the professor cold-calls students.</p><div class="scenario-meta"><span class="scenario-tag">Reading</span><span class="scenario-tag">Before class</span></div></div>
+        <div class="scenario-card"><h3>Lecture Gap</h3><p>During Tuesday's lecture, the professor moves quickly through a concept that will appear on Friday's quiz.</p><div class="scenario-meta"><span class="scenario-tag">Notes</span><span class="scenario-tag">During class</span></div></div>
+        <div class="scenario-card"><h3>Competing Deadlines</h3><p>A short paper, quiz, and group contribution all land within 48 hours while two evenings are already committed.</p><div class="scenario-meta"><span class="scenario-tag">Planning</span><span class="scenario-tag">Time &amp; focus</span></div></div>
+        <div class="scenario-card"><h3>Forgetting Curve</h3><p>By Thursday, Monday's material already feels fuzzy even though it made sense in class.</p><div class="scenario-meta"><span class="scenario-tag">Review</span><span class="scenario-tag">Retention</span></div></div>
+      </div>
+
+      <div class="lab-section">
+        <h3>1. Diagnose the Week</h3>
+        <p class="lab-help">Name the pressure points before choosing strategies.</p>
+        <div class="phase-row"><div class="phase-label">Top risk</div><div><select class="lab-select lab-save" data-key="risk"><option value="">Choose one...</option><option>Starting too late</option><option>Missing a knowledge gap</option><option>Overloading one day</option><option>Forgetting after class</option><option>Avoiding help</option></select></div></div>
+        <div class="phase-row"><div class="phase-label">Why it matters</div><div><textarea class="lab-input lab-save" data-key="risk-why" placeholder="What could go wrong if this is ignored?"></textarea></div></div>
+      </div>
+
+      <div class="lab-section">
+        <h3>2. Run the Three-Part Learning Cycle</h3>
+        <p class="lab-help">Choose a concrete action before, during, and after class.</p>
+        <div class="phase-row"><div class="phase-label">Before class</div><div><textarea class="lab-input lab-save" data-key="before-plan" placeholder="Preview, identify questions, schedule the first pass..."></textarea></div></div>
+        <div class="phase-row"><div class="phase-label">During class</div><div><textarea class="lab-input lab-save" data-key="during-plan" placeholder="Capture the main idea, mark confusion, ask or verify..."></textarea></div></div>
+        <div class="phase-row"><div class="phase-label">After class</div><div><textarea class="lab-input lab-save" data-key="after-plan" placeholder="Review window, retrieval practice, next check..."></textarea></div></div>
+      </div>
+
+      <div class="lab-section">
+        <h3>3. Select the Right Tools</h3>
+        <p class="lab-help">Select only the tools that solve this week's actual problems.</p>
+        <div class="decision-list">
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-command"><span><strong>College Command Center</strong><br><span style="color:var(--text-muted)">See deadlines and protect study blocks.</span></span></label>
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-preview"><span><strong>Preview &amp; Prepare Kit</strong><br><span style="color:var(--text-muted)">Reduce surprise before class.</span></span></label>
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-notes"><span><strong>Note-Taking System</strong><br><span style="color:var(--text-muted)">Capture ideas and visibly mark gaps.</span></span></label>
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-review"><span><strong>Review Window</strong><br><span style="color:var(--text-muted)">Repair understanding while the class is still fresh.</span></span></label>
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-retention"><span><strong>Retention Builder</strong><br><span style="color:var(--text-muted)">Retrieve again across several days.</span></span></label>
+          <label class="decision"><input type="checkbox" class="lab-save" data-key="tool-help"><span><strong>Help-Seeking Rule</strong><br><span style="color:var(--text-muted)">Escalate a gap instead of carrying it forward.</span></span></label>
         </div>
       </div>
 
-      <div class="chunk-card synth-card">
-        <div class="chunk-eyebrow">Today's Rep</div>
-        <div class="rep-card" style="border:none; padding:0; background:transparent;">
-          <div class="rep-head">
-            <h3>Run it once, for real</h3>
-            <span class="rep-count" id="sheets-rep-count">0 / 3</span>
-          </div>
-          <div class="rep-list" id="sheets-rep-list"></div>
-        </div>
+      <div class="lab-section">
+        <h3>4. Build the Week</h3>
+        <p class="lab-help">Convert good intentions into visible appointments with the work.</p>
+        <div style="overflow-x:auto"><table class="plan-table"><thead><tr><th>Day</th><th>First academic move</th><th>Study block</th><th>Review / retrieval</th><th>Help trigger</th></tr></thead><tbody id="week-plan-body"></tbody></table></div>
       </div>
 
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">Connect the Dots</div>
-        <p style="margin-bottom:10px;">Where else could this same total trick be useful?</p>
-        <div class="chunk-field">
-          <textarea class="sheets-rep-input" data-key="transfer" rows="2" placeholder="Type here..."></textarea>
-        </div>
+      <div class="lab-section">
+        <h3>5. Synthesis: Tyler's Personal Rule</h3>
+        <p class="lab-help">Finish with one portable rule he can use when the semester gets messy.</p>
+        <textarea class="lab-input lab-save" data-key="personal-rule" placeholder="When I feel behind or confused, I will..."></textarea>
+        <div class="lab-actions"><div class="readiness">Application readiness: <strong id="readiness-score">0%</strong></div><div><button class="lab-btn secondary" id="lab-reset">Reset</button> <button class="lab-btn primary" id="lab-save-now">Save Application Plan</button></div></div>
       </div>
-    </div>
-    <div class="save-row"><span id="sheets-rep-save-status" class="save-status">Not saved yet</span></div>
-
-    <div class="mode-switch" style="margin-bottom:40px;">
-      <button data-nav="agenda">← Back to agenda</button>
-    </div>
-  </section>
-
-  <!-- ===================== GRADE FORECAST (Session 5) ===================== -->
-  <section id="screen-grade-forecast" class="screen">
-    <div class="chunk-wrap">
-      <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Sessions 5&ndash;6 &middot; Grade Forecast Tool</div>
-        <h4>Your Live Grade Calculator</h4>
-        <p style="margin-bottom:0;">Set your category weights, enter grades as they come in, and this tool tells you where you stand and what you need on what's left. Weights below are placeholders built from GMU's catalog course descriptions — swap them in for the real numbers the day your syllabi post.</p>
-      </div>
-
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">1 · Category Weights (%)</div>
-        <div class="gap-row-head" style="grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;">
-          <span>Course</span><span>Participation</span><span>Homework</span><span>Midterms</span><span>Final</span>
-        </div>
-        <div id="gf-weights"></div>
-      </div>
-
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">2 · Grades Entered So Far</div>
-        <div class="gap-row-head" style="grid-template-columns: 1fr 1fr 1.4fr 0.7fr;">
-          <span>Course</span><span>Category</span><span>Assignment</span><span>Score %</span>
-        </div>
-        <div id="gf-entries"></div>
-      </div>
-
-      <div class="chunk-card synth-card">
-        <div class="chunk-eyebrow">3 · Your Live Standing</div>
-        <p style="margin-bottom:10px;">Set a target grade per course. Status colors itself.</p>
-        <div class="gap-row-head" style="grid-template-columns: 1.2fr 1fr 1fr 1fr;">
-          <span>Course</span><span>Current Grade</span><span>Target %</span><span>Status</span>
-        </div>
-        <div id="gf-standing"></div>
-      </div>
-
-      <div class="chunk-card" style="border-left-color: var(--amber);">
-        <div class="chunk-eyebrow">4 · What Do I Need?</div>
-        <p style="margin-bottom:10px;">Pick a course and a target. This tells you the score you need on the final.</p>
-        <div class="chunk-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
-          <div class="chunk-field">
-            <label>Course</label>
-            <select id="gf-whatif-course" class="gf-select"></select>
-          </div>
-          <div class="chunk-field">
-            <label>Target Grade %</label>
-            <input type="number" id="gf-whatif-target" class="gf-number" min="0" max="100" value="90">
-          </div>
-          <div class="chunk-field">
-            <label>Score Needed on Final</label>
-            <div id="gf-whatif-result" style="font-family: var(--font-mono); font-size:20px; font-weight:700; color: var(--success); padding-top: 6px;">—</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chunk-card" style="border-left-color:#C0554D; background: rgba(192,85,77,0.08);">
-        <div class="chunk-eyebrow" style="color:#E08A82;">When You See Red</div>
-        <p style="margin-bottom:0;">A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. If stress ever gets bigger than a spreadsheet or a reset breath can handle, GMU's counseling services are there for exactly that.</p>
-      </div>
-
-      <div class="chunk-card synth-card">
-        <div class="chunk-eyebrow">Your Recovery Rule</div>
-        <p style="margin-bottom:10px;">If I don't update this within 48 hours of a grade posting, here's exactly what I do:</p>
-        <div class="chunk-field">
-          <textarea class="gf-input" data-key="recovery-rule" rows="2" placeholder="Type here..."></textarea>
-        </div>
-      </div>
-
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">Today's Rep</div>
-        <div class="rep-card" style="border:none; padding:0; background:transparent;">
-          <div class="rep-head">
-            <h3>Run it once, for real</h3>
-            <span class="rep-count" id="gf-rep-count">0 / 3</span>
-          </div>
-          <div class="rep-list" id="gf-rep-list"></div>
-        </div>
-      </div>
-    </div>
-    <div class="save-row"><span id="gf-save-status" class="save-status">Not saved yet</span></div>
-
-    <div class="mode-switch" style="margin-bottom:40px;">
-      <button data-nav="agenda">← Back to agenda</button>
-    </div>
-  </section>
-
-  <!-- ===================== DAILY ROUTINE: 3+3 (Session 5) ===================== -->
-  <section id="screen-daily-routine" class="screen">
-    <div class="chunk-wrap">
-      <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Session 5 · Daily Routine</div>
-        <h4>The 3+3</h4>
-        <p style="margin-bottom:0;">Under two minutes, every morning. Three things that must get done today. Then three things you're grateful for. Same order every time, gratitude second so it never feels like a chore attached to a nicer thing.</p>
-      </div>
-
-      <div class="chunk-card">
-        <div class="chunk-eyebrow">Must Get Done Today</div>
-        <div id="routine-mustdo"></div>
-      </div>
-
-      <div class="chunk-card synth-card">
-        <div class="chunk-eyebrow">Grateful For</div>
-        <div id="routine-grateful"></div>
-      </div>
-    </div>
-    <div class="save-row"><span id="routine-save-status" class="save-status">Not saved yet</span></div>
-
-    <div class="mode-switch" style="margin-bottom:40px;">
-      <button data-nav="agenda">← Back to agenda</button>
-    </div>
-  </section>
-
-  <!-- ===================== WORK BLOCKS: 50/5 (Session 5) ===================== -->
-  <section id="screen-work-blocks" class="screen">
-    <div class="chunk-wrap">
-      <div class="chunk-card prime-card">
-        <div class="chunk-eyebrow">Session 5 · Work Blocks</div>
-        <h4>50 Up, 5 Moving</h4>
-        <p style="margin-bottom:0;">Every 50 minutes of focused work, stand up and move for 5 — walk, stretch, refill water, anything that gets you out of the chair. Scheduled in advance, not negotiated in the moment.</p>
-      </div>
-
-      <div class="chunk-card" style="text-align:center; padding: 36px 22px;">
-        <div id="wb-phase-label" style="font-family: var(--font-mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color: var(--amber); margin-bottom:10px;">Focus Block</div>
-        <div id="wb-timer" style="font-family: var(--font-mono); font-size:56px; font-weight:700;">50:00</div>
-        <div style="display:flex; gap:10px; justify-content:center; margin-top:22px;">
-          <button class="tool-btn" id="wb-start">▶ Start</button>
-          <button class="tool-btn" id="wb-pause" style="background: rgba(255,255,255,0.06); border-color: var(--locked-line); color: var(--text-primary);">⏸ Pause</button>
-          <button class="tool-btn" id="wb-reset" style="background: rgba(255,255,255,0.06); border-color: var(--locked-line); color: var(--text-primary);">↺ Reset</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="mode-switch" style="margin-bottom:40px;">
-      <button data-nav="agenda">← Back to agenda</button>
     </div>
   </section>
 
@@ -1058,106 +883,52 @@
   /* ---------------- Data ---------------- */
   const sessionsData = {
     1: { title: "Foundations & Vision", state: "done" },
-    2: {
-      title: "Before Class: Preview & Prepare",
-      state: "done",
-      agenda: [
-        { title: "Check In & Arc Review", time: "5 min", desc: "Pull up the roadmap together and walk through where today fits across all nine sessions.", tools: [] },
-        { title: "Build the Assignment Tracker", time: "8 min", desc: "Log this unit's Business 101 items into the Command Center using the placeholder set.", tools: [{ label: "Open Command Center", nav: null, note: "Excel workbook, hand this to Tyler separately" }] },
-        { title: "Read & Discuss the Passage", time: "10 min", desc: "Read the Unit 1 passage together and talk through it before doing any annotating.", tools: [{ label: "Open Reading (clean)", nav: "reading-clean" }] },
-        { title: "Practice With Reading Supports", time: "15 min", desc: "Go back through the same passage with chunking, main idea tracking, and question prompts.", tools: [{ label: "Open Reading (with supports)", nav: "reading-supported" }] },
-        { title: "Log Today's Rep", time: "3 min", desc: "Check off the habit once it's actually been done, not just discussed.", tools: [{ label: "Open Rep Checklist", nav: "reading-supported" }] },
-        { title: "Restart Rule & What's Next", time: "3 min", desc: "Set the rule for what happens if a pass gets missed, then ask where else this same move could help.", tools: [] }
-      ]
-    },
-    3: {
-      title: "During Class: Closing the Gap",
-      state: "done",
-      agenda: [
-        { title: "Open With What You've Already Built", time: "3 min", desc: "A quick look at the fall schedule and the three-pass reading you've already practiced, proof this system is already working.", tools: [] },
-        { title: "Name the Skill: Catching the Gap", time: "5 min", desc: "Class time isn't where learning starts, it's where you close the gap between what you taught yourself and what actually gets covered. Four things to catch: a new example, a different emphasis, the speaker's own take, or a correction.", tools: [] },
-        { title: "Watch & Fill Your Gap Sheet", time: "25 min", desc: "Watch a real research-based study skills lecture once through and work your gap sheet live: Already Knew, New or Deeper, Still Unclear.", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] },
-        { title: "Lock In Your Recovery Rule", time: "7 min", desc: "Decide exactly what you do when you miss something in class and can't ask right away.", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] },
-        { title: "Set Your Plan for Next Class", time: "5 min", desc: "Write your own answer: how will you catch yourself if your attention drifts during a real lecture?", tools: [{ label: "Open Gap Sheet", nav: "gap-sheet" }] }
-      ]
-    },
-    4: {
-      title: "After Class: The Review Window",
-      state: "done",
-      agenda: [
-        { title: "3-Pass Reading: First-Semester Systems", time: "15 min", desc: "Read a fresh passage on what actually trips up first-semester freshmen, using the same overview → key points → details pass structure from Session 2.", tools: [{ label: "Open the Reading", nav: "reading-whitepaper" }, { label: "Before Class tracker (Google Doc)", href: "https://docs.google.com/document/d/1UzmQ8tfDIp18mvz-A_yEOgBVbo4JTmDqqvyx4FM0OSk/edit" }] },
-        { title: "Live Lecture: What the Reading Didn't Cover", time: "5-10 min", desc: "A short live lecture that goes deeper on two points from the reading (the responsibility shift, notes fading fast) and introduces two genuinely new ones (office hours, decision fatigue), so there's a real gap to close.", tools: [{ label: "During Class Gap Sheet (Google Doc)", href: "https://docs.google.com/document/d/17AVdcJGGONC4R-AosEjjGulIv4RPMMv4aAzl8X_9IxM/edit" }] },
-        { title: "Cold Recall, Then Check", time: "8-10 min", desc: "Write down what you remember from the reading and the lecture combined, before looking back at anything. Then check your notes, fill in what you missed, and rewrite it into 3-5 real takeaways.", tools: [{ label: "After Class Cold Recall (Google Doc)", href: "https://docs.google.com/document/d/1PZfa1X38g-ZK0m69zotap_4QFAH9weXZRUTxkBtpci4/edit" }] },
-        { title: "Sheets Rep: Build a Takeaway Tracker", time: "15 min", desc: "Cell basics and one SUM formula, live, using your own synthesized takeaways as the sheet's actual content. This finishes the after-class rep and builds today's tool at the same time.", tools: [{ label: "Open Sheets Rep", nav: "sheets-rep" }] },
-        { title: "Closing Question", time: "2-3 min", desc: "Which of these takeaways will actually still be true in week 3?", tools: [] }
-      ]
-    },
-    5: {
-      title: "Grade Tracking & Forecasting",
-      state: "done",
-      agenda: [
-        { title: "Check In", time: "5 min", desc: "Quick catch-up. How are you feeling heading into the semester?", tools: [] },
-        { title: "Daily Routine: The 3+3", time: "5 min", desc: "A fast morning routine you can run in under two minutes: name 3 things that must get done today, then 3 things you're grateful for. Practice it live right now, using today as the example.", tools: [{ label: "Open Daily Routine", nav: "daily-routine" }] },
-        { title: "See the Finished Tool First", time: "5 min", desc: "Before you build anything, see a finished example: sample classes color-coded on track or at risk, plus a working what-if calculator you can try right now.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Work Blocks: 50 Up, 5 Moving", time: "3-5 min", desc: "The rule: every 50 minutes of focused work, stand up and move for 5. Scheduled in advance, not negotiated in the moment. You'll use this for real during today's build.", tools: [{ label: "Open Work Block Timer", nav: "work-blocks" }] },
-        { title: "Build: Cells, SUM & AVERAGE", time: "10 min", desc: "Format individual cells and cells as a group, then build your first real formulas: SUM and AVERAGE, entering grades as they come in.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Dropdown Menus", time: "10-15 min", desc: "Add dropdown menus for course and category, and add your own items to select through them, so entering a new grade stays fast and consistent.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Intro: Conditional Statements", time: "5 min", desc: "A first look at IF/THEN logic and how it'll power automatic flags in an upcoming session.", tools: [] },
-        { title: "Closing Question", time: "2-3 min", desc: "Once your first grade posts this semester, when are you going to open this and plug it in?", tools: [] }
-      ]
-    },
+    2: { title: "Before Class: Preview & Prepare", state: "done" },
+    3: { title: "During Class: Active Note-Taking & Engagement", state: "done" },
+    4: { title: "After Class: The Review Window", state: "done" },
+    5: { title: "Reading Strategies for Dense Text", state: "done" },
     6: {
-      title: "Finishing the Grade Forecast Tool",
+      title: "Make Learning Stick: Retention & Spaced Practice",
       state: "current",
       agenda: [
-        { title: "Check In", time: "5 min", desc: "Quick catch-up: how's the 3+3 morning routine going, and are the 50/5 work blocks actually happening?", tools: [] },
-        { title: "Where the Tool Stands", time: "4-5 min", desc: "Quick look at what's already working in your Grade Forecast Tool (SUM, AVERAGE, basic dropdowns) and what's still missing. Today we finish it.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Real Weighted Grades", time: "12-15 min", desc: "Replace the plain average with a real weighted grade formula, built cell by cell, category by category, yourself.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Automatic Warning Flags", time: "12-15 min", desc: "Write your first real IF formula: compare your current grade to a target you set, and return On Track or At Risk automatically.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Color-Coded Status", time: "10 min", desc: "Layer conditional formatting on top of the flag so status is a color at a glance, not text you have to read every time.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "When You See Red", time: "3-5 min", desc: "A red flag is information, not a verdict. Quick reset: breathe in for 4, hold for 4, out for 4, a few times, before deciding your next move. GMU's counseling services are there if stress ever gets bigger than a spreadsheet or a reset breath can handle.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Build: Real Data Validation", time: "10 min", desc: "Properly wire your course and category dropdowns with real validation rules, plus an error alert so a typo can't quietly break a formula.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Live Practice: What Do I Need?", time: "10 min", desc: "Now that your weighted grade and flags are real, build the formula that answers: what score do I need on the final to land a B+?", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Log the Rep + Recovery Rule", time: "5 min", desc: "Log today's rep. Set your rule for what happens once real grades start posting.", tools: [{ label: "Open Grade Forecast Tool", nav: "grade-forecast" }] },
-        { title: "Closing Question", time: "2-3 min", desc: "Once your first grade posts this semester, when are you going to open this and plug it in?", tools: [] }
+        { title: "Recall vs. Recognition Warm-Up", time: "7 min", desc: "Compare information that feels familiar with information Tyler can retrieve independently without looking.", tools: [{ label: "Open Retention Lab", nav: "retention-lab" }] },
+        { title: "Learn the Retention Cycle", time: "8 min", desc: "Build the four-step cycle: Learn → Retrieve → Check and Repair → Space and Repeat.", tools: [{ label: "View the Cycle", nav: "retention-lab" }] },
+        { title: "Practice Retrieval Methods", time: "15 min", desc: "Try brain dumps, teach-back, question generation, diagram reconstruction, and solving without a model.", tools: [{ label: "Choose Retrieval Methods", nav: "retention-lab" }] },
+        { title: "Adapt It Across Subjects", time: "10 min", desc: "Apply retrieval differently to math, science, reading, and other content-heavy college courses.", tools: [{ label: "Open Subject Guide", nav: "retention-lab" }] },
+        { title: "Build a Spaced Review Schedule", time: "10 min", desc: "Plan several short retrieval checks across time instead of one long rereading session.", tools: [{ label: "Build Review Schedule", nav: "retention-lab" }] },
+        { title: "Preview an Organized Google Drive", time: "5 min", desc: "Look at an example of a clean folder and file-naming system Tyler can adopt when courses begin.", tools: [{ label: "View Organization Model", nav: "retention-lab" }] },
+        { title: "Commit to One Real Rep", time: "5 min", desc: "Choose one retention method and one course where Tyler will test it first.", tools: [{ label: "Save My Plan", nav: "retention-lab" }] }
       ]
     },
     7: { title: "Executive Functioning: Time & Procrastination", state: "locked" },
-    8: { title: "Building Retention Across the Semester", state: "locked" },
-    9: { title: "Application & Synthesis / Finals Prep (scope TBD)", state: "locked" },
+    8: {
+      title: "Application & Synthesis",
+      state: "locked",
+      agenda: [
+        { title: "System Check & Retrieval Warm-Up", time: "7 min", desc: "Without opening the old lessons, have Tyler reconstruct the before-class, during-class, and after-class learning cycle and name the purpose of each phase.", tools: [] },
+        { title: "Open the College Week Simulation", time: "5 min", desc: "Introduce a realistic week containing dense reading, a lecture knowledge gap, overlapping deadlines, and material beginning to fade.", tools: [{ label: "Launch Application Lab", nav: "application-lab" }] },
+        { title: "Diagnose Before Solving", time: "8 min", desc: "Identify the highest-risk failure point and explain what is likely to happen if it is ignored. Emphasize noticing before reacting.", tools: [{ label: "Open Diagnosis", nav: "application-lab" }] },
+        { title: "Build the Three-Part Response", time: "15 min", desc: "Create specific before-class, during-class, and after-class actions using the systems Tyler has already learned.", tools: [{ label: "Build Learning Cycle", nav: "application-lab" }] },
+        { title: "Schedule the Actual Week", time: "12 min", desc: "Move the selected actions into visible daily study blocks and define the trigger for asking for help.", tools: [{ label: "Build Weekly Plan", nav: "application-lab" }] },
+        { title: "Stress-Test & Adjust", time: "8 min", desc: "Introduce one disruption—missed study block, harder-than-expected reading, or schedule change—and have Tyler revise the plan without abandoning the system.", tools: [] },
+        { title: "Create Tyler's Personal Rule", time: "5 min", desc: "End with one concise restart rule Tyler can use when he feels confused, overloaded, or behind.", tools: [{ label: "Save Personal Rule", nav: "application-lab" }] }
+      ]
+    },
+    9: { title: "Finals Prep & System Tune-Up", state: "locked" },
   };
 
   const toolsData = [
-    { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed", nav: null },
-    { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed", nav: "reading-supported" },
-    { icon: "🧩", name: "Gap-Closing Toolkit", state: "active", session: 3, statusText: "Installed", nav: "gap-sheet" },
-    { icon: "📊", name: "Takeaway Tracker (Sheets)", state: "active", session: 4, statusText: "Installed", nav: "sheets-rep" },
-    { icon: "📈", name: "Grade Forecast Tool", state: "active", session: 6, statusText: "Active today", nav: "grade-forecast" },
-    { icon: "☀️", name: "Daily Routine (3+3)", state: "active", session: 5, statusText: "Installed", nav: "daily-routine" },
-    { icon: "🏃", name: "Work Block Timer", state: "active", session: 5, statusText: "Installed", nav: "work-blocks" },
+    { icon: "🗂️", name: "College Command Center", state: "active", session: 1, statusText: "Installed" },
+    { icon: "📖", name: "Preview & Prepare Kit", state: "active", session: 2, statusText: "Installed" },
+    { icon: "📝", name: "Note-Taking System", state: "active", session: 3, statusText: "Installed" },
+    { icon: "🔁", name: "Review Window Tracker", state: "active", session: 4, statusText: "Installed" },
+    { icon: "🔍", name: "Reading Toolkit", state: "active", session: 5, statusText: "Installed" },
+    { icon: "🧠", name: "Retention Builder", state: "active", session: 6, statusText: "Active today" },
     { icon: "⏱️", name: "Time & Focus Manager", state: "locked", session: 7, statusText: "Unlocks S7" },
-    { icon: "🧠", name: "Retention Builder", state: "locked", session: 8, statusText: "Unlocks S8" },
-    { icon: "⚙️", name: "Application Lab", state: "locked", session: 9, statusText: "Unlocks S9" },
-    { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Scope TBD" },
+    { icon: "⚙️", name: "Application Lab", state: "locked", session: 8, statusText: "Unlocks S8" },
+    { icon: "🎯", name: "Finals Command Deck", state: "locked", session: 9, statusText: "Unlocks S9" },
+    { icon: "📊", name: "Google Sheets Foundations", state: "planned", session: null, statusText: "Planned" },
     { icon: "🤖", name: "AI Study Skills", state: "planned", session: null, statusText: "Planned" },
-  ];
-
-  const whitepaperData = [
-    { heading: "Abstract", text: "Nearly every first-semester college student encounters the same five structural problems, regardless of academic ability. This brief summarizes peer-reviewed and applied research behind each one: the shift from externally managed accountability to self-regulated learning, the risks of unstructured time, the rapid decay of unreviewed lecture material, the underuse of faculty office hours, and the cognitive cost of unstructured daily decision-making. Across these five bodies of research, a consistent theme emerges: first-year struggle is rarely a matter of intelligence or effort. It is a matter of whether a student has built systems that do not depend on someone else providing structure." },
-    { heading: "1. The Responsibility Shift: Self-Regulated Learning", text: "Education researchers describe the move from secondary school to college as a shift in self-regulated learning (SRL), the set of skills a student uses to independently plan, monitor, and manage their own academic behavior. A 2026 study of 1,385 students at a large public university found that first-year students experience marked changes in how much they rely on their own planning and monitoring once the external structure of high school disappears, and that these shifts in self-regulation are closely tied to whether students persist and perform well in their first year.\n\nA related line of research applies Nicholson's Transition Cycle model to the first-year experience, identifying \u201cbecoming a self-regulated learner\u201d as one of the core adjustment challenges new students face, alongside readiness and goal-setting. The consistent finding across this literature is that the skills required to succeed in college are not simply more advanced versions of high school skills. They are a different category of skill entirely, centered on independent accountability rather than externally enforced deadlines." },
-    { heading: "2. Unstructured Time and the Time Management Gap", text: "A 2026 design-based research study on first-year time management competencies notes that the transition to college demands heightened autonomy, since students must now balance academic and personal demands under much looser external supervision than in secondary school. The researchers found that most institutional responses to this gap, typically a single orientation-week seminar, are too brief and too front-loaded to build a durable skill, and that sustained, practice-based instruction produces significantly stronger time management competency than one-time instruction alone.\n\nThis matches a broader pattern in the self-regulated learning literature: unstructured time is not inherently a problem, but time management is a trainable skill that most students have never explicitly practiced, since high school rarely requires them to independently allocate large blocks of unsupervised time." },
-    { heading: "3. The Forgetting Curve and the Case for Same-Day Review", text: "The foundational research here dates to Hermann Ebbinghaus's 1885 memory experiments, which established that newly learned information decays fastest in the hours immediately following exposure, and that this decay can be substantially slowed through review at well-timed intervals. Ebbinghaus's original findings have since been replicated with modern methods, most notably by Murre and Dros in 2015, who reproduced his original decay curve using a fresh sample of learners.\n\nLater cognitive science extended this into what is now called the spacing effect and the testing effect. Roediger and Karpicke's widely cited 2006 research demonstrated that actively retrieving and reprocessing material shortly after learning it produces substantially stronger long-term retention than passive rereading, and later synthesis work by Kang (2016) and others has translated this into practical guidance for instructional settings: a short review completed within about a day of first exposure meaningfully blunts the steepest part of the decay curve, while delaying that review by a week or more allows most of the material to be lost." },
-    { heading: "4. Office Hours: An Underused, High-Return Resource", text: "Despite being one of the few structured, one-on-one academic resources built into a college schedule, office hours remain sharply underused. Reporting on office hour research in the Journal of Political Science Education found that students who attended office hours at least twice in a semester scored significantly higher on exams, even after controlling for prior academic performance, yet the same research base consistently finds that the large majority of students never attend a single session.\n\nApplied research on why students avoid office hours points to a consistent misconception: most students believe office hours exist only for emergencies, reserved for when they are already failing or deeply confused, rather than as a routine, low-stakes touchpoint. Research summarized by faculty development researchers found that students who use office hours as ongoing check-ins, rather than last resorts, report stronger relationships with instructors and catch small misunderstandings well before those misunderstandings compound into larger academic problems." },
-    { heading: "5. Routine, Decision Fatigue, and the Value of Structure", text: "The psychological basis for routine-building traces back to Baumeister, Bratslavsky, Muraven, and Tice's 1998 research on ego depletion, which established that self-control functions like a limited resource that becomes harder to exercise well the more it is used across a day. Vohs and colleagues later extended this finding specifically to decision-making, showing that the simple act of making repeated choices, independent of their difficulty, measurably reduces a person's capacity for self-control on subsequent tasks.\n\nThe practical implication for routine-building is well established in this literature: habits and pre-set routines largely bypass this depletion effect, since once a behavior becomes automatic it no longer draws on the same limited pool of self-control that active decision-making requires. Researchers summarizing this body of work note that structured routines function as a form of cognitive offloading, conserving a person's limited daily capacity for the decisions that actually require judgment, rather than spending it on dozens of small, repeated choices about when and how to work." },
-    { heading: "Conclusion", text: "Across all five areas, the research points to the same underlying mechanism. First-semester struggle is very rarely a story about raw ability. It is a story about whether a student has replaced the external scaffolding of high school, teacher reminders, daily supervision, and structured time, with self-built systems: a habit of capturing deadlines the moment they appear, fixed study blocks that treat free time as usable time, a short same-day review habit that interrupts the forgetting curve, routine rather than emergency-only use of office hours, and a small set of fixed weekly anchors that remove the need to renegotiate the schedule every day. None of these fixes require more intelligence or more raw effort. They require different habits, built deliberately, before the semester makes the cost of not having them obvious." },
-  ];
-
-  const whitepaperSourcesData = [
-    ["Responsibility Shift", "Georgia Southern SRL study (2026); Frontiers in Psychology (2021)"],
-    ["Unstructured Time", "Design-based time management study, first-year students (2026)"],
-    ["Notes Fading", "Ebbinghaus (1885); Murre & Dros (2015); Roediger & Karpicke (2006); Kang (2016)"],
-    ["Office Hours", "Journal of Political Science Education; Umbach & Wawrzynski (2005)"],
-    ["Routines", "Baumeister et al. (1998); Vohs et al. (2008)"],
   ];
 
   const chunksData = [
@@ -1185,48 +956,17 @@
     { id: "annotate", label: "Named the main idea of at least one section" },
   ];
 
-  const gapRowCount = 5;
-
-  const sheetsRepItems = [
-    { id: "takeaways", label: "Typed each takeaway myself, in my own words" },
-    { id: "formula", label: "Typed the SUM formula myself, before being shown" },
-    { id: "transfer", label: "Named another place this same formula trick could help" },
-  ];
-
-  /* ---------------- Session 5: Grade Forecast data ---------------- */
-  const gfCourses = ["ENGH 101", "BUS 103", "FREN 101", "UNIV 100"];
-  const gfCategories = ["Participation", "Homework", "Midterms", "Final"];
-  const gfDefaultWeights = {
-    "ENGH 101": { Participation: 10, Homework: 25, Midterms: 25, Final: 40 },
-    "BUS 103": { Participation: 10, Homework: 20, Midterms: 30, Final: 40 },
-    "FREN 101": { Participation: 15, Homework: 25, Midterms: 25, Final: 35 },
-    "UNIV 100": { Participation: 30, Homework: 40, Midterms: 15, Final: 15 },
-  };
-  const gfEntryRowCount = 6;
-
-  const gfRepItems = [
-    { id: "weighted", label: "Typed the weighted grade formula myself, before being shown" },
-    { id: "flags", label: "Set my own target grades, not ones assigned to me" },
-    { id: "whatif", label: "Ran the what-if calculator on a real target I care about" },
-  ];
-
-  /* ---------------- Session 5: Daily Routine data ---------------- */
-  const routineMustDoLabels = ["Must-do 1", "Must-do 2", "Must-do 3"];
-  const routineGratefulLabels = ["Grateful for 1", "Grateful for 2", "Grateful for 3"];
-
   /* ---------------- Navigation ---------------- */
   const navHistory = ["home"];
-  let activeAgendaSession = 6;
-  let lastScreenBeforeTool = "home";
 
   function goTo(screen) {
-    const current = document.querySelector(".screen.active");
-    if (current) lastScreenBeforeTool = current.id.replace("screen-", "");
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     document.getElementById("screen-" + screen).classList.add("active");
     document.getElementById("back-btn").classList.toggle("show", screen !== "home");
     window.scrollTo({ top: 0, behavior: "instant" });
-    if (screen === "agenda") renderAgenda(activeAgendaSession);
+    if (screen === "agenda") renderAgenda(6);
+    if (screen === "retention-lab") initRetentionLab();
+    if (screen === "application-lab") initApplicationLab();
   }
 
   function showToast(msg) {
@@ -1247,7 +987,7 @@
 
   document.getElementById("back-btn").addEventListener("click", () => {
     const current = document.querySelector(".screen.active").id;
-    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-gap-sheet" || current === "screen-sheets-rep" || current === "screen-reading-whitepaper" || current === "screen-grade-forecast" || current === "screen-daily-routine" || current === "screen-work-blocks") {
+    if (current === "screen-reading-clean" || current === "screen-reading-supported" || current === "screen-retention-lab" || current === "screen-application-lab") {
       goTo("agenda");
     } else {
       goTo("home");
@@ -1276,11 +1016,10 @@
         const s = sessionsData[num];
         if (s.state === "locked") {
           showToast(`Session ${num} unlocks when we get there.`);
-        } else if (s.agenda) {
-          activeAgendaSession = num;
+        } else if (num === "6") {
           goTo("agenda");
         } else {
-          showToast(`Session ${num} is already done.`);
+          showToast(`Session ${num} is complete.`);
         }
       });
     });
@@ -1304,19 +1043,16 @@
 
     el.querySelectorAll(".tool-chip").forEach(chip => {
       chip.addEventListener("click", () => {
-        const name = chip.getAttribute("data-tool");
-        const tool = toolsData.find(t => t.name === name);
+        const state = chip.classList.contains("active") ? "active" : chip.classList.contains("planned") ? "planned" : "locked";
         const session = chip.getAttribute("data-session");
-        if (tool.state === "planned") {
+        if (state === "planned") {
           showToast("On the roadmap, not slotted into a session yet.");
-        } else if (tool.state === "locked") {
+        } else if (state === "locked") {
           showToast(`Unlocks in session ${session}.`);
-        } else if (tool.nav) {
-          goTo(tool.nav);
-        } else if (tool.session == 1) {
-          showToast("Command Center lives in your Excel workbook from session 1.");
+        } else if (session === "6") {
+          goTo("retention-lab");
         } else {
-          showToast(`${tool.name} is installed.`);
+          showToast("This tool is already installed in Tyler’s system.");
         }
       });
     });
@@ -1337,7 +1073,7 @@
             <span class="agenda-time">${item.time}</span>
           </div>
           <div class="agenda-desc">${item.desc}</div>
-          ${item.tools.length ? `<div class="agenda-tools">${item.tools.map(t => t.href ? `<a class="tool-btn" href="${t.href}" target="_blank" rel="noopener">${t.label}</a>` : `<span class="tool-btn" ${t.nav ? `data-nav="${t.nav}"` : ""}>${t.label}</span>`).join("")}</div>` : ""}
+          ${item.tools.length ? `<div class="agenda-tools">${item.tools.map(t => `<span class="tool-btn" ${t.nav ? `data-nav="${t.nav}"` : ""}>${t.label}</span>`).join("")}</div>` : ""}
         </div>
       </div>
     `).join("");
@@ -1347,14 +1083,6 @@
   function renderDocClean() {
     document.getElementById("doc-main").innerHTML = chunksData.map(c => `<h3>${c.heading}</h3><p>${c.text}</p>`).join("");
     document.getElementById("doc-terms").innerHTML = `<h4>Key Terms</h4><dl>${termsData.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join("")}</dl>`;
-  }
-
-  /* ---------------- Reading: white paper view (Session 4) ---------------- */
-  function renderWhitepaper() {
-    document.getElementById("doc-main-whitepaper").innerHTML = whitepaperData.map(c =>
-      `<h3>${c.heading}</h3>${c.text.split("\n\n").map(p => `<p>${p}</p>`).join("")}`
-    ).join("");
-    document.getElementById("doc-terms-whitepaper").innerHTML = `<h4>Section → Source</h4><dl>${whitepaperSourcesData.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join("")}</dl>`;
   }
 
   /* ---------------- Reading: supported/chunked view ---------------- */
@@ -1460,524 +1188,105 @@
     if (el) el.textContent = `${checked} / ${repItems.length}`;
   }
 
-  /* ---------------- Gap sheet (Session 3) ---------------- */
-  function renderGapRows() {
-    const el = document.getElementById("gap-rows");
-    if (!el) return;
-    let rows = "";
-    for (let i = 0; i < gapRowCount; i++) {
-      rows += `
-        <div class="gap-row">
-          <textarea class="gap-input" data-key="row-${i}-knew" rows="2" placeholder="..."></textarea>
-          <textarea class="gap-input" data-key="row-${i}-new" rows="2" placeholder="..."></textarea>
-          <textarea class="gap-input" data-key="row-${i}-unclear" rows="2" placeholder="..."></textarea>
-        </div>`;
-    }
-    el.innerHTML = rows;
+
+  /* ---------------- Session 8: Application Lab ---------------- */
+  const labDays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+
+  function renderWeekPlan() {
+    const body = document.getElementById("week-plan-body");
+    if (!body || body.children.length) return;
+    body.innerHTML = labDays.map((day, i) => `<tr><td><strong>${day}</strong></td>${["move","block","review","help"].map(k => `<td><input class="lab-save" data-key="${k}-${i}" placeholder="${k === 'block' ? 'Time + duration' : 'Type here'}"></td>`).join('')}</tr>`).join('');
   }
 
-  async function loadGapState() {
-    try {
-      const result = await window.storage.get('session3-gap-sheet');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
+  function loadLabState() {
+    try { return JSON.parse(localStorage.getItem('tyler-session8-application') || '{}'); }
+    catch (e) { return {}; }
   }
 
-  async function saveGapState(state) {
-    try {
-      await window.storage.set('session3-gap-sheet', JSON.stringify(state));
-      const status = document.getElementById('gap-save-status');
-      if (status) {
-        status.textContent = 'Saved';
-        status.classList.add('saved');
-      }
-    } catch (e) { console.error('Could not save gap sheet', e); }
-  }
-
-  let gapSaveTimer = null;
-  async function initGapInputs() {
-    const state = await loadGapState();
-    document.querySelectorAll('.gap-input').forEach(input => {
-      const key = input.getAttribute('data-key');
-      if (state[key]) input.value = state[key];
-      input.addEventListener('input', () => {
-        const status = document.getElementById('gap-save-status');
-        if (status) {
-          status.textContent = 'Typing...';
-          status.classList.remove('saved');
-        }
-        clearTimeout(gapSaveTimer);
-        gapSaveTimer = setTimeout(async () => {
-          const current = await loadGapState();
-          current[key] = input.value;
-          await saveGapState(current);
-        }, 500);
-      });
+  function saveLabState() {
+    const state = {};
+    document.querySelectorAll('.lab-save').forEach(el => {
+      state[el.dataset.key] = el.type === 'checkbox' ? el.checked : el.value;
     });
+    localStorage.setItem('tyler-session8-application', JSON.stringify(state));
+    updateReadiness();
   }
 
-  /* ---------------- Sheets rep (Session 4) ---------------- */
-  async function loadSheetsRepState() {
-    try {
-      const result = await window.storage.get('session4-sheets-rep');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
+  function updateReadiness() {
+    const fields = [...document.querySelectorAll('.lab-save')];
+    const completed = fields.filter(el => el.type === 'checkbox' ? el.checked : String(el.value || '').trim()).length;
+    const score = fields.length ? Math.round((completed / fields.length) * 100) : 0;
+    const out = document.getElementById('readiness-score');
+    if (out) out.textContent = score + '%';
   }
 
-  async function saveSheetsRepState(state) {
-    try { await window.storage.set('session4-sheets-rep', JSON.stringify(state)); }
-    catch (e) { console.error('Could not save sheets rep checklist', e); }
-  }
-
-  async function renderSheetsRepList() {
-    const el = document.getElementById("sheets-rep-list");
-    if (!el) return;
-    const state = await loadSheetsRepState();
-    el.innerHTML = sheetsRepItems.map(item => `
-      <div class="rep-row ${state[item.id] ? 'checked' : ''}" data-id="${item.id}">
-        <div class="rep-check">${state[item.id] ? '✓' : ''}</div>
-        <div class="rep-label">${item.label}</div>
-      </div>
-    `).join("");
-    updateSheetsRepCount(state);
-    el.querySelectorAll(".rep-row").forEach(row => {
-      row.addEventListener("click", async () => {
-        const id = row.getAttribute("data-id");
-        const current = await loadSheetsRepState();
-        current[id] = !current[id];
-        await saveSheetsRepState(current);
-        renderSheetsRepList();
-      });
-    });
-  }
-
-  function updateSheetsRepCount(state) {
-    const checked = sheetsRepItems.filter(i => state[i.id]).length;
-    const el = document.getElementById("sheets-rep-count");
-    if (el) el.textContent = `${checked} / ${sheetsRepItems.length}`;
-  }
-
-  async function loadSheetsRepNotes() {
-    try {
-      const result = await window.storage.get('session4-sheets-rep-notes');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
-  }
-
-  async function saveSheetsRepNotes(state) {
-    try {
-      await window.storage.set('session4-sheets-rep-notes', JSON.stringify(state));
-      const status = document.getElementById('sheets-rep-save-status');
-      if (status) {
-        status.textContent = 'Saved';
-        status.classList.add('saved');
-      }
-    } catch (e) { console.error('Could not save sheets rep notes', e); }
-  }
-
-  let sheetsRepSaveTimer = null;
-  async function initSheetsRepInputs() {
-    const state = await loadSheetsRepNotes();
-    document.querySelectorAll('.sheets-rep-input').forEach(input => {
-      const key = input.getAttribute('data-key');
-      if (state[key]) input.value = state[key];
-      input.addEventListener('input', () => {
-        const status = document.getElementById('sheets-rep-save-status');
-        if (status) {
-          status.textContent = 'Typing...';
-          status.classList.remove('saved');
-        }
-        clearTimeout(sheetsRepSaveTimer);
-        sheetsRepSaveTimer = setTimeout(async () => {
-          const current = await loadSheetsRepNotes();
-          current[key] = input.value;
-          await saveSheetsRepNotes(current);
-        }, 500);
-      });
-    });
-  }
-
-  /* ---------------- Grade Forecast Tool (Session 5) ---------------- */
-  async function loadGfWeights() {
-    try {
-      const result = await window.storage.get('session5-gf-weights');
-      return result ? JSON.parse(result.value) : JSON.parse(JSON.stringify(gfDefaultWeights));
-    } catch (e) { return JSON.parse(JSON.stringify(gfDefaultWeights)); }
-  }
-  async function saveGfWeights(state) {
-    try {
-      await window.storage.set('session5-gf-weights', JSON.stringify(state));
-      flashSaved('gf-save-status');
-    } catch (e) { console.error('Could not save weights', e); }
-  }
-
-  async function loadGfEntries() {
-    try {
-      const result = await window.storage.get('session5-gf-entries');
-      return result ? JSON.parse(result.value) : Array.from({ length: gfEntryRowCount }, () => ({ course: "", category: "", assignment: "", score: "" }));
-    } catch (e) { return Array.from({ length: gfEntryRowCount }, () => ({ course: "", category: "", assignment: "", score: "" })); }
-  }
-  async function saveGfEntries(state) {
-    try {
-      await window.storage.set('session5-gf-entries', JSON.stringify(state));
-      flashSaved('gf-save-status');
-    } catch (e) { console.error('Could not save entries', e); }
-  }
-
-  async function loadGfTargets() {
-    try {
-      const result = await window.storage.get('session5-gf-targets');
-      return result ? JSON.parse(result.value) : Object.fromEntries(gfCourses.map(c => [c, 85]));
-    } catch (e) { return Object.fromEntries(gfCourses.map(c => [c, 85])); }
-  }
-  async function saveGfTargets(state) {
-    try {
-      await window.storage.set('session5-gf-targets', JSON.stringify(state));
-      flashSaved('gf-save-status');
-    } catch (e) { console.error('Could not save targets', e); }
-  }
-
-  function flashSaved(elId) {
-    const status = document.getElementById(elId);
-    if (status) { status.textContent = 'Saved'; status.classList.add('saved'); }
-  }
-  function flashTyping(elId) {
-    const status = document.getElementById(elId);
-    if (status) { status.textContent = 'Typing...'; status.classList.remove('saved'); }
-  }
-
-  function computeCourseStats(course, weights, entries) {
-    const w = weights[course] || {};
-    const catData = {};
-    gfCategories.forEach(cat => {
-      const scores = entries
-        .filter(e => e.course === course && e.category === cat && e.score !== "" && !isNaN(parseFloat(e.score)))
-        .map(e => parseFloat(e.score));
-      if (scores.length) catData[cat] = scores.reduce((a, b) => a + b, 0) / scores.length;
-    });
-    let weightedSum = 0, weightUsed = 0, pointsBanked = 0;
-    gfCategories.forEach(cat => {
-      if (catData[cat] !== undefined) {
-        const wt = parseFloat(w[cat]) || 0;
-        weightedSum += catData[cat] * wt;
-        weightUsed += wt;
-        pointsBanked += (catData[cat] / 100) * wt;
+  function initApplicationLab() {
+    renderWeekPlan();
+    const state = loadLabState();
+    document.querySelectorAll('.lab-save').forEach(el => {
+      const v = state[el.dataset.key];
+      if (v !== undefined) el.type === 'checkbox' ? el.checked = !!v : el.value = v;
+      if (!el.dataset.bound) {
+        el.addEventListener('input', saveLabState);
+        el.addEventListener('change', saveLabState);
+        el.dataset.bound = '1';
       }
     });
-    const currentGrade = weightUsed > 0 ? (weightedSum / weightUsed) : null;
-    return { currentGrade, pointsBanked, weightUsed };
+    updateReadiness();
+    const save = document.getElementById('lab-save-now');
+    const reset = document.getElementById('lab-reset');
+    if (save && !save.dataset.bound) { save.addEventListener('click', () => { saveLabState(); showToast('Application plan saved.'); }); save.dataset.bound='1'; }
+    if (reset && !reset.dataset.bound) { reset.addEventListener('click', () => { localStorage.removeItem('tyler-session8-application'); document.querySelectorAll('.lab-save').forEach(el => el.type === 'checkbox' ? el.checked=false : el.value=''); updateReadiness(); showToast('Application Lab reset.'); }); reset.dataset.bound='1'; }
   }
 
-  let gfWeightsCache = null, gfEntriesCache = null, gfTargetsCache = null;
 
-  async function renderGfWeights() {
-    gfWeightsCache = await loadGfWeights();
-    const el = document.getElementById("gf-weights");
-    el.innerHTML = gfCourses.map(course => `
-      <div class="gf-row gf-weight-row">
-        <div class="gf-course-label">${course}</div>
-        ${gfCategories.map(cat => `<input type="number" class="gf-number gf-weight-input" data-course="${course}" data-cat="${cat}" min="0" max="100" value="${gfWeightsCache[course][cat]}">`).join("")}
-      </div>
-    `).join("");
-    el.querySelectorAll(".gf-weight-input").forEach(input => {
-      input.addEventListener("input", async () => {
-        flashTyping('gf-save-status');
-        const course = input.getAttribute("data-course");
-        const cat = input.getAttribute("data-cat");
-        gfWeightsCache[course][cat] = parseFloat(input.value) || 0;
-        await saveGfWeights(gfWeightsCache);
-        renderGfStanding();
-        renderGfWhatIf();
-      });
+  /* ---------------- Persistence: Session 6 retention lab ---------------- */
+  const retentionKey = 'tyler-session6-retention';
+  function loadRetentionState() {
+    try { return JSON.parse(localStorage.getItem(retentionKey) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function saveRetentionState() {
+    const state = {};
+    document.querySelectorAll('.ret-save').forEach(el => {
+      const key = el.dataset.key;
+      state[key] = el.type === 'checkbox' ? el.checked : el.value;
     });
+    localStorage.setItem(retentionKey, JSON.stringify(state));
+    showToast('Retention plan saved.');
   }
-
-  async function renderGfEntries() {
-    gfEntriesCache = await loadGfEntries();
-    const el = document.getElementById("gf-entries");
-    el.innerHTML = gfEntriesCache.map((entry, i) => `
-      <div class="gf-row gf-entry-row">
-        <select class="gf-select gf-entry-course" data-i="${i}">
-          <option value="">Select...</option>
-          ${gfCourses.map(c => `<option value="${c}" ${entry.course === c ? "selected" : ""}>${c}</option>`).join("")}
-        </select>
-        <select class="gf-select gf-entry-cat" data-i="${i}">
-          <option value="">Select...</option>
-          ${gfCategories.map(c => `<option value="${c}" ${entry.category === c ? "selected" : ""}>${c}</option>`).join("")}
-        </select>
-        <input type="text" class="gf-number gf-entry-assign" data-i="${i}" placeholder="e.g. Midterm 1" value="${entry.assignment || ""}">
-        <input type="number" class="gf-number gf-entry-score" data-i="${i}" min="0" max="100" placeholder="%" value="${entry.score}">
-      </div>
-    `).join("");
-
-    const bindEntry = (selector, field, parse) => {
-      el.querySelectorAll(selector).forEach(input => {
-        input.addEventListener("input", async () => {
-          flashTyping('gf-save-status');
-          const i = parseInt(input.getAttribute("data-i"), 10);
-          gfEntriesCache[i][field] = parse ? input.value : input.value;
-          await saveGfEntries(gfEntriesCache);
-          renderGfStanding();
-          renderGfWhatIf();
-        });
-      });
-    };
-    bindEntry(".gf-entry-course", "course");
-    bindEntry(".gf-entry-cat", "category");
-    bindEntry(".gf-entry-assign", "assignment");
-    bindEntry(".gf-entry-score", "score");
-  }
-
-  async function renderGfStanding() {
-    if (!gfWeightsCache) gfWeightsCache = await loadGfWeights();
-    if (!gfEntriesCache) gfEntriesCache = await loadGfEntries();
-    gfTargetsCache = await loadGfTargets();
-    const el = document.getElementById("gf-standing");
-    el.innerHTML = gfCourses.map(course => {
-      const stats = computeCourseStats(course, gfWeightsCache, gfEntriesCache);
-      const target = gfTargetsCache[course] ?? 85;
-      const gradeText = stats.currentGrade === null ? "—" : stats.currentGrade.toFixed(1) + "%";
-      let statusClass = "nodata", statusText = "No data yet";
-      if (stats.currentGrade !== null) {
-        statusClass = stats.currentGrade >= target ? "ontrack" : "atrisk";
-        statusText = stats.currentGrade >= target ? "On Track" : "At Risk";
+  function initRetentionLab() {
+    const state = loadRetentionState();
+    document.querySelectorAll('.ret-save').forEach(el => {
+      const key = el.dataset.key;
+      if (key in state) {
+        if (el.type === 'checkbox') el.checked = !!state[key];
+        else el.value = state[key];
       }
-      return `
-        <div class="gf-row gf-standing-row">
-          <div class="gf-course-label">${course}</div>
-          <div style="font-family: var(--font-mono); font-size:13px;">${gradeText}</div>
-          <input type="number" class="gf-number gf-target-input" data-course="${course}" min="0" max="100" value="${target}">
-          <div class="status-pill ${statusClass}">${statusText}</div>
-        </div>
-      `;
-    }).join("");
-
-    el.querySelectorAll(".gf-target-input").forEach(input => {
-      input.addEventListener("input", async () => {
-        flashTyping('gf-save-status');
-        const course = input.getAttribute("data-course");
-        gfTargetsCache[course] = parseFloat(input.value) || 0;
-        await saveGfTargets(gfTargetsCache);
-        renderGfStanding();
-        renderGfWhatIf();
-      });
-    });
-  }
-
-  async function renderGfWhatIf() {
-    const courseSel = document.getElementById("gf-whatif-course");
-    if (!courseSel) return;
-    if (!courseSel.dataset.built) {
-      courseSel.innerHTML = gfCourses.map(c => `<option value="${c}">${c}</option>`).join("");
-      courseSel.dataset.built = "1";
-      courseSel.addEventListener("change", renderGfWhatIf);
-      document.getElementById("gf-whatif-target").addEventListener("input", renderGfWhatIf);
-    }
-    if (!gfWeightsCache) gfWeightsCache = await loadGfWeights();
-    if (!gfEntriesCache) gfEntriesCache = await loadGfEntries();
-    const course = courseSel.value || gfCourses[0];
-    const target = parseFloat(document.getElementById("gf-whatif-target").value) || 0;
-    const stats = computeCourseStats(course, gfWeightsCache, gfEntriesCache);
-    const finalWeight = parseFloat((gfWeightsCache[course] || {}).Final) || 0;
-    const resultEl = document.getElementById("gf-whatif-result");
-    if (finalWeight <= 0) {
-      resultEl.textContent = "Set a Final weight above";
-      return;
-    }
-    const needed = (target - stats.pointsBanked) * 100 / finalWeight;
-    if (needed <= 0) resultEl.textContent = "Already there! 🎉";
-    else if (needed > 100) resultEl.textContent = "Not possible on the final alone";
-    else resultEl.textContent = needed.toFixed(1) + "%";
-  }
-
-  let gfRecoveryTimer = null;
-  async function loadGfRecovery() {
-    try {
-      const result = await window.storage.get('session5-gf-recovery');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
-  }
-  async function saveGfRecovery(state) {
-    try { await window.storage.set('session5-gf-recovery', JSON.stringify(state)); flashSaved('gf-save-status'); }
-    catch (e) { console.error('Could not save recovery rule', e); }
-  }
-  async function initGfRecoveryInput() {
-    const state = await loadGfRecovery();
-    document.querySelectorAll('.gf-input').forEach(input => {
-      const key = input.getAttribute('data-key');
-      if (state[key]) input.value = state[key];
-      input.addEventListener('input', () => {
-        flashTyping('gf-save-status');
-        clearTimeout(gfRecoveryTimer);
-        gfRecoveryTimer = setTimeout(async () => {
-          const current = await loadGfRecovery();
-          current[key] = input.value;
-          await saveGfRecovery(current);
-        }, 500);
-      });
-    });
-  }
-
-  async function loadGfRepState() {
-    try {
-      const result = await window.storage.get('session5-gf-rep');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
-  }
-  async function saveGfRepState(state) {
-    try { await window.storage.set('session5-gf-rep', JSON.stringify(state)); }
-    catch (e) { console.error('Could not save rep checklist', e); }
-  }
-  async function renderGfRepList() {
-    const el = document.getElementById("gf-rep-list");
-    if (!el) return;
-    const state = await loadGfRepState();
-    el.innerHTML = gfRepItems.map(item => `
-      <div class="rep-row ${state[item.id] ? 'checked' : ''}" data-id="${item.id}">
-        <div class="rep-check">${state[item.id] ? '✓' : ''}</div>
-        <div class="rep-label">${item.label}</div>
-      </div>
-    `).join("");
-    const checked = gfRepItems.filter(i => state[i.id]).length;
-    document.getElementById("gf-rep-count").textContent = `${checked} / ${gfRepItems.length}`;
-    el.querySelectorAll(".rep-row").forEach(row => {
-      row.addEventListener("click", async () => {
-        const id = row.getAttribute("data-id");
-        const current = await loadGfRepState();
-        current[id] = !current[id];
-        await saveGfRepState(current);
-        renderGfRepList();
-      });
-    });
-  }
-
-  async function initGradeForecast() {
-    await renderGfWeights();
-    await renderGfEntries();
-    await renderGfStanding();
-    await renderGfWhatIf();
-    await initGfRecoveryInput();
-    await renderGfRepList();
-  }
-
-  /* ---------------- Daily Routine: 3+3 (Session 5) ---------------- */
-  let routineTimer = null;
-  async function loadRoutineState() {
-    try {
-      const result = await window.storage.get('daily-routine');
-      return result ? JSON.parse(result.value) : {};
-    } catch (e) { return {}; }
-  }
-  async function saveRoutineState(state) {
-    try {
-      await window.storage.set('daily-routine', JSON.stringify(state));
-      flashSaved('routine-save-status');
-    } catch (e) { console.error('Could not save routine', e); }
-  }
-  async function renderRoutine() {
-    const state = await loadRoutineState();
-    const mustdoEl = document.getElementById("routine-mustdo");
-    const gratefulEl = document.getElementById("routine-grateful");
-    mustdoEl.innerHTML = routineMustDoLabels.map((label, i) => `
-      <div class="routine-row">
-        <div class="routine-num">${i + 1}</div>
-        <input type="text" class="routine-input" data-key="mustdo-${i}" placeholder="${label}..." value="${state["mustdo-" + i] || ""}">
-      </div>
-    `).join("");
-    gratefulEl.innerHTML = routineGratefulLabels.map((label, i) => `
-      <div class="routine-row">
-        <div class="routine-num">${i + 1}</div>
-        <input type="text" class="routine-input" data-key="grateful-${i}" placeholder="${label}..." value="${state["grateful-" + i] || ""}">
-      </div>
-    `).join("");
-
-    document.querySelectorAll(".routine-input").forEach(input => {
-      input.addEventListener("input", () => {
-        flashTyping('routine-save-status');
-        clearTimeout(routineTimer);
-        routineTimer = setTimeout(async () => {
-          const current = await loadRoutineState();
-          current[input.getAttribute("data-key")] = input.value;
-          await saveRoutineState(current);
-        }, 500);
-      });
-    });
-  }
-
-  /* ---------------- Work Block Timer: 50/5 (Session 5) ---------------- */
-  let wbSecondsLeft = 50 * 60;
-  let wbPhase = "focus";
-  let wbInterval = null;
-
-  function wbFormatTime(s) {
-    const m = Math.floor(s / 60).toString().padStart(2, "0");
-    const sec = (s % 60).toString().padStart(2, "0");
-    return `${m}:${sec}`;
-  }
-
-  function wbUpdateDisplay() {
-    const timerEl = document.getElementById("wb-timer");
-    const labelEl = document.getElementById("wb-phase-label");
-    if (!timerEl) return;
-    timerEl.textContent = wbFormatTime(wbSecondsLeft);
-    labelEl.textContent = wbPhase === "focus" ? "Focus Block" : "Move for 5";
-    labelEl.style.color = wbPhase === "focus" ? "var(--amber)" : "var(--success)";
-  }
-
-  function wbTick() {
-    wbSecondsLeft--;
-    if (wbSecondsLeft <= 0) {
-      if (wbPhase === "focus") {
-        wbPhase = "move";
-        wbSecondsLeft = 5 * 60;
-        showToast("50 minutes up. Time to move for 5.");
-      } else {
-        wbPhase = "focus";
-        wbSecondsLeft = 50 * 60;
-        showToast("Break's over. Back to a focus block.");
+      if (!el.dataset.bound) {
+        el.addEventListener('change', saveRetentionState);
+        el.dataset.bound = '1';
       }
-    }
-    wbUpdateDisplay();
-  }
-
-  function initWorkBlockTimer() {
-    const startBtn = document.getElementById("wb-start");
-    const pauseBtn = document.getElementById("wb-pause");
-    const resetBtn = document.getElementById("wb-reset");
-    if (!startBtn) return;
-    wbUpdateDisplay();
-    startBtn.addEventListener("click", () => {
-      if (wbInterval) return;
-      wbInterval = setInterval(wbTick, 1000);
-    });
-    pauseBtn.addEventListener("click", () => {
-      clearInterval(wbInterval);
-      wbInterval = null;
-    });
-    resetBtn.addEventListener("click", () => {
-      clearInterval(wbInterval);
-      wbInterval = null;
-      wbPhase = "focus";
-      wbSecondsLeft = 50 * 60;
-      wbUpdateDisplay();
     });
   }
+  document.getElementById('ret-save-now')?.addEventListener('click', saveRetentionState);
+  document.getElementById('ret-reset')?.addEventListener('click', () => {
+    localStorage.removeItem(retentionKey);
+    document.querySelectorAll('.ret-save').forEach(el => {
+      if (el.type === 'checkbox') el.checked = false;
+      else el.value = '';
+    });
+    showToast('Retention plan reset.');
+  });
 
   /* ---------------- Init ---------------- */
   renderRoadmap();
   renderToolkit();
   renderDocClean();
-  renderWhitepaper();
   renderChunks();
   renderRepList();
   initPrepInputs();
-  renderGapRows();
-  initGapInputs();
-  renderSheetsRepList();
-  initSheetsRepInputs();
-  initGradeForecast();
-  renderRoutine();
-  initWorkBlockTimer();
+  initApplicationLab();
 </script>
 
 </body>
