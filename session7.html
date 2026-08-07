@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tyler OS · Session 7 · Microeconomics Study Lab</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#0E1822;overflow:hidden}iframe{border:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<iframe id="lab" src="retention.html" title="Tyler Session 7 Microeconomics Study Lab"></iframe>
+<script>
+const f=document.getElementById('lab');
+f.addEventListener('load',()=>{
+  try{
+    const d=f.contentDocument;
+    const kicker=d.querySelector('.kicker');
+    if(kicker) kicker.textContent='Session 7 · From Notes to Memory';
+    const brand=d.querySelector('.brand');
+    if(brand) brand.innerHTML='<b>●</b> TYLER OS · MICROECONOMICS STUDY LAB';
+    d.title='Tyler OS · Session 7 · Microeconomics Study Lab';
+  }catch(e){}
+});
+</script>
+</body>
+</html>
