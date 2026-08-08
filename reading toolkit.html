@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Tyler reading toolkit: preview and prepare, plus the 3-pass reading demo.">
+<title>Reading Toolkit: Preview &amp; Prepare | Tyler OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap">
+<style>
+:root{--navy:#20365f;--blue-soft:#eef4ff;--paper:#f8fafc;--line:#d9e2ef;--muted:#617186;--ink:#26344a;--green:#1b6b48;--amber:#8a5a00}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}
+.container{max-width:1080px;margin:auto;padding:0 20px}.lesson-hero{padding:58px 0 34px;background:linear-gradient(180deg,#f6f8ff,var(--paper))}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#56709b}
+h1,h2,h3{color:var(--navy)}h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin:.15em 0}.hero-copy{max-width:760px;font-size:1.08rem;color:var(--muted)}
+.lesson-shell{max-width:1080px;margin:0 auto;padding:28px 20px 84px}
+.flow{position:sticky;top:10px;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(32,54,95,.08);margin-bottom:26px}
+.flow button{text-align:center;border:0;background:transparent;padding:10px 8px;border-radius:12px;font-weight:800;color:var(--muted);font-size:.9rem;cursor:pointer;font-family:inherit}
+.flow button.active{background:var(--navy);color:#fff}
+.stage{background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,38px);margin:0 0 24px;box-shadow:0 10px 28px rgba(32,54,95,.055)}
+.mode{display:none}.mode.active{display:block}
+.doc-window{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;font-family:Georgia,serif}
+.doc-window h3{font-family:"DM Sans",sans-serif;color:var(--navy);font-size:1.05rem;margin:20px 0 6px}
+.doc-window h3:first-child{margin-top:0}
+.doc-window p{font-size:.96rem;line-height:1.65;margin:0 0 12px}
+.terms{margin-top:18px;padding:16px 18px;border-radius:14px;background:var(--blue-soft)}
+.terms dt{font-weight:800;color:var(--navy);margin-top:8px}.terms dt:first-child{margin-top:0}
+.terms dd{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+.chunk-card{padding:16px 18px;border:1px solid var(--line);border-radius:15px;background:var(--paper);margin-bottom:14px}
+.chunk-card h4{margin:0 0 6px;color:var(--navy);font-size:.98rem}
+.field{margin:14px 0}.field label{display:block;font-weight:800;color:var(--navy);margin-bottom:7px}.field textarea{width:100%;min-height:70px;border:1px solid #ccd7e6;border-radius:12px;padding:12px;font:inherit;background:#fff;resize:vertical}
+.rep-list{display:grid;gap:10px;margin-top:14px}
+.rep-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.button{border:0;border-radius:999px;padding:10px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:var(--navy);color:#fff}.secondary{background:#fff;color:var(--navy);border:1px solid #cbd7e7}
+.save-status{font-size:.9rem;color:var(--muted);text-align:right;margin-top:10px}
+@media(max-width:760px){.lesson-shell{padding-inline:13px}}
+</style>
+</head>
+<body>
+<header class="lesson-hero"><div class="container">
+<p class="eyebrow">Sessions 2 &amp; 5 · Before Class</p>
+<h1>Preview &amp; Prepare: The Reading Toolkit</h1>
+<p class="hero-copy">The same passage, two ways — read it cold first, then again with the 3-pass and chunking scaffolding. This is what "before class" actually means in practice.</p>
+</div></header>
+<main class="lesson-shell">
+<nav class="flow"><button id="btnClean" class="active">Clean Read</button><button id="btnSupported">Practice with Supports</button></nav>
+
+<section class="stage mode active" id="modeClean">
+<div class="doc-window" id="docMain"></div>
+<div class="terms" id="docTerms"></div>
+<p style="margin-top:16px;color:var(--muted);font-size:.9rem">This is the read-together version — no annotation, just the content. Switch to the supported mode above to practice the full before-class routine.</p>
+</section>
+
+<section class="stage mode" id="modeSupported">
+<div class="chunk-card"><h4>Before reading</h4><p style="margin:0 0 10px;font-size:.92rem">Jot 2–3 things you already think you know about how businesses work.</p><div class="field"><textarea id="beforeField" placeholder="Type here..."></textarea></div></div>
+
+<div id="chunkList"></div>
+
+<div class="chunk-card"><h4>After reading</h4><p style="margin:0 0 10px;font-size:.92rem">What's the one idea you'd explain to a friend who missed class?</p><div class="field"><textarea id="afterField" placeholder="Type here..."></textarea></div></div>
+
+<h3 style="margin-top:24px">Today's Rep</h3>
+<div class="rep-list">
+<label class="rep-item"><input type="checkbox" id="rep0"> Previewed the reading before diving in</label>
+<label class="rep-item"><input type="checkbox" id="rep1"> Wrote a question for at least one section</label>
+<label class="rep-item"><input type="checkbox" id="rep2"> Named the main idea of at least one section</label>
+</div>
+<p class="save-status" id="saveStatus">Everything saves automatically on this device.</p>
+</section>
+</main>
+<script>
+(()=>{
+const KEY='tyler-reading-toolkit-v1';
+const state=JSON.parse(localStorage.getItem(KEY)||'{}');
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(state));const s=document.getElementById('saveStatus');if(s){s.textContent='Saved.';clearTimeout(window._sv);window._sv=setTimeout(()=>s.textContent='Everything saves automatically on this device.',900)}};
+
+const chunksData=[
+{heading:"What Is Business?",text:"At its core, a business is any organization that provides goods or services in exchange for something of value, usually money. A goods-producing business makes something physical, like a bakery selling bread or a factory building furniture. A service business sells expertise, time, or labor instead, like a tutoring company, a hair salon, or an accounting firm. Most businesses today are actually a mix of both, since even a bakery is also selling the experience and convenience of walking in and getting exactly what you want. Every business exists to solve a problem for someone. Coffee shops solve the problem of wanting a fast, quality drink without making it yourself. Understanding business starts with understanding what problem is actually being solved, and for whom."},
+{heading:"Goods, Services, and Profit",text:"Businesses generally aim to earn a profit, the money left over after all costs of running the business are subtracted from the money it brings in through sales. Profit is not the same as revenue. A business might bring in a million dollars in sales and still lose money if its costs are higher than that. Profit is what allows a business to survive, grow, pay its employees well, and reinvest in itself. Nonprofits still need revenue to cover costs, but instead of distributing extra money to owners, they reinvest everything back into their mission."},
+{heading:"Who Businesses Serve: The Stakeholder Circle",text:"A stakeholder is anyone who is affected by, or has an interest in, how a business operates. This is a bigger group than most people initially assume. Customers are the most obvious stakeholders, but employees, suppliers, investors, and even the local community all count too. Strong businesses learn to balance the needs of all these groups rather than focusing on just one, because ignoring any of them tends to create problems down the road."},
+{heading:"How Businesses Are Owned: Three Basic Structures",text:"Nearly every business fits into one of three ownership structures. A sole proprietorship is owned and run by one person, simplest to start but personally on the hook for every debt or lawsuit the business faces. A partnership works the same way but is split between two or more people, who share both the decision-making and the risk. A corporation is its own legal entity, separate from its owners, which protects them personally but comes with more paperwork, more regulation, and often shareholders."},
+{heading:"The Environment Businesses Operate In",text:"No business exists in a vacuum. Every business operates inside a broader environment made up of forces it usually cannot control directly: the economy, competitors, technology, and social trends. A business that ignores shifts in this environment, like a retailer that never adapts to online shopping, tends to fall behind."},
+{heading:"Management: Turning Resources Into Results",text:"Once a business exists, someone has to run it. Management is generally broken into four functions. Planning means setting goals and deciding how to reach them. Organizing means arranging people and resources to carry that plan out. Leading means motivating and directing the people doing the work. Controlling means tracking whether things are actually going according to plan, and adjusting when they are not. These four functions happen continuously and often overlap."}
+];
+const termsData=[
+["Revenue","Total money brought in from sales, before costs are subtracted."],
+["Profit","What's left after all costs are subtracted from revenue."],
+["Stakeholder","Anyone affected by or invested in how a business operates."],
+["Sole Proprietorship","A business owned and run by one person."],
+["Partnership","A business owned by two or more people."],
+["Corporation","A business structured as its own legal entity, separate from its owners."],
+["Liability","Legal responsibility for a business's debts or losses."]
+];
+
+document.getElementById('docMain').innerHTML=chunksData.map(c=>`<h3>${c.heading}</h3><p>${c.text}</p>`).join('');
+document.getElementById('docTerms').innerHTML=`<h4 style="margin:0 0 8px;color:var(--navy)">Key Terms</h4><dl style="margin:0">${termsData.map(([n,d])=>`<dt>${n}</dt><dd>${d}</dd>`).join('')}</dl>`;
+document.getElementById('chunkList').innerHTML=chunksData.map((c,i)=>`<div class="chunk-card"><h4>${c.heading}</h4><p style="font-size:.9rem;color:var(--muted);margin-bottom:10px">${c.text}</p><div class="field"><label>What's the main idea here?</label><textarea data-key="chunk${i}" placeholder="In your own words..."></textarea></div></div>`).join('');
+
+document.querySelectorAll('textarea, input[type=checkbox]').forEach(el=>{
+  const key = el.id || el.dataset.key;
+  if(!key) return;
+  if(el.type==='checkbox'){ el.checked=!!state[key]; el.addEventListener('change',()=>{state[key]=el.checked;save()}); }
+  else { el.value=state[key]||''; el.addEventListener('input',()=>{state[key]=el.value;save()}); }
+});
+
+const btnClean=document.getElementById('btnClean'), btnSupported=document.getElementById('btnSupported');
+const modeClean=document.getElementById('modeClean'), modeSupported=document.getElementById('modeSupported');
+btnClean.onclick=()=>{btnClean.classList.add('active');btnSupported.classList.remove('active');modeClean.classList.add('active');modeSupported.classList.remove('active')};
+btnSupported.onclick=()=>{btnSupported.classList.add('active');btnClean.classList.remove('active');modeSupported.classList.add('active');modeClean.classList.remove('active')};
+})();
+</script>
+</body>
+</html>
