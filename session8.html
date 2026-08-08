@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Tyler Session 8 cross-subject application and spacing structure lab.">
+<title>Session 8: Calibrate → Note → Retrieve → Structure → Space | Tyler OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap">
+<style>
+:root{--navy:#20365f;--blue-soft:#eef4ff;--paper:#f8fafc;--line:#d9e2ef;--muted:#617186;--ink:#26344a;--green:#1b6b48;--amber:#8a5a00}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}
+.container{max-width:1080px;margin:auto;padding:0 20px}.lesson-hero{padding:58px 0 34px;background:linear-gradient(180deg,#f6f8ff,var(--paper))}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#56709b}
+h1,h2,h3{color:var(--navy)}h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;margin:.15em 0}.hero-copy{max-width:760px;font-size:1.08rem;color:var(--muted)}
+.lesson-shell{max-width:1080px;margin:0 auto;padding:28px 20px 84px}.flow{position:sticky;top:10px;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:10px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(32,54,95,.08);margin-bottom:26px}
+.flow a{text-align:center;text-decoration:none;padding:10px 8px;border-radius:12px;font-weight:800;color:var(--muted);font-size:.88rem}.flow a:hover{background:var(--blue-soft);color:var(--navy)}
+.stage{scroll-margin-top:100px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,38px);margin:0 0 24px;box-shadow:0 10px 28px rgba(32,54,95,.055)}
+.stage-head{display:flex;gap:15px;align-items:flex-start;margin-bottom:18px}.stage-num{flex:0 0 42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;font-weight:800}
+.method-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.method-card{padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--paper)}
+.subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0}
+.subject-card{border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,24px);background:#fff}
+.subject-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;line-height:1.15;margin:.1em 0 .4em}
+.subject-card .passage{font-family:Georgia,"Times New Roman",serif;font-size:.96rem;line-height:1.65;color:#26344a}
+.subject-card .passage p{margin:0 0 .8em}
+.vocab-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem}
+.vocab-table th,.vocab-table td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+.vocab-table th{background:var(--blue-soft);color:var(--navy)}
+.quick-fields,.note-grid,.prompt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin:14px 0}.field label{display:block;font-weight:800;color:var(--navy);margin-bottom:7px}.field textarea,.field input[type=text]{width:100%;border:1px solid #ccd7e6;border-radius:12px;padding:12px;font:inherit;background:#fff}.field textarea{min-height:80px;resize:vertical}
+.tip{padding:16px 18px;border-left:4px solid var(--navy);background:var(--blue-soft);border-radius:10px;margin:18px 0}.challenge{display:grid;gap:10px}.challenge-item{padding:16px;border:1px solid var(--line);border-radius:15px;background:#fff}.choice-row{display:flex;gap:8px;flex-wrap:wrap}.choice{border:1px solid #cbd7e7;border-radius:999px;background:#fff;padding:8px 12px;font-weight:700;cursor:pointer}.choice.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+.feedback{margin:9px 0 0;font-size:.92rem;color:var(--muted)}.feedback.good{color:var(--green)}.feedback.watch{color:var(--amber)}
+.note-row,.prompt-card{padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--paper)}.retrieval-controls,.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.button{border:0;border-radius:999px;padding:10px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:var(--navy);color:#fff}.secondary{background:#fff;color:var(--navy);border:1px solid #cbd7e7}
+.retrieval-card{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--paper)}.retrieval-question{font-size:1.2rem;font-weight:800;color:var(--navy)}.retrieval-tag{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--amber);background:#fff4e5;border:1px solid #f1d3a0;border-radius:999px;padding:3px 10px;margin-bottom:8px}.answer-box{min-height:110px;width:100%;border:1px solid #cbd7e7;border-radius:12px;padding:12px;font:inherit;background:#fff}
+.reference{display:none;margin-top:14px;padding:15px;border-radius:12px;background:#fff;border:1px dashed #a9bad0}.score-row{display:none;gap:8px;flex-wrap:wrap;margin-top:12px}.score-btn{border:0;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}
+.repair-list{display:grid;gap:10px;margin-top:16px}.repair-item{padding:14px;border-radius:12px;background:#fff4e5;border:1px solid #f1d3a0}.empty{color:var(--muted);font-style:italic}
+.space-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.space-card{padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--paper)}
+.col-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem}
+.col-table th,.col-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.col-table th{background:var(--navy);color:#fff}
+.col-table td.formula{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--navy)}
+.step-list{display:grid;gap:12px;counter-reset:step}
+.step-item{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--paper);display:flex;gap:14px;align-items:flex-start}
+.step-num{flex:0 0 30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.pop-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
+.save-status{font-size:.9rem;color:var(--muted);text-align:right}
+@media(max-width:760px){.flow{position:static;grid-template-columns:1fr 1fr}.flow a:last-child{grid-column:1/-1}.method-strip,.quick-fields,.note-grid,.prompt-grid,.space-grid,.subject-grid,.pop-grid{grid-template-columns:1fr}.lesson-shell{padding-inline:13px}}
+</style>
+</head>
+<body>
+<header class="lesson-hero"><div class="container">
+<p class="eyebrow">Session 8 · Cross-Subject Application</p>
+<h1>Calibrate → Note → Retrieve → Structure → Space</h1>
+<p class="hero-copy">Run the system across all four GMU classes in one sitting, add exam-style retrieval, then build the spacing structure that carries the habit into the semester.</p>
+</div></header>
+<main class="lesson-shell">
+<nav class="flow"><a href="#calibrate">CALIBRATE</a><a href="#note">NOTE</a><a href="#retrieve">RETRIEVE</a><a href="#structure">STRUCTURE</a><a href="#space">SPACE</a></nav>
+
+<section class="stage" id="calibrate"><div class="stage-head"><span class="stage-num">1</span><div><p class="eyebrow">Apply the system, fast</p><h2>Run a calibration round across three classes</h2><p>Same Map → Frame → Gather approach from Session 7, condensed. BUS 103 was already covered through the Microeconomics passage — today covers ENGH 101, FREN 101, and UNIV 100 back to back.</p></div></div>
+
+<div class="subject-grid">
+<div class="subject-card"><p class="eyebrow">ENGH 101</p><h3>What a Paragraph Argues</h3><div class="passage">
+<p>A college paragraph is not a container for facts. It is an argument in miniature. Every paragraph should be doing one job: proving a single claim, stated in a <strong>topic sentence</strong>, using evidence the reader can actually check.</p>
+<p>The topic sentence is not a topic. "This paragraph is about scarcity" names a topic. "Scarcity forces every buyer and seller to make trade-offs" makes a claim — something a reader could disagree with, which is exactly why it needs proof.</p>
+<p>Everything after the topic sentence should support that one claim: an example, a piece of evidence, a explanation of why the evidence matters. If a sentence doesn't connect back to the claim, it belongs in a different paragraph or nowhere at all.</p>
+<p>A paragraph usually ends by telling the reader what the evidence adds up to — not repeating the topic sentence, but pushing the idea one step further: so what does this claim mean for the larger argument?</p>
+</div></div>
+
+<div class="subject-card"><p class="eyebrow">FREN 101</p><h3>Le Présent: Verbes en -ER</h3><div class="passage">
+<p>Most French verbs end in <strong>-er</strong> in their infinitive form (parler, aimer, étudier). To conjugate them in the present tense, drop <strong>-er</strong> and add the ending that matches the subject.</p>
+</div>
+<table class="vocab-table"><tr><th>Subject</th><th>Ending</th><th>parler</th></tr>
+<tr><td>je</td><td>-e</td><td>je parle</td></tr>
+<tr><td>tu</td><td>-es</td><td>tu parles</td></tr>
+<tr><td>il / elle / on</td><td>-e</td><td>il parle</td></tr>
+<tr><td>nous</td><td>-ons</td><td>nous parlons</td></tr>
+<tr><td>vous</td><td>-ez</td><td>vous parlez</td></tr>
+<tr><td>ils / elles</td><td>-ent</td><td>ils parlent</td></tr>
+</table>
+<p class="passage">Common greetings that pair naturally with introducing yourself using -er verbs: <em>je m'appelle</em> (I call myself), <em>j'habite à</em> (I live in), <em>j'étudie</em> (I study).</p>
+</div>
+
+<div class="subject-card"><p class="eyebrow">UNIV 100</p><h3>Using Office Hours on Purpose</h3><div class="passage">
+<p>Office hours are not remedial help — they're scheduled, protected time a professor has already set aside to talk with students. Most go unused, not because students don't need them, but because they don't know what to bring.</p>
+<p>A useful office hours visit starts before you arrive: one specific question, tied to something you already attempted. "I don't get chapter 3" gets a vague answer. "I tried problem 4 this way and got stuck at this step" gets a real one.</p>
+<p>Showing up early in the semester, before there's a crisis, also does something practical: the professor now recognizes your name when it matters later, like a grading question or a recommendation request.</p>
+</div></div>
+</div>
+
+<div class="quick-fields"><div class="field"><label for="c-connect">Connection: what's one thing that shows up in more than one class today?</label><textarea id="c-connect" data-save placeholder="Both ENGH and BUS ask me to state a claim before defending it..."></textarea></div><div class="field"><label for="c-hardest">Which of the three felt least automatic today?</label><textarea id="c-hardest" data-save></textarea></div></div>
+</section>
+
+<section class="stage" id="note"><div class="stage-head"><span class="stage-num">2</span><div><p class="eyebrow">Filter across subjects</p><h2>Decide what's worth a note, per class</h2><p>Same decision rule as always: if a detail doesn't help you explain or use the idea later, it doesn't need much space.</p></div></div>
+<div class="tip"><strong>Decision rule:</strong> If a detail does not help explain the concept, relationship, or application, it probably does not deserve much space.</div>
+<h3>Worth a Note?</h3><div class="challenge" id="noteChallenge"></div>
+<h3 style="margin-top:28px">Build your selective notes — one row per class</h3>
+<div class="note-grid">
+<div class="note-row field"><label for="n-engh">ENGH 101 — core idea</label><textarea id="n-engh" data-save placeholder="What makes a topic sentence a claim, not a topic?"></textarea></div>
+<div class="note-row field"><label for="n-fren">FREN 101 — core pattern</label><textarea id="n-fren" data-save placeholder="-er endings, one example conjugated..."></textarea></div>
+<div class="note-row field"><label for="n-univ">UNIV 100 — core idea</label><textarea id="n-univ" data-save placeholder="What makes an office hours visit actually useful?"></textarea></div>
+<div class="note-row field"><label for="n-bus">BUS 103 — carried over from Session 7</label><textarea id="n-bus" data-save placeholder="Demand vs. quantity demanded, in your own words..."></textarea></div>
+</div>
+</section>
+
+<section class="stage" id="retrieve"><div class="stage-head"><span class="stage-num">3</span><div><p class="eyebrow">New layer today</p><h2>Exam-style retrieval</h2><p>Instead of just recalling your notes, generate the question in the format each class will actually test — then answer it cold.</p></div></div>
+<div class="prompt-grid">
+<div class="prompt-card field"><label for="p1">ENGH 101 — short answer</label><input id="p1" type="text" data-save placeholder="Identify the claim in this topic sentence and explain why it's arguable."></div>
+<div class="prompt-card field"><label for="p2">ENGH 101 — application</label><input id="p2" type="text" data-save placeholder="Write a topic sentence that makes a claim about a habit you're building."></div>
+<div class="prompt-card field"><label for="p3">FREN 101 — fill-in-the-blank</label><input id="p3" type="text" data-save placeholder="Je ______ (parler) français tous les jours."></div>
+<div class="prompt-card field"><label for="p4">FREN 101 — translation</label><input id="p4" type="text" data-save placeholder="Translate: We study every evening."></div>
+<div class="prompt-card field"><label for="p5">UNIV 100 — scenario</label><input id="p5" type="text" data-save placeholder="What specific question would you bring to office hours this week?"></div>
+<div class="prompt-card field"><label for="p6">BUS 103 — short answer</label><input id="p6" type="text" data-save placeholder="What happens to equilibrium if demand increases, all else equal?"></div>
+</div>
+<h3 style="margin-top:28px">Retrieval Mode</h3><div class="retrieval-controls"><button class="button primary" id="startRetrieval">Start Retrieval Round</button><button class="button secondary" id="nextPrompt">Next prompt</button></div>
+<div class="retrieval-card"><p class="retrieval-tag" id="retrievalTag">Class</p><p class="retrieval-question" id="retrievalQuestion">Your prompts will appear here.</p><textarea class="answer-box" id="retrievalAnswer" placeholder="No peeking. Produce what you know first."></textarea><button class="button secondary" id="checkNotes">Check my notes</button><div class="reference" id="reference"></div><div class="score-row" id="scores"><button class="score-btn" data-score="got">✓ Got it</button><button class="score-btn" data-score="partial">~ Partial</button><button class="score-btn" data-score="missed">↺ Missed</button></div></div>
+</section>
+
+<section class="stage" id="structure"><div class="stage-head"><span class="stage-num">4</span><div><p class="eyebrow">Build the empty structure first</p><h2>Add a spacing schedule to the Assignment Tracker</h2><p>This uses Sheets skills you already have — SUM, IF, conditional formatting, data validation from Sessions 5–6. No new Sheets concept today, just a new target: turning today's content into a real spaced-review schedule.</p></div></div>
+
+<a class="button primary" href="https://docs.google.com/spreadsheets/d/1E_pNHhapjs24wuuQJczNrc_v7gSXxpSW/edit" target="_blank" rel="noopener">Open the College Command Center →</a>
+
+<h3 style="margin-top:24px">Columns to add (G–L), next to the existing tracker</h3>
+<table class="col-table">
+<tr><th>Column</th><th>Header</th><th>Content</th></tr>
+<tr><td>G</td><td>Date Learned</td><td class="formula">Real date, formatted M/d/yyyy — enter directly</td></tr>
+<tr><td>H</td><td>Review 1</td><td class="formula">=G4+1</td></tr>
+<tr><td>I</td><td>Review 2</td><td class="formula">=G4+3</td></tr>
+<tr><td>J</td><td>Review 3</td><td class="formula">=G4+7</td></tr>
+<tr><td>K</td><td>Review 4</td><td class="formula">=G4+14</td></tr>
+<tr><td>L</td><td>Review Status</td><td class="formula">Checkbox — conditional format amber if any review date ≤ today and unchecked</td></tr>
+</table>
+
+<h3>Build order</h3>
+<div class="step-list">
+<div class="step-item"><span class="step-num">1</span><div>Add the six header labels in row 3, columns G–L, matching the existing blue header style.</div></div>
+<div class="step-item"><span class="step-num">2</span><div>Format column G as a date column (M/d/yyyy) — same format already applied to Due Date.</div></div>
+<div class="step-item"><span class="step-num">3</span><div>Enter the H–K formulas in one row, then fill down so every future row calculates automatically.</div></div>
+<div class="step-item"><span class="step-num">4</span><div>Add a checkbox data validation rule to column L.</div></div>
+<div class="step-item"><span class="step-num">5</span><div>Add the conditional formatting rule: format L amber when a review date in H–K is today or earlier and L is unchecked.</div></div>
+</div>
+<p class="tip"><strong>Structure only, for now.</strong> Leave rows 4+ empty — today's content gets entered as its own step, once the structure is confirmed working.</p>
+</section>
+
+<section class="stage" id="space"><div class="stage-head"><span class="stage-num">5</span><div><p class="eyebrow">Populate, then come back later</p><h2>Seed today's first spaced reps</h2><p>Now that the structure works, enter today's four classes as real rows — this schedules your first live spaced reps before you leave.</p></div></div>
+
+<div class="pop-grid">
+<div class="field"><label for="pop-engh">ENGH 101 — what to review</label><textarea id="pop-engh" data-save placeholder="Topic sentences = claims, not topics"></textarea></div>
+<div class="field"><label for="pop-fren">FREN 101 — what to review</label><textarea id="pop-fren" data-save placeholder="-er verb endings"></textarea></div>
+<div class="field"><label for="pop-univ">UNIV 100 — what to review</label><textarea id="pop-univ" data-save placeholder="Office hours prep question"></textarea></div>
+</div>
+
+<div class="space-grid"><div class="space-card"><label><input id="d1" type="checkbox" data-check> Structure built and tested</label></div><div class="space-card"><label><input id="d2" type="checkbox" data-check> Today's rows entered (Date Learned = today)</label></div><div class="space-card"><label><input id="d3" type="checkbox" data-check> Review 1 date confirmed correct</label></div><div class="space-card"><label><input id="d4" type="checkbox" data-check> Amber flag tested on a past date</label></div></div>
+
+<div class="field"><label for="ownership">Which review date lands first, and where will you be when it does?</label><textarea id="ownership" data-save placeholder="My first review is..."></textarea></div>
+<p class="save-status" id="saveStatus">Everything saves automatically on this device.</p>
+</section>
+</main>
+<script>
+(()=>{const KEY='tylerSession8CrossSubjectV1';const state=JSON.parse(localStorage.getItem(KEY)||'{}');const save=()=>{localStorage.setItem(KEY,JSON.stringify(state));const s=document.getElementById('saveStatus');if(s){s.textContent='Saved.';clearTimeout(window._sv);window._sv=setTimeout(()=>s.textContent='Everything saves automatically on this device.',900)}};document.querySelectorAll('[data-save]').forEach(e=>{e.value=state[e.id]||'';e.addEventListener('input',()=>{state[e.id]=e.value;save()})});document.querySelectorAll('[data-check]').forEach(e=>{e.checked=!!state[e.id];e.addEventListener('change',()=>{state[e.id]=e.checked;save()})});
+const challenges=[{t:'A topic sentence states a claim someone could disagree with.',best:'Capture',why:'This is the core distinction the reading makes.'},{t:'The example verb used for -er conjugation was "parler."',best:'Skip',why:'Useful for illustration, but the pattern matters more than this one example.'},{t:'Office hours visits work better with one specific, attempted question.',best:'Capture',why:'This is the actionable takeaway, not a background detail.'},{t:'Nous and vous have different endings from je, tu, il/elle.',best:'Capture',why:'You need this to conjugate correctly, not just recognize the pattern.'},{t:'Professors set aside office hours time whether or not students come.',best:'Maybe',why:'True and motivating, but secondary to knowing how to use the time well.'},{t:'A paragraph should end by pushing the claim one step further, not repeating it.',best:'Capture',why:'This is the actual skill — most students only get the first half right.'}];
+const box=document.getElementById('noteChallenge');box.innerHTML=challenges.map((c,i)=>`<div class="challenge-item"><p><strong>${c.t}</strong></p><div class="choice-row">${['Capture','Maybe','Skip'].map(x=>`<button class="choice" data-i="${i}" data-v="${x}">${x}</button>`).join('')}</div><p class="feedback" id="fb${i}"></p></div>`).join('');
+box.onclick=e=>{const b=e.target.closest('.choice');if(!b)return;const i=+b.dataset.i,v=b.dataset.v,c=challenges[i];b.parentElement.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');const f=document.getElementById('fb'+i);f.textContent=(v===c.best?'Good call. ':'Reasonable judgment call. ')+c.why;f.className='feedback '+(v===c.best?'good':'watch')};
+let repair=state.repair||[];
+const defaultPrompts=['Identify the claim in a topic sentence and explain why it is arguable.','Write a topic sentence that makes a claim about a habit you are building.','Je ______ (parler) français tous les jours.','Translate: We study every evening.','What specific question would you bring to office hours this week?','What happens to equilibrium if demand increases, all else equal?'];
+const tags=['ENGH 101 · Short Answer','ENGH 101 · Application','FREN 101 · Fill-in-the-Blank','FREN 101 · Translation','UNIV 100 · Scenario','BUS 103 · Short Answer'];
+const refs=()=>[document.getElementById('n-engh').value,document.getElementById('n-engh').value,document.getElementById('n-fren').value,document.getElementById('n-fren').value,document.getElementById('n-univ').value,document.getElementById('n-bus').value];
+const prompts=()=>[1,2,3,4,5,6].map((n,i)=>document.getElementById('p'+n).value||defaultPrompts[i]);
+let order=[],pos=0;const q=document.getElementById('retrievalQuestion'),tag=document.getElementById('retrievalTag'),answer=document.getElementById('retrievalAnswer'),reference=document.getElementById('reference'),scores=document.getElementById('scores');
+function show(){if(!order.length)order=[0,1,2,3,4,5];const id=order[pos%order.length];q.textContent=prompts()[id];tag.textContent=tags[id];q.dataset.id=id;answer.value='';reference.style.display='none';scores.style.display='none'}
+document.getElementById('startRetrieval').onclick=()=>{order=[0,1,2,3,4,5].sort(()=>Math.random()-.5);pos=0;show()};
+document.getElementById('nextPrompt').onclick=()=>{pos++;show()};
+document.getElementById('checkNotes').onclick=()=>{const id=+q.dataset.id;reference.innerHTML='<strong>Reference notes</strong><p>'+((refs()[id]||'Check the relevant section of your notes or reading.').replace(/</g,'&lt;'))+'</p>';reference.style.display='block';scores.style.display='flex'};
+function renderRepair(){}
+scores.onclick=e=>{const b=e.target.closest('[data-score]');if(!b)return;pos++;show()};
+})();
+</script>
+</body>
+</html>
